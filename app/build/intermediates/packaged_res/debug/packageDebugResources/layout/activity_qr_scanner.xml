@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="96dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/page_padding"
+            android:paddingVertical="@dimen/space_4">
+
+            <!-- App Bar Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_3">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_chip_rounded"
+                    android:contentDescription="Back"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_back" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/space_3"
+                    android:layout_toEndOf="@id/btnBack"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="QR Attendance Scanner"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:id="@+id/tvMeetingContext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Meeting: Weekly Chapter Sync"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Scanner Viewfinder Box -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.GDGCoreHQ.Card"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginBottom="@dimen/space_4"
+                app:cardBackgroundColor="@color/brand_navy">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/viewScannerFrame"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_qr_frame" />
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="Scanner Reticle"
+                        android:src="@drawable/ic_qr_scan"
+                        app:tint="#66C8D8FF" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/viewScannerFrame"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/space_2"
+                        android:text="Align QR Code on physical GDG ID Card"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                        android:textColor="@color/surface" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Simulation Controls for UI Testing -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_2"
+                android:text="Simulate ID Card Scan (Testing)"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                android:textColor="@color/text_secondary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_3"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSimulateValid"
+                    style="@style/Widget.GDGCoreHQ.Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_1"
+                    android:layout_weight="1"
+                    android:text="Valid (PRN2024001)"
+                    android:textSize="11sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSimulateInvalid"
+                    style="@style/Widget.GDGCoreHQ.Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_1"
+                    android:layout_weight="1"
+                    android:text="Invalid PRN"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Manual PRN Fallback -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilManualPrn"
+                    style="@style/Widget.GDGCoreHQ.TextInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_2"
+                    android:layout_weight="1"
+                    android:hint="Manual PRN Entry">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etManualPrn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVerifyPrn"
+                    style="@style/Widget.GDGCoreHQ.Button.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Look Up" />
+            </LinearLayout>
+
+            <!-- Scanned Member Confirmation Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardResult"
+                style="@style/Widget.GDGCoreHQ.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Member Scan Result"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                        android:textColor="@color/text_primary" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="@dimen/space_2"
+                        android:background="@color/border" />
+
+                    <TextView
+                        android:id="@+id/tvResultName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Siddhi Kulkarni"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:id="@+id/tvResultRolePrn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_1"
+                        android:text="Design Lead • PRN: PRN2024001"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/tvResultStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_2"
+                        android:background="@drawable/bg_chip_rounded"
+                        android:backgroundTint="@color/color_success_container"
+                        android:paddingHorizontal="@dimen/space_2"
+                        android:paddingVertical="@dimen/space_1"
+                        android:text="✓ Verified Core Member"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                        android:textColor="@color/status_success" />
+
+                    <!-- Primary Confirm CTA Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnConfirmAttendance"
+                        style="@style/Widget.GDGCoreHQ.Button.Primary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_4"
+                        android:text="Confirm &amp; Record Attendance" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Scan Status Feed / History -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_2"
+                android:text="Recent Session Check-Ins"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/tvSessionHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_rounded"
+                android:padding="@dimen/space_3"
+                android:text="No attendance scans recorded in this session yet. Ready for first scan."
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
+                android:textColor="@color/text_secondary" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Pill Navigation Bar (Admin) -->
+    <LinearLayout
+        android:id="@+id/bottomNavPill"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/space_4"
+        android:layout_marginBottom="@dimen/space_4"
+        android:background="@drawable/bg_floating_nav"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_2">
+
+        <ImageView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Dashboard"
+            android:padding="10dp"
+            android:src="@drawable/ic_dashboard"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navTasks"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Tasks"
+            android:padding="10dp"
+            android:src="@drawable/ic_tasks"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navScanner"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_selected"
+            android:contentDescription="QR Scanner"
+            android:padding="10dp"
+            android:src="@drawable/ic_qr_scan"
+            app:tint="@color/surface" />
+
+        <ImageView
+            android:id="@+id/navExpenses"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Reimbursements"
+            android:padding="10dp"
+            android:src="@drawable/ic_receipt"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navStrikes"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Strikes"
+            android:padding="10dp"
+            android:src="@drawable/ic_strike"
+            app:tint="@color/text_secondary" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

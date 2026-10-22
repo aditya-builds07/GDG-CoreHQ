@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gdgcorehq.app.CoreHQLogicTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-22T10:02:00.451Z" hostname="INBOOK_X2_SLIM" time="0.198">
+  <properties/>
+  <testcase name="testMemberNavigationDestinations" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.129"/>
+  <testcase name="testPrnValidation" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testValidLoginGrantsAccess" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testTaskStatusTransitionsAndOverdueClearing" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testInvalidExpenseAmountRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testReimbursementRejectionReasonRequirement" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testAdminNavigationDestinations" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.007"/>
+  <testcase name="testStrikePardonRequiresJustification" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testDuplicateAttendancePrevention" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testSessionClearingOnLogout" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testInvalidLoginIsRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
+  <testcase name="testRoleAccessDistinction" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testPostMeetingReportValidationAndLinking" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

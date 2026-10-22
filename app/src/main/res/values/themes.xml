@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme using Material 3 -->
+    <style name="Theme.GDGCoreHQ" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+
+        <!-- Background and surface -->
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
+
+        <!-- Error colors -->
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation bar -->
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Default shape appearance for cards -->
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.GDGCoreHQ.Card</item>
+    </style>
+
+    <!-- Card shape (20dp radius from design.md §5) -->
+    <style name="ShapeAppearance.GDGCoreHQ.Card" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_card</item>
+    </style>
+
+    <!-- Feature card shape (24dp radius) -->
+    <style name="ShapeAppearance.GDGCoreHQ.FeatureCard" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_card_feature</item>
+    </style>
+
+    <!-- Chip shape (12dp radius) -->
+    <style name="ShapeAppearance.GDGCoreHQ.Chip" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_chip</item>
+    </style>
+
+    <!-- Button shape (16dp radius) -->
+    <style name="ShapeAppearance.GDGCoreHQ.Button" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_button</item>
+    </style>
+
+    <!-- Primary button style -->
+    <style name="Widget.GDGCoreHQ.Button.Primary" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>
+        <item name="backgroundTint">@color/brand_navy</item>
+        <item name="android:textColor">@color/surface</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <!-- Secondary/outlined button style -->
+    <style name="Widget.GDGCoreHQ.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <!-- Destructive button style -->
+    <style name="Widget.GDGCoreHQ.Button.Destructive" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>
+        <item name="backgroundTint">@color/status_error</item>
+        <item name="android:textColor">@color/surface</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <!-- Text input style (14dp radius) -->
+    <style name="Widget.GDGCoreHQ.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/border</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_input</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_input</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_input</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_input</item>
+        <item name="boxBackgroundColor">@color/surface</item>
+    </style>
+
+    <!-- Typography styles -->
+    <style name="TextAppearance.GDGCoreHQ" parent="android:TextAppearance" />
+
+    <style name="TextAppearance.GDGCoreHQ.Display">
+        <item name="android:textSize">@dimen/text_display</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.Headline">
+        <item name="android:textSize">@dimen/text_headline</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.TitleLarge">
+        <item name="android:textSize">@dimen/text_title_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.TitleMedium">
+        <item name="android:textSize">@dimen/text_title_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.Body">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.BodyLarge">
+        <item name="android:textSize">@dimen/text_body_large</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.Label">
+        <item name="android:textSize">@dimen/text_label</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.GDGCoreHQ.Caption">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+
+    <!-- Material Card style -->
+    <style name="Widget.GDGCoreHQ.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Card</item>
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="strokeWidth">@dimen/border_width</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="contentPadding">@dimen/card_padding</item>
+    </style>
+
+</resources>

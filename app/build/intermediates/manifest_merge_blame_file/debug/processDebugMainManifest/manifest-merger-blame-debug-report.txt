@@ -1,0 +1,259 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.gdgcorehq.app"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Network access for future Firebase backend -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:6:5-67
+12-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:7:5-79
+13-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:7:22-76
+14
+15    <permission
+15-->[androidx.core:core:1.13.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e6452694551e6af08cdd52cdd649dca5\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+16        android:name="com.gdgcorehq.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+16-->[androidx.core:core:1.13.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e6452694551e6af08cdd52cdd649dca5\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+17        android:protectionLevel="signature" />
+17-->[androidx.core:core:1.13.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e6452694551e6af08cdd52cdd649dca5\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+18
+19    <uses-permission android:name="com.gdgcorehq.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+19-->[androidx.core:core:1.13.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e6452694551e6af08cdd52cdd649dca5\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+19-->[androidx.core:core:1.13.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e6452694551e6af08cdd52cdd649dca5\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+20
+21    <application
+21-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:9:5-104:19
+22        android:allowBackup="true"
+22-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:10:9-35
+23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+23-->[androidx.core:core:1.13.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e6452694551e6af08cdd52cdd649dca5\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+24        android:debuggable="true"
+25        android:extractNativeLibs="false"
+26        android:icon="@mipmap/ic_launcher"
+26-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:11:9-43
+27        android:label="@string/app_name"
+27-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:13:9-41
+28        android:roundIcon="@mipmap/ic_launcher_round"
+28-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:12:9-54
+29        android:supportsRtl="true"
+29-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:14:9-35
+30        android:theme="@style/Theme.GDGCoreHQ"
+30-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:15:9-47
+31        android:usesCleartextTraffic="false" >
+31-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:16:9-45
+32
+33        <!-- Launcher Activity: Login Screen per PRD §3.1 -->
+34        <activity
+34-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:20:9-28:20
+35            android:name="com.gdgcorehq.app.LoginActivity"
+35-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:21:13-42
+36            android:exported="true"
+36-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:22:13-36
+37            android:theme="@style/Theme.GDGCoreHQ" >
+37-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:23:13-51
+38            <intent-filter>
+38-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:24:13-27:29
+39                <action android:name="android.intent.action.MAIN" />
+39-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:25:17-69
+39-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:25:25-66
+40
+41                <category android:name="android.intent.category.LAUNCHER" />
+41-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:26:17-77
+41-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:26:27-74
+42            </intent-filter>
+43        </activity>
+44
+45        <!-- Foundation Verification Activity -->
+46        <activity
+46-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:31:9-34:54
+47            android:name="com.gdgcorehq.app.MainActivity"
+47-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:32:13-41
+48            android:exported="false"
+48-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:33:13-37
+49            android:theme="@style/Theme.GDGCoreHQ" />
+49-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:34:13-51
+50
+51        <!-- Super Admin Activities -->
+52        <activity
+52-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:37:9-40:54
+53            android:name="com.gdgcorehq.app.AdminDashboardActivity"
+53-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:38:13-51
+54            android:exported="false"
+54-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:39:13-37
+55            android:theme="@style/Theme.GDGCoreHQ" />
+55-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:40:13-51
+56        <activity
+56-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:42:9-45:54
+57            android:name="com.gdgcorehq.app.QrScannerActivity"
+57-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:43:13-46
+58            android:exported="false"
+58-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:44:13-37
+59            android:theme="@style/Theme.GDGCoreHQ" />
+59-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:45:13-51
+60        <activity
+60-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:47:9-50:54
+61            android:name="com.gdgcorehq.app.AdminTasksActivity"
+61-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:48:13-47
+62            android:exported="false"
+62-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:49:13-37
+63            android:theme="@style/Theme.GDGCoreHQ" />
+63-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:50:13-51
+64        <activity
+64-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:52:9-55:54
+65            android:name="com.gdgcorehq.app.AgendaManagementActivity"
+65-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:53:13-53
+66            android:exported="false"
+66-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:54:13-37
+67            android:theme="@style/Theme.GDGCoreHQ" />
+67-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:55:13-51
+68        <activity
+68-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:57:9-60:54
+69            android:name="com.gdgcorehq.app.ReimbursementReviewActivity"
+69-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:58:13-56
+70            android:exported="false"
+70-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:59:13-37
+71            android:theme="@style/Theme.GDGCoreHQ" />
+71-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:60:13-51
+72        <activity
+72-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:62:9-65:54
+73            android:name="com.gdgcorehq.app.StrikeDashboardActivity"
+73-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:63:13-52
+74            android:exported="false"
+74-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:64:13-37
+75            android:theme="@style/Theme.GDGCoreHQ" />
+75-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:65:13-51
+76
+77        <!-- Core Member Activities -->
+78        <activity
+78-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:68:9-71:54
+79            android:name="com.gdgcorehq.app.MemberDashboardActivity"
+79-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:69:13-52
+80            android:exported="false"
+80-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:70:13-37
+81            android:theme="@style/Theme.GDGCoreHQ" />
+81-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:71:13-51
+82        <activity
+82-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:73:9-76:54
+83            android:name="com.gdgcorehq.app.MemberTasksActivity"
+83-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:74:13-48
+84            android:exported="false"
+84-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:75:13-37
+85            android:theme="@style/Theme.GDGCoreHQ" />
+85-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:76:13-51
+86        <activity
+86-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:78:9-81:54
+87            android:name="com.gdgcorehq.app.MemberAgendaActivity"
+87-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:79:13-49
+88            android:exported="false"
+88-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:80:13-37
+89            android:theme="@style/Theme.GDGCoreHQ" />
+89-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:81:13-51
+90        <activity
+90-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:83:9-86:54
+91            android:name="com.gdgcorehq.app.PostMeetingReportActivity"
+91-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:84:13-54
+92            android:exported="false"
+92-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:85:13-37
+93            android:theme="@style/Theme.GDGCoreHQ" />
+93-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:86:13-51
+94        <activity
+94-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:88:9-91:54
+95            android:name="com.gdgcorehq.app.NewExpenseActivity"
+95-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:89:13-47
+96            android:exported="false"
+96-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:90:13-37
+97            android:theme="@style/Theme.GDGCoreHQ" />
+97-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:91:13-51
+98        <activity
+98-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:93:9-96:54
+99            android:name="com.gdgcorehq.app.ExpenseHistoryActivity"
+99-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:94:13-51
+100            android:exported="false"
+100-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:95:13-37
+101            android:theme="@style/Theme.GDGCoreHQ" />
+101-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:96:13-51
+102
+103        <!-- Shared Activities -->
+104        <activity
+104-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:99:9-102:54
+105            android:name="com.gdgcorehq.app.ProfileActivity"
+105-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:100:13-44
+106            android:exported="false"
+106-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:101:13-37
+107            android:theme="@style/Theme.GDGCoreHQ" />
+107-->C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\AndroidManifest.xml:102:13-51
+108
+109        <provider
+109-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+110            android:name="androidx.startup.InitializationProvider"
+110-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+111            android:authorities="com.gdgcorehq.app.androidx-startup"
+111-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+112            android:exported="false" >
+112-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+113            <meta-data
+113-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+114                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+114-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+115                android:value="androidx.startup" />
+115-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2b4d0017583813b54eea73756b4f4c55\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+116            <meta-data
+116-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\9a2b4fbbb993d4567b196dbd4ab4acc8\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+117                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+117-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\9a2b4fbbb993d4567b196dbd4ab4acc8\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+118                android:value="androidx.startup" />
+118-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\9a2b4fbbb993d4567b196dbd4ab4acc8\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+119            <meta-data
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+120                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+120-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+121                android:value="androidx.startup" />
+121-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+122        </provider>
+123
+124        <receiver
+124-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+125            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+126            android:directBootAware="false"
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+127            android:enabled="true"
+127-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+128            android:exported="true"
+128-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+129            android:permission="android.permission.DUMP" >
+129-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+130            <intent-filter>
+130-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+131                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+131-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+131-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+132            </intent-filter>
+133            <intent-filter>
+133-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+134                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+134-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+134-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+135            </intent-filter>
+136            <intent-filter>
+136-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+137                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+137-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+137-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+138            </intent-filter>
+139            <intent-filter>
+139-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+140                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+140-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+140-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\158cd5a7ea5a547765d5a173d5918e78\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+141            </intent-filter>
+142        </receiver>
+143    </application>
+144
+145</manifest>

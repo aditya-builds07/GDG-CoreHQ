@@ -1,0 +1,70 @@
+plugins {
+    id 'com.android.application'
+    // Uncomment when Developer B provides google-services.json
+    // id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.gdgcorehq.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.gdgcorehq.app"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    // AndroidX Core
+    implementation 'androidx.core:core:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Material Design 3
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // Activity
+    implementation 'androidx.activity:activity:1.9.3'
+
+    // Firebase — uncomment when Developer B provides google-services.json and Firebase setup
+    // implementation platform('com.google.firebase:firebase-bom:33.5.1')
+    // implementation 'com.google.firebase:firebase-auth'
+    // implementation 'com.google.firebase:firebase-firestore'
+    // implementation 'com.google.firebase:firebase-storage'
+    // implementation 'com.google.firebase:firebase-messaging'
+
+    // ML Kit Barcode Scanning — for QR attendance scanner
+    // implementation 'com.google.mlkit:barcode-scanning:17.3.0'
+
+    // CameraX — for QR scanner camera integration
+    // implementation 'androidx.camera:camera-core:1.4.0'
+    // implementation 'androidx.camera:camera-camera2:1.4.0'
+    // implementation 'androidx.camera:camera-lifecycle:1.4.0'
+    // implementation 'androidx.camera:camera-view:1.4.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}
