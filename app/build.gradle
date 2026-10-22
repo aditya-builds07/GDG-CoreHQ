@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
-    // Uncomment when Developer B provides google-services.json
-    // id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -47,12 +46,9 @@ dependencies {
     // Activity
     implementation 'androidx.activity:activity:1.9.3'
 
-    // Firebase — uncomment when Developer B provides google-services.json and Firebase setup
-    // implementation platform('com.google.firebase:firebase-bom:33.5.1')
-    // implementation 'com.google.firebase:firebase-auth'
-    // implementation 'com.google.firebase:firebase-firestore'
-    // implementation 'com.google.firebase:firebase-storage'
-    // implementation 'com.google.firebase:firebase-messaging'
+    // Firebase BoM & Core SDKs
+    implementation platform('com.google.firebase:firebase-bom:33.5.1')
+    implementation 'com.google.firebase:firebase-analytics'
 
     // ML Kit Barcode Scanning — for QR attendance scanner
     // implementation 'com.google.mlkit:barcode-scanning:17.3.0'
