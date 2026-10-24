@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/status_success"
                 android:minHeight="40dp"
-                android:text="✓ Approve (Reimburse)"
+                android:text="Approve (Reimburse)"
                 android:textSize="12sp" />
         </LinearLayout>
 

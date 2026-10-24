@@ -75,7 +75,7 @@ public class MemberDashboardActivity extends AppCompatActivity {
         Meeting next = MockDataRepository.getInstance().getNextUpcomingMeeting();
         if (next != null) {
             binding.tvMeetingTitle.setText(next.getTitle());
-            binding.tvMeetingSchedule.setText("📅 " + next.getDate() + " • " + next.getTime() + " • " + next.getLocation());
+            binding.tvMeetingSchedule.setText(next.getDate() + " • " + next.getTime() + " • " + next.getLocation());
         }
 
         // Tasks Summary
@@ -83,6 +83,25 @@ public class MemberDashboardActivity extends AppCompatActivity {
         long inProgress = myTasks.stream().filter(t -> t.getStatus() == TaskItem.Status.IN_PROGRESS).count();
         long todo = myTasks.stream().filter(t -> t.getStatus() == TaskItem.Status.TODO).count();
         binding.tvMyTaskSummary.setText(inProgress + " In Progress • " + todo + " To-Do");
+
+        // Digital Encrypted Attendance QR (PRD §3.2)
+        generateAndDisplayQr(user);
+    }
+
+    private void generateAndDisplayQr(User user) {
+        if (user == null || user.getPrn() == null) return;
+        binding.tvQrPrnLabel.setText("PRN: " + user.getPrn());
+        try {
+            String encryptedToken = com.gdgcorehq.app.data.QrCryptoManager.encryptPayload(user.getPrn(), user.getId());
+            int qrSizePx = (int) (200 * getResources().getDisplayMetrics().density);
+            android.graphics.Bitmap qrBitmap = com.gdgcorehq.app.data.QrCryptoManager.generateQrBitmap(encryptedToken, Math.max(qrSizePx, 256));
+            binding.ivAttendanceQr.setImageBitmap(qrBitmap);
+            binding.tvQrStatus.setText("Encrypted • Valid for 15 minutes");
+            binding.tvQrStatus.setTextColor(getColor(R.color.text_secondary));
+        } catch (Exception e) {
+            binding.tvQrStatus.setText("Failed to generate QR: " + e.getMessage());
+            binding.tvQrStatus.setTextColor(getColor(R.color.status_error));
+        }
     }
 
     private void setupNavigationAndActions() {
@@ -91,6 +110,14 @@ public class MemberDashboardActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 finishAffinity();
+            }
+        });
+
+        binding.btnRefreshQr.setOnClickListener(v -> {
+            User user = SessionManager.getInstance().getCurrentUser();
+            if (user != null) {
+                generateAndDisplayQr(user);
+                android.widget.Toast.makeText(this, "Attendance QR code refreshed.", android.widget.Toast.LENGTH_SHORT).show();
             }
         });
 

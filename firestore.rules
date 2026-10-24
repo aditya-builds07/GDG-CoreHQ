@@ -1,0 +1,125 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Helper Functions ---
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserDoc(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data;
+    }
+
+    function isSuperAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.role == 'SUPER_ADMIN' ||
+        getUserDoc(request.auth.uid).role == 'SUPER_ADMIN'
+      );
+    }
+
+    function isMember(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // --- 1. Users Collection ---
+    // Members can read directory; only Super Admin can create/update/delete accounts
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, delete: if isSuperAdmin();
+      allow update: if isSuperAdmin();
+    }
+
+    // --- 2. Meetings & Agendas Collection ---
+    // Members can view meetings; only Super Admin can publish/edit/archive agendas
+    match /meetings/{meetingId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin();
+    }
+
+    // --- 3. Attendance Collection ---
+    // Strictly Admin-only write: Core Members can NEVER write attendance records
+    match /attendance/{attendanceId} {
+      allow read: if isAuthenticated();
+      allow write: if isSuperAdmin()
+        && request.resource.data.meetingId is string
+        && request.resource.data.prn is string
+        && request.resource.data.status in ['PRESENT', 'ABSENT']
+        && request.resource.data.recordedById == request.auth.uid;
+    }
+
+    // --- 4. Tasks Collection ---
+    // Super Admin can create, delete, and reassign tasks.
+    // Core Members can ONLY update task status (TODO -> IN_PROGRESS -> DONE) on their OWN assigned tasks.
+    match /tasks/{taskId} {
+      allow read: if isAuthenticated();
+      allow create, delete: if isSuperAdmin();
+      allow update: if isSuperAdmin() || (
+        isAuthenticated()
+        && resource.data.assigneeId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'isOverdue48h', 'updatedAt'])
+        && request.resource.data.status in ['TODO', 'IN_PROGRESS', 'DONE']
+      );
+    }
+
+    // --- 5. Post-Meeting Reports Collection ---
+    // Core Members submit their own report with mandatory progress & roadblocks.
+    match /postMeetingReports/{reportId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && (request.resource.data.memberId == request.auth.uid || isSuperAdmin())
+        && request.resource.data.progress is string && request.resource.data.progress.size() > 0
+        && request.resource.data.roadblocks is string && request.resource.data.roadblocks.size() > 0;
+      allow update, delete: if isSuperAdmin();
+    }
+
+    // --- 6. Reimbursements Collection ---
+    // Members submit expenses (> 0, receipt attached).
+    // Admin reviews: Rejection STRICTLY requires a non-empty reason (PRD §3.5, R22).
+    match /reimbursements/{reimbursementId} {
+      allow read: if isAuthenticated() && (
+        isSuperAdmin() || resource.data.memberId == request.auth.uid
+      );
+      
+      // Member submission: must start as PENDING with positive amount and receipt URI
+      allow create: if isAuthenticated()
+        && (request.resource.data.memberId == request.auth.uid || isSuperAdmin())
+        && request.resource.data.amount is number && request.resource.data.amount > 0
+        && request.resource.data.status == 'PENDING'
+        && request.resource.data.receiptUri is string && request.resource.data.receiptUri.size() > 0;
+        
+      // Super Admin review: Approval or Rejection (with mandatory reason)
+      allow update: if isSuperAdmin() && (
+        (request.resource.data.status == 'APPROVED') ||
+        (request.resource.data.status == 'REJECTED' 
+          && request.resource.data.rejectionReason is string 
+          && request.resource.data.rejectionReason.size() > 0)
+      );
+      
+      allow delete: if isSuperAdmin();
+    }
+
+    // --- 7. Strikes Collection ---
+    // Super Admin exclusively manages strikes and pardons.
+    match /strikes/{strikeId} {
+      allow read: if isAuthenticated() && (
+        isSuperAdmin() || resource.data.memberId == request.auth.uid
+      );
+      allow create: if isSuperAdmin()
+        && request.resource.data.triggerType in ['ABSENCE', 'OVERDUE_TASK']
+        && request.resource.data.reason is string && request.resource.data.reason.size() > 0;
+        
+      // Pardon update requires pardon justification and admin identity
+      allow update: if isSuperAdmin() && (
+        !request.resource.data.isPardoned || (
+          request.resource.data.isPardoned == true
+          && request.resource.data.pardonedReason is string && request.resource.data.pardonedReason.size() > 0
+          && request.resource.data.pardonedBy is string && request.resource.data.pardonedBy.size() > 0
+        )
+      );
+      
+      allow delete: if isSuperAdmin();
+    }
+  }
+}

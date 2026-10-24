@@ -115,6 +115,7 @@ id btnNewExpense
 id btnOpenReport
 id btnPardonStrike
 id btnPostMeetingReport
+id btnRefreshQr
 id btnReject
 id btnRoleAdmin
 id btnRoleMember
@@ -128,6 +129,8 @@ id btnSubmitReport
 id btnToggleGlobal
 id btnVerifyPrn
 id btnViewAgenda
+id cameraPreviewView
+id cardAttendanceQr
 id cardCaptureReceipt
 id cardLogin
 id cardMeetingOverview
@@ -167,9 +170,11 @@ id filterDesign
 id filterLogistics
 id filterPR
 id filterTech
+id ivAttendanceQr
 id ivLogo
 id ivProfile
 id ivReceiptStatusIcon
+id ivScanReticle
 id ivStrikeIcon
 id layoutDepartmentFilters
 id layoutExpensesContainer
@@ -202,6 +207,7 @@ id tvAmount
 id tvAppDescription
 id tvAppName
 id tvBoardTitle
+id tvCameraStatus
 id tvCategoryDate
 id tvChapter
 id tvForgotPassword
@@ -228,6 +234,8 @@ id tvProfileName
 id tvProfilePrn
 id tvProfileStrikes
 id tvPublishedBy
+id tvQrPrnLabel
+id tvQrStatus
 id tvReceiptDetails
 id tvReceiptFilename
 id tvReceiptStatus
@@ -309,7 +317,12 @@ string expense_reject_reason_required
 string expense_rejected
 string expenses_title
 string feedback_hint
+string gcm_defaultSenderId
 string global_view
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
 string loading
 string login_button
 string login_email_hint
@@ -324,6 +337,7 @@ string new_expense
 string post_meeting_title
 string profile_title
 string progress_hint
+string project_id
 string publish_agenda
 string retry
 string roadblocks_hint

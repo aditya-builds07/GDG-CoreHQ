@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_new_expense.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_new_expense.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_agenda_management.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_agenda_management.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_admin_dashboard.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_admin_dashboard.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/item_task_card.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/item_task_card.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_reimbursement_review.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_reimbursement_review.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_qr_scanner.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_qr_scanner.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_post_meeting_report.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_post_meeting_report.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/item_meeting_card.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/item_meeting_card.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_member_tasks.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_member_tasks.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_member_agenda.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_member_agenda.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_main.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_strike_dashboard.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_strike_dashboard.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/dialog_add_task.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/dialog_add_task.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/item_strike_card.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/item_strike_card.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_login.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_expense_history.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_expense_history.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_member_dashboard.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_member_dashboard.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/item_reimbursement_review.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/item_reimbursement_review.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_profile.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/dialog_add_meeting.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/dialog_add_meeting.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeReleaseResources-37:/layout/activity_admin_tasks.xml",
+        "source": "com.gdgcorehq.app-main-39:/layout/activity_admin_tasks.xml"
+    }
+]

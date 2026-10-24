@@ -1,302 +1,262 @@
 [
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_admin_dashboard.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_admin_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-mdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-mdpi\\ic_launcher_foreground.png"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_reimbursement_review.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_reimbursement_review.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_tasks.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_tasks.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_agenda.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_agenda.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_admin_tasks.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_admin_tasks.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_bg_floating_nav.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/bg_floating_nav.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_profile.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_profile.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_qr_scanner.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_qr_scanner.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_dialog_add_meeting.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\dialog_add_meeting.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_visibility.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_visibility.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_arrow_forward.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_arrow_forward.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_agenda_management.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_agenda_management.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_strike.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_strike.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_post_meeting_report.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_post_meeting_report.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-ldpi_ic_launcher_round.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-ldpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_main.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_dialog_add_task.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/dialog_add_task.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_visibility_off.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_visibility_off.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_bg_strike_warning_container.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/bg_strike_warning_container.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_qr_scan.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_qr_scan.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_bg_chip_rounded.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/bg_chip_rounded.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_bg_floating_nav.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\bg_floating_nav.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xxxhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_reimbursement_review.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_reimbursement_review.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_member_agenda.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_member_agenda.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_strike_dashboard.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_strike_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_item_reimbursement_review.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\item_reimbursement_review.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-ldpi_ic_launcher.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-ldpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xxhdpi\\ic_launcher_round.png"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_main.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_dialog_add_task.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\dialog_add_task.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_agenda.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_agenda.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_dashboard.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_dashboard.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-mdpi\\ic_launcher_round.png"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_admin_dashboard.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_admin_dashboard.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_warning.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_warning.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-mdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_login.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_login.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_expense_history.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_expense_history.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_bg_chip_rounded.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\bg_chip_rounded.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_arrow_forward.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_arrow_forward.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_admin_tasks.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_admin_tasks.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_strike_dashboard.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_strike_dashboard.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_add.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_add.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_item_strike_card.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/item_strike_card.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_strike_dashboard.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_strike_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_item_reimbursement_review.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/item_reimbursement_review.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_profile.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_profile.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_cancel.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_cancel.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xxhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_item_task_card.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\item_task_card.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_tasks.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_tasks.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_member_agenda.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_member_agenda.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-ldpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-ldpi\\ic_launcher_round.png"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_qr_scan.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_qr_scan.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-ldpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-ldpi\\ic_launcher.png"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_item_task_card.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/item_task_card.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_dashboard.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_cancel.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_cancel.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_qr_scanner.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_qr_scanner.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_member_tasks.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_member_tasks.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_new_expense.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_new_expense.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_post_meeting_report.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_post_meeting_report.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_calendar.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_calendar.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_member_tasks.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_member_tasks.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_camera.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_camera.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_bg_qr_frame.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/bg_qr_frame.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_expense_history.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_expense_history.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_visibility_off.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_visibility_off.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-hdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-hdpi\\ic_launcher_foreground.png"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_filter.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_filter.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_logout.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_logout.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_add.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_add.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_item_meeting_card.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\item_meeting_card.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_filter.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_filter.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_dialog_add_meeting.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/dialog_add_meeting.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_location.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_location.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_qr_scanner.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_qr_scanner.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_login.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_receipt.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_receipt.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_arrow_back.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_arrow_back.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_arrow_back.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_item_meeting_card.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/item_meeting_card.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_bg_nav_selected.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\bg_nav_selected.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_agenda_management.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_agenda_management.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_visibility.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_visibility.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_strike.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_strike.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_item_strike_card.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\item_strike_card.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_member_dashboard.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_member_dashboard.xml"
     },
     {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_member_dashboard.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_member_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_warning.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_warning.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_check.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_check.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_logout.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_logout.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_location.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_location.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_profile.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_profile.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_admin_tasks.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_admin_tasks.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_admin_dashboard.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_admin_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/layout_activity_new_expense.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/layout/activity_new_expense.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_member_dashboard.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_member_dashboard.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.gdgcorehq.app-main-52:/mipmap-hdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_bg_qr_frame.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\bg_qr_frame.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_check.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_check.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xhdpi\\ic_launcher_foreground.png"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_bg_nav_selected.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/bg_nav_selected.xml"
     },
     {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_calendar.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_calendar.xml"
-    },
-    {
-        "merged": "com.gdgcorehq.app-debug-31:/layout_activity_member_tasks.xml.flat",
-        "source": "com.gdgcorehq.app-main-33:/layout/activity_member_tasks.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_profile.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_profile.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_profile.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_profile.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_member_agenda.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_member_agenda.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\mipmap-xxxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_bg_strike_warning_container.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\bg_strike_warning_container.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_reimbursement_review.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_reimbursement_review.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\layout_activity_expense_history.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\layout\\activity_expense_history.xml"
-    },
-    {
-        "merged": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-debug-31:\\drawable_ic_camera.xml.flat",
-        "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\daemon\\9.7.1\\com.gdgcorehq.app-main-33:\\drawable\\ic_camera.xml"
+        "merged": "com.gdgcorehq.app-debug-50:/drawable_ic_receipt.xml.flat",
+        "source": "com.gdgcorehq.app-main-52:/drawable/ic_receipt.xml"
     }
 ]

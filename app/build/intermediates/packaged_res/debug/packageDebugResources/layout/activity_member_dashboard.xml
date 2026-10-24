@@ -38,7 +38,7 @@
                         android:id="@+id/tvMemberGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hi, Siddhi 👋"
+                        android:text="Hi, Siddhi"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Headline"
                         android:textColor="@color/text_primary" />
 
@@ -115,6 +115,92 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Digital Attendance QR Card (PRD §3.2) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAttendanceQr"
+                style="@style/Widget.GDGCoreHQ.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                app:cardBackgroundColor="@color/surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_2">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="My Attendance QR"
+                                android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                                android:textColor="@color/text_primary" />
+
+                            <TextView
+                                android:id="@+id/tvQrStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Encrypted • Present to Chapter Admin"
+                                android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                                android:textColor="@color/text_secondary" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/btnRefreshQr"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/bg_chip_rounded"
+                            android:contentDescription="Refresh QR Code"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_qr_scan"
+                            app:tint="@color/brand_navy" />
+                    </RelativeLayout>
+
+                    <!-- QR Display Frame -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/space_2"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/border"
+                        app:strokeWidth="1dp">
+
+                        <ImageView
+                            android:id="@+id/ivAttendanceQr"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:contentDescription="Encrypted Attendance QR Code"
+                            android:padding="12dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvQrPrnLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_1"
+                        android:text="PRN: PRN2024001"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                        android:textColor="@color/brand_navy" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- Upcoming Meeting Card -->
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.GDGCoreHQ.Card"
@@ -149,7 +235,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="📅 Friday, Oct 24 • 05:00 PM • Seminar Hall B"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:drawablePadding="@dimen/space_1"
+                        app:drawableTint="@color/text_secondary"
+                        android:gravity="center_vertical"
+                        android:text="Friday, Oct 24 • 05:00 PM • Seminar Hall B"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                         android:textColor="@color/text_secondary" />
 

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.view.PreviewView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -44,10 +45,16 @@ public final class ActivityQrScannerBinding implements ViewBinding {
   public final MaterialButton btnVerifyPrn;
 
   @NonNull
+  public final PreviewView cameraPreviewView;
+
+  @NonNull
   public final MaterialCardView cardResult;
 
   @NonNull
   public final TextInputEditText etManualPrn;
+
+  @NonNull
+  public final ImageView ivScanReticle;
 
   @NonNull
   public final ImageView navExpenses;
@@ -66,6 +73,9 @@ public final class ActivityQrScannerBinding implements ViewBinding {
 
   @NonNull
   public final TextInputLayout tilManualPrn;
+
+  @NonNull
+  public final TextView tvCameraStatus;
 
   @NonNull
   public final TextView tvMeetingContext;
@@ -89,13 +99,14 @@ public final class ActivityQrScannerBinding implements ViewBinding {
       @NonNull LinearLayout bottomNavPill, @NonNull ImageView btnBack,
       @NonNull MaterialButton btnConfirmAttendance, @NonNull MaterialButton btnSimulateInvalid,
       @NonNull MaterialButton btnSimulateValid, @NonNull MaterialButton btnVerifyPrn,
-      @NonNull MaterialCardView cardResult, @NonNull TextInputEditText etManualPrn,
+      @NonNull PreviewView cameraPreviewView, @NonNull MaterialCardView cardResult,
+      @NonNull TextInputEditText etManualPrn, @NonNull ImageView ivScanReticle,
       @NonNull ImageView navExpenses, @NonNull ImageView navHome, @NonNull ImageView navScanner,
       @NonNull ImageView navStrikes, @NonNull ImageView navTasks,
-      @NonNull TextInputLayout tilManualPrn, @NonNull TextView tvMeetingContext,
-      @NonNull TextView tvResultName, @NonNull TextView tvResultRolePrn,
-      @NonNull TextView tvResultStatus, @NonNull TextView tvSessionHistory,
-      @NonNull View viewScannerFrame) {
+      @NonNull TextInputLayout tilManualPrn, @NonNull TextView tvCameraStatus,
+      @NonNull TextView tvMeetingContext, @NonNull TextView tvResultName,
+      @NonNull TextView tvResultRolePrn, @NonNull TextView tvResultStatus,
+      @NonNull TextView tvSessionHistory, @NonNull View viewScannerFrame) {
     this.rootView = rootView;
     this.bottomNavPill = bottomNavPill;
     this.btnBack = btnBack;
@@ -103,14 +114,17 @@ public final class ActivityQrScannerBinding implements ViewBinding {
     this.btnSimulateInvalid = btnSimulateInvalid;
     this.btnSimulateValid = btnSimulateValid;
     this.btnVerifyPrn = btnVerifyPrn;
+    this.cameraPreviewView = cameraPreviewView;
     this.cardResult = cardResult;
     this.etManualPrn = etManualPrn;
+    this.ivScanReticle = ivScanReticle;
     this.navExpenses = navExpenses;
     this.navHome = navHome;
     this.navScanner = navScanner;
     this.navStrikes = navStrikes;
     this.navTasks = navTasks;
     this.tilManualPrn = tilManualPrn;
+    this.tvCameraStatus = tvCameraStatus;
     this.tvMeetingContext = tvMeetingContext;
     this.tvResultName = tvResultName;
     this.tvResultRolePrn = tvResultRolePrn;
@@ -182,6 +196,12 @@ public final class ActivityQrScannerBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.cameraPreviewView;
+      PreviewView cameraPreviewView = ViewBindings.findChildViewById(rootView, id);
+      if (cameraPreviewView == null) {
+        break missingId;
+      }
+
       id = R.id.cardResult;
       MaterialCardView cardResult = ViewBindings.findChildViewById(rootView, id);
       if (cardResult == null) {
@@ -191,6 +211,12 @@ public final class ActivityQrScannerBinding implements ViewBinding {
       id = R.id.etManualPrn;
       TextInputEditText etManualPrn = ViewBindings.findChildViewById(rootView, id);
       if (etManualPrn == null) {
+        break missingId;
+      }
+
+      id = R.id.ivScanReticle;
+      ImageView ivScanReticle = ViewBindings.findChildViewById(rootView, id);
+      if (ivScanReticle == null) {
         break missingId;
       }
 
@@ -227,6 +253,12 @@ public final class ActivityQrScannerBinding implements ViewBinding {
       id = R.id.tilManualPrn;
       TextInputLayout tilManualPrn = ViewBindings.findChildViewById(rootView, id);
       if (tilManualPrn == null) {
+        break missingId;
+      }
+
+      id = R.id.tvCameraStatus;
+      TextView tvCameraStatus = ViewBindings.findChildViewById(rootView, id);
+      if (tvCameraStatus == null) {
         break missingId;
       }
 
@@ -267,10 +299,10 @@ public final class ActivityQrScannerBinding implements ViewBinding {
       }
 
       return new ActivityQrScannerBinding((CoordinatorLayout) rootView, bottomNavPill, btnBack,
-          btnConfirmAttendance, btnSimulateInvalid, btnSimulateValid, btnVerifyPrn, cardResult,
-          etManualPrn, navExpenses, navHome, navScanner, navStrikes, navTasks, tilManualPrn,
-          tvMeetingContext, tvResultName, tvResultRolePrn, tvResultStatus, tvSessionHistory,
-          viewScannerFrame);
+          btnConfirmAttendance, btnSimulateInvalid, btnSimulateValid, btnVerifyPrn,
+          cameraPreviewView, cardResult, etManualPrn, ivScanReticle, navExpenses, navHome,
+          navScanner, navStrikes, navTasks, tilManualPrn, tvCameraStatus, tvMeetingContext,
+          tvResultName, tvResultRolePrn, tvResultStatus, tvSessionHistory, viewScannerFrame);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

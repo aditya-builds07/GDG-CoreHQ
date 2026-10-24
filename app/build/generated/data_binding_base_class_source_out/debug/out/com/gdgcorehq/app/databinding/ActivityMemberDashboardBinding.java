@@ -36,13 +36,22 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
   public final MaterialButton btnPostMeetingReport;
 
   @NonNull
+  public final ImageView btnRefreshQr;
+
+  @NonNull
   public final MaterialButton btnViewAgenda;
+
+  @NonNull
+  public final MaterialCardView cardAttendanceQr;
 
   @NonNull
   public final MaterialCardView cardMyTasks;
 
   @NonNull
   public final MaterialCardView cardStrikeStatus;
+
+  @NonNull
+  public final ImageView ivAttendanceQr;
 
   @NonNull
   public final ImageView ivProfile;
@@ -81,6 +90,12 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
   public final TextView tvMyTaskSummary;
 
   @NonNull
+  public final TextView tvQrPrnLabel;
+
+  @NonNull
+  public final TextView tvQrStatus;
+
+  @NonNull
   public final TextView tvStrikeSubtitle;
 
   @NonNull
@@ -89,22 +104,27 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
   private ActivityMemberDashboardBinding(@NonNull CoordinatorLayout rootView,
       @NonNull LinearLayout bottomNavPill, @NonNull MaterialButton btnExpenseHistory,
       @NonNull MaterialButton btnNewExpense, @NonNull MaterialButton btnPostMeetingReport,
-      @NonNull MaterialButton btnViewAgenda, @NonNull MaterialCardView cardMyTasks,
-      @NonNull MaterialCardView cardStrikeStatus, @NonNull ImageView ivProfile,
-      @NonNull ImageView ivStrikeIcon, @NonNull ImageView navAgenda, @NonNull ImageView navExpenses,
-      @NonNull ImageView navHome, @NonNull ImageView navProfile, @NonNull ImageView navTasks,
-      @NonNull TextView tvMeetingSchedule, @NonNull TextView tvMeetingTitle,
-      @NonNull TextView tvMemberGreeting, @NonNull TextView tvMemberRolePrn,
-      @NonNull TextView tvMyTaskSummary, @NonNull TextView tvStrikeSubtitle,
-      @NonNull TextView tvStrikeTitle) {
+      @NonNull ImageView btnRefreshQr, @NonNull MaterialButton btnViewAgenda,
+      @NonNull MaterialCardView cardAttendanceQr, @NonNull MaterialCardView cardMyTasks,
+      @NonNull MaterialCardView cardStrikeStatus, @NonNull ImageView ivAttendanceQr,
+      @NonNull ImageView ivProfile, @NonNull ImageView ivStrikeIcon, @NonNull ImageView navAgenda,
+      @NonNull ImageView navExpenses, @NonNull ImageView navHome, @NonNull ImageView navProfile,
+      @NonNull ImageView navTasks, @NonNull TextView tvMeetingSchedule,
+      @NonNull TextView tvMeetingTitle, @NonNull TextView tvMemberGreeting,
+      @NonNull TextView tvMemberRolePrn, @NonNull TextView tvMyTaskSummary,
+      @NonNull TextView tvQrPrnLabel, @NonNull TextView tvQrStatus,
+      @NonNull TextView tvStrikeSubtitle, @NonNull TextView tvStrikeTitle) {
     this.rootView = rootView;
     this.bottomNavPill = bottomNavPill;
     this.btnExpenseHistory = btnExpenseHistory;
     this.btnNewExpense = btnNewExpense;
     this.btnPostMeetingReport = btnPostMeetingReport;
+    this.btnRefreshQr = btnRefreshQr;
     this.btnViewAgenda = btnViewAgenda;
+    this.cardAttendanceQr = cardAttendanceQr;
     this.cardMyTasks = cardMyTasks;
     this.cardStrikeStatus = cardStrikeStatus;
+    this.ivAttendanceQr = ivAttendanceQr;
     this.ivProfile = ivProfile;
     this.ivStrikeIcon = ivStrikeIcon;
     this.navAgenda = navAgenda;
@@ -117,6 +137,8 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
     this.tvMemberGreeting = tvMemberGreeting;
     this.tvMemberRolePrn = tvMemberRolePrn;
     this.tvMyTaskSummary = tvMyTaskSummary;
+    this.tvQrPrnLabel = tvQrPrnLabel;
+    this.tvQrStatus = tvQrStatus;
     this.tvStrikeSubtitle = tvStrikeSubtitle;
     this.tvStrikeTitle = tvStrikeTitle;
   }
@@ -172,9 +194,21 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnRefreshQr;
+      ImageView btnRefreshQr = ViewBindings.findChildViewById(rootView, id);
+      if (btnRefreshQr == null) {
+        break missingId;
+      }
+
       id = R.id.btnViewAgenda;
       MaterialButton btnViewAgenda = ViewBindings.findChildViewById(rootView, id);
       if (btnViewAgenda == null) {
+        break missingId;
+      }
+
+      id = R.id.cardAttendanceQr;
+      MaterialCardView cardAttendanceQr = ViewBindings.findChildViewById(rootView, id);
+      if (cardAttendanceQr == null) {
         break missingId;
       }
 
@@ -187,6 +221,12 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
       id = R.id.cardStrikeStatus;
       MaterialCardView cardStrikeStatus = ViewBindings.findChildViewById(rootView, id);
       if (cardStrikeStatus == null) {
+        break missingId;
+      }
+
+      id = R.id.ivAttendanceQr;
+      ImageView ivAttendanceQr = ViewBindings.findChildViewById(rootView, id);
+      if (ivAttendanceQr == null) {
         break missingId;
       }
 
@@ -262,6 +302,18 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvQrPrnLabel;
+      TextView tvQrPrnLabel = ViewBindings.findChildViewById(rootView, id);
+      if (tvQrPrnLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.tvQrStatus;
+      TextView tvQrStatus = ViewBindings.findChildViewById(rootView, id);
+      if (tvQrStatus == null) {
+        break missingId;
+      }
+
       id = R.id.tvStrikeSubtitle;
       TextView tvStrikeSubtitle = ViewBindings.findChildViewById(rootView, id);
       if (tvStrikeSubtitle == null) {
@@ -275,10 +327,11 @@ public final class ActivityMemberDashboardBinding implements ViewBinding {
       }
 
       return new ActivityMemberDashboardBinding((CoordinatorLayout) rootView, bottomNavPill,
-          btnExpenseHistory, btnNewExpense, btnPostMeetingReport, btnViewAgenda, cardMyTasks,
-          cardStrikeStatus, ivProfile, ivStrikeIcon, navAgenda, navExpenses, navHome, navProfile,
-          navTasks, tvMeetingSchedule, tvMeetingTitle, tvMemberGreeting, tvMemberRolePrn,
-          tvMyTaskSummary, tvStrikeSubtitle, tvStrikeTitle);
+          btnExpenseHistory, btnNewExpense, btnPostMeetingReport, btnRefreshQr, btnViewAgenda,
+          cardAttendanceQr, cardMyTasks, cardStrikeStatus, ivAttendanceQr, ivProfile, ivStrikeIcon,
+          navAgenda, navExpenses, navHome, navProfile, navTasks, tvMeetingSchedule, tvMeetingTitle,
+          tvMemberGreeting, tvMemberRolePrn, tvMyTaskSummary, tvQrPrnLabel, tvQrStatus,
+          tvStrikeSubtitle, tvStrikeTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

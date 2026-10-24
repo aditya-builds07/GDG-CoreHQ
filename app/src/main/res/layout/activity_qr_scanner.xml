@@ -64,43 +64,55 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <!-- Scanner Viewfinder Box -->
+            <!-- Scanner Viewfinder Box with CameraX PreviewView -->
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.GDGCoreHQ.Card"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="260dp"
                 android:layout_marginBottom="@dimen/space_4"
                 app:cardBackgroundColor="@color/brand_navy">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
 
-                    <View
-                        android:id="@+id/viewScannerFrame"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/bg_qr_frame" />
+                    <androidx.camera.view.PreviewView
+                        android:id="@+id/cameraPreviewView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-                    <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_centerInParent="true"
-                        android:contentDescription="Scanner Reticle"
-                        android:src="@drawable/ic_qr_scan"
-                        app:tint="#66C8D8FF" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/viewScannerFrame"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/space_2"
-                        android:text="Align QR Code on physical GDG ID Card"
-                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
-                        android:textColor="@color/surface" />
+                        <View
+                            android:id="@+id/viewScannerFrame"
+                            android:layout_width="160dp"
+                            android:layout_height="160dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/bg_qr_frame" />
+
+                        <ImageView
+                            android:id="@+id/ivScanReticle"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_centerInParent="true"
+                            android:contentDescription="Scanner Reticle"
+                            android:src="@drawable/ic_qr_scan"
+                            app:tint="#66C8D8FF" />
+
+                        <TextView
+                            android:id="@+id/tvCameraStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/viewScannerFrame"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/space_2"
+                            android:text="Align member's in-app digital QR code within frame"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                            android:textColor="@color/surface" />
+                    </RelativeLayout>
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -227,7 +239,7 @@
                         android:backgroundTint="@color/color_success_container"
                         android:paddingHorizontal="@dimen/space_2"
                         android:paddingVertical="@dimen/space_1"
-                        android:text="✓ Verified Core Member"
+                        android:text="Verified Core Member"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                         android:textColor="@color/status_success" />
 

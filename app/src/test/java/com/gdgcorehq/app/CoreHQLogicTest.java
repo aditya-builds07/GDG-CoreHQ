@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import com.gdgcorehq.app.data.MockDataRepository;
+import com.gdgcorehq.app.data.QrCryptoManager;
 import com.gdgcorehq.app.data.SessionManager;
 import com.gdgcorehq.app.model.AttendanceRecord;
 import com.gdgcorehq.app.model.PostMeetingReport;
@@ -327,5 +328,94 @@ public class CoreHQLogicTest {
         User member = sessionManager.getCurrentUser();
         assertNotNull(member);
         assertFalse("Core Member must not have Super Admin authority", member.isSuperAdmin());
+    }
+
+    @Test
+    public void testFindMemberByIdAndStrikeCountThreshold() {
+        User memberWith3Strikes = repo.findMemberById("usr_member_03");
+        assertNotNull("User usr_member_03 should exist", memberWith3Strikes);
+        assertEquals("Rahul Patil", memberWith3Strikes.getName());
+        assertTrue("Member should meet 3+ critical strike threshold", memberWith3Strikes.getStrikeCount() >= 3);
+
+        User memberNormal = repo.findMemberById("usr_member_02");
+        assertNotNull("User usr_member_02 should exist", memberNormal);
+        assertEquals(0, memberNormal.getStrikeCount());
+        assertFalse("Member should not meet 3+ critical strike threshold", memberNormal.getStrikeCount() >= 3);
+    }
+
+    // --- QR Encryption, Decryption & Replay Attack Prevention Tests ---
+
+    @Test
+    public void testQrEncryptionDecryptionSuccess() throws Exception {
+        String prn = "PRN2024001";
+        String userId = "usr_member_01";
+
+        String token = QrCryptoManager.encryptPayload(prn, userId);
+        assertNotNull("Generated token must not be null", token);
+        assertFalse("Generated token must not be empty", token.trim().isEmpty());
+
+        QrCryptoManager.DecryptedPayload result = QrCryptoManager.decryptPayload(token);
+        assertTrue("Decryption must succeed for valid ciphertext", result.isSuccess());
+        assertEquals(prn, result.getPrn());
+        assertEquals(userId, result.getUserId());
+        assertFalse("Fresh QR code must not be expired", result.isExpired());
+        assertTrue("Timestamp must be valid", result.getTimestamp() > 0);
+        assertNull(result.getErrorMessage());
+    }
+
+    @Test
+    public void testQrTamperedCiphertextRejected() throws Exception {
+        String prn = "PRN2024001";
+        String userId = "usr_member_01";
+
+        String token = QrCryptoManager.encryptPayload(prn, userId);
+
+        // Tamper with characters in the middle of ciphertext
+        char[] chars = token.toCharArray();
+        chars[chars.length / 2] = (chars[chars.length / 2] == 'A') ? 'B' : 'A';
+        String tamperedToken = new String(chars);
+
+        QrCryptoManager.DecryptedPayload result = QrCryptoManager.decryptPayload(tamperedToken);
+        assertFalse("Tampered token must fail authenticated AES-GCM verification", result.isSuccess());
+        assertNotNull("Failure must contain error description", result.getErrorMessage());
+    }
+
+    @Test
+    public void testQrReplayAttackExpiredPayloadRejected() throws Exception {
+        String prn = "PRN2024001";
+        String userId = "usr_member_01";
+        // Create a payload timestamped 20 minutes ago (exceeding 15-minute window)
+        long expiredTimestamp = System.currentTimeMillis() - (20 * 60 * 1000L);
+
+        String expiredToken = QrCryptoManager.encryptPayloadWithTime(prn, userId, expiredTimestamp);
+        assertNotNull(expiredToken);
+
+        QrCryptoManager.DecryptedPayload result = QrCryptoManager.decryptPayload(expiredToken, QrCryptoManager.DEFAULT_EXPIRATION_MS);
+        assertFalse("Expired payload must not be marked success", result.isSuccess());
+        assertTrue("isExpired() must be true for token older than 15 minutes", result.isExpired());
+        assertEquals(prn, result.getPrn());
+        assertEquals(userId, result.getUserId());
+    }
+
+    @Test
+    public void testQrInvalidOrCorruptTokenRejected() {
+        QrCryptoManager.DecryptedPayload nullResult = QrCryptoManager.decryptPayload(null);
+        assertFalse("Null token must fail gracefully", nullResult.isSuccess());
+
+        QrCryptoManager.DecryptedPayload emptyResult = QrCryptoManager.decryptPayload("   ");
+        assertFalse("Empty token must fail gracefully", emptyResult.isSuccess());
+
+        QrCryptoManager.DecryptedPayload garbageResult = QrCryptoManager.decryptPayload("not_a_valid_base64_payload_at_all");
+        assertFalse("Garbage payload must fail gracefully", garbageResult.isSuccess());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testQrEncryptThrowsOnEmptyPrn() throws Exception {
+        QrCryptoManager.encryptPayload("", "usr_member_01");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testQrEncryptThrowsOnEmptyUserId() throws Exception {
+        QrCryptoManager.encryptPayload("PRN2024001", "");
     }
 }

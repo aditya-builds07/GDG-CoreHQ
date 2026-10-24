@@ -80,14 +80,14 @@ public class ReimbursementReviewActivity extends AppCompatActivity {
                 itemBinding.btnReject.setOnClickListener(v -> promptRejectionReason(r));
 
             } else if (r.getStatus() == Reimbursement.Status.APPROVED) {
-                itemBinding.tvStatusBadge.setText("✓ Approved (Reimbursed)");
+                itemBinding.tvStatusBadge.setText("Approved (Reimbursed)");
                 itemBinding.tvStatusBadge.setBackgroundTintList(getColorStateList(R.color.color_success_container));
                 itemBinding.tvStatusBadge.setTextColor(getColor(R.color.status_success));
                 itemBinding.layoutReviewActions.setVisibility(View.GONE);
                 itemBinding.tvRejectionReason.setVisibility(View.GONE);
 
             } else {
-                itemBinding.tvStatusBadge.setText("✕ Rejected");
+                itemBinding.tvStatusBadge.setText("Rejected");
                 itemBinding.tvStatusBadge.setBackgroundTintList(getColorStateList(R.color.color_error_container));
                 itemBinding.tvStatusBadge.setTextColor(getColor(R.color.status_error));
                 itemBinding.layoutReviewActions.setVisibility(View.GONE);

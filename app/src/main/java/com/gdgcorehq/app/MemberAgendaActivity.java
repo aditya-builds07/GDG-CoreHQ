@@ -53,8 +53,8 @@ public class MemberAgendaActivity extends AppCompatActivity {
                     LayoutInflater.from(this), binding.layoutMeetingsContainer, false);
 
             cardBinding.tvMeetingTitle.setText(m.getTitle());
-            cardBinding.tvMeetingDateTime.setText("📅 " + m.getDate() + " • " + m.getTime());
-            cardBinding.tvMeetingLocation.setText("📍 " + m.getLocation());
+            cardBinding.tvMeetingDateTime.setText(m.getDate() + " • " + m.getTime());
+            cardBinding.tvMeetingLocation.setText(m.getLocation());
             cardBinding.tvPublishedBy.setText("Published by: " + m.getPublishedBy());
 
             if (m.isUpcoming()) {

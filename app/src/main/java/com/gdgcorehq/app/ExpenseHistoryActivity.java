@@ -79,13 +79,13 @@ public class ExpenseHistoryActivity extends AppCompatActivity {
                 itemBinding.tvRejectionReason.setVisibility(View.GONE);
 
             } else if (r.getStatus() == Reimbursement.Status.APPROVED) {
-                itemBinding.tvStatusBadge.setText("✓ Approved (Reimbursed)");
+                itemBinding.tvStatusBadge.setText("Approved (Reimbursed)");
                 itemBinding.tvStatusBadge.setBackgroundTintList(getColorStateList(R.color.color_success_container));
                 itemBinding.tvStatusBadge.setTextColor(getColor(R.color.status_success));
                 itemBinding.tvRejectionReason.setVisibility(View.GONE);
 
             } else {
-                itemBinding.tvStatusBadge.setText("✕ Rejected");
+                itemBinding.tvStatusBadge.setText("Rejected");
                 itemBinding.tvStatusBadge.setBackgroundTintList(getColorStateList(R.color.color_error_container));
                 itemBinding.tvStatusBadge.setTextColor(getColor(R.color.status_error));
 

@@ -124,7 +124,7 @@ public class AdminTasksActivity extends AppCompatActivity {
             cardBinding.tvTaskTitle.setText(task.getTitle());
             cardBinding.tvTaskDesc.setText(task.getDescription());
             cardBinding.tvTaskDept.setText(task.getDepartment());
-            cardBinding.tvTaskAssignee.setText("👤 " + task.getAssigneeName());
+            cardBinding.tvTaskAssignee.setText("Assigned: " + task.getAssigneeName());
             cardBinding.tvTaskDeadline.setText("Due: " + task.getDeadline());
 
             // 48h Overdue warning
@@ -146,7 +146,7 @@ public class AdminTasksActivity extends AppCompatActivity {
             } else if (task.getStatus() == TaskItem.Status.IN_PROGRESS) {
                 cardBinding.btnMoveProgress.setVisibility(View.GONE);
                 cardBinding.btnMoveDone.setVisibility(View.VISIBLE);
-                cardBinding.btnMoveDone.setText("✓ Mark Done");
+                cardBinding.btnMoveDone.setText("Mark Done");
                 cardBinding.btnMoveDone.setOnClickListener(v -> {
                     MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.DONE);
                     renderTasks();

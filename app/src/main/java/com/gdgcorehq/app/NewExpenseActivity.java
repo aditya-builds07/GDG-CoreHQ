@@ -42,7 +42,7 @@ public class NewExpenseActivity extends AppCompatActivity {
         // Simulated Camera / Receipt Capture
         binding.cardCaptureReceipt.setOnClickListener(v -> {
             attachedReceiptName = "receipt_chapter_" + System.currentTimeMillis() + ".jpg";
-            binding.tvReceiptStatus.setText("✓ Receipt Image Attached");
+            binding.tvReceiptStatus.setText("Receipt Image Attached");
             binding.tvReceiptStatus.setTextColor(getColor(R.color.status_success));
             binding.tvReceiptDetails.setText(attachedReceiptName + " (Ready to upload)");
             binding.ivReceiptStatusIcon.setImageResource(R.drawable.ic_check);
@@ -110,7 +110,7 @@ public class NewExpenseActivity extends AppCompatActivity {
 
         MockDataRepository.getInstance().submitReimbursement(expense);
         binding.btnSubmitExpense.setEnabled(false);
-        Toast.makeText(this, "✓ Expense submitted as Pending for Admin review.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Expense submitted as Pending for Admin review.", Toast.LENGTH_LONG).show();
         finish();
     }
 

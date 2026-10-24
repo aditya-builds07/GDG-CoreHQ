@@ -81,7 +81,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="👤 Assigned: Siddhi Kulkarni"
+                android:drawableStart="@drawable/ic_profile"
+                android:drawablePadding="@dimen/space_1"
+                app:drawableTint="@color/text_secondary"
+                android:gravity="center_vertical"
+                android:text="Assigned: Siddhi Kulkarni"
                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                 android:textColor="@color/text_secondary" />
 
@@ -121,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="36dp"
-                android:text="✓ Mark Done"
+                android:text="Mark Done"
                 android:textSize="11sp" />
         </LinearLayout>
 

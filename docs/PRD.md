@@ -49,21 +49,23 @@ Core Members can:
 - The profile displays the member's name, core role, current tasks, and strike count.
 
 ### 3.2 QR Attendance
-#### Admin workflow
-1. The authorized Admin opens the in-app QR scanner.
-2. The scanner reads the QR code on a member's physical GDG ID card.
-3. The QR code contains the member's PRN, linked to the registered member record.
-4. The app validates the PRN against the backend.
-5. If the PRN is invalid or the attendance has already been recorded for the relevant meeting, reject the scan.
-6. If valid, display the member's name and role for confirmation.
-7. After Admin confirmation, record attendance with the member/PRN reference, meeting ID, status, timestamp, and recorder ID.
-
 #### Member workflow
-- The member's app receives the attendance update through a real-time database listener.
-- After attendance is recorded, direct the member to the existing Post-Meeting Form.
-- The member submits weekly progress, roadblocks, and meeting feedback before returning to the dashboard.
+1. The Core Member logs into the GDG CoreHQ app.
+2. The Member Dashboard generates and displays a digital QR code containing their securely encrypted PRN (AES encryption).
+3. The member presents their screen to the Super Admin for scanning during the meeting check-in.
+4. The member's app receives the attendance update through a real-time database listener.
+5. After attendance is recorded, direct the member to the existing Post-Meeting Form.
+6. The member submits weekly progress, roadblocks, and meeting feedback before returning to the dashboard.
 
-**Authorization:** Only Super Admin users can open the scanner and record attendance.
+#### Admin workflow
+1. The authorized Admin opens the in-app QR scanner powered by Google ML Kit.
+2. The scanner reads the encrypted digital QR code from the Core Member's screen.
+3. The Admin app decrypts the PRN and validates the decrypted PRN against backend/registered member records.
+4. If decryption fails, the PRN is invalid, or attendance has already been recorded for the meeting, reject the scan with clear feedback.
+5. If valid, display the member's name and role for confirmation.
+6. After Admin confirmation, record attendance with the member/PRN reference, meeting ID, status, date/timestamp, and recorder ID.
+
+**Authorization:** Only Super Admin users can open the scanner and record attendance. Core Members generate/display their personal encrypted QR code.
 
 ### 3.3 Task Delegation and Kanban Board
 - Admins can create tasks, set deadlines, assign tasks to specific members, and view the global task board.

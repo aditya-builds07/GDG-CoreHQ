@@ -70,7 +70,7 @@ public class StrikeDashboardActivity extends AppCompatActivity {
                 itemBinding.tvStrikeBadge.setText("PARDONED");
                 itemBinding.tvStrikeBadge.setBackgroundTintList(getColorStateList(R.color.color_success_container));
                 itemBinding.tvStrikeBadge.setTextColor(getColor(R.color.status_success));
-                itemBinding.tvPardonStatus.setText("✓ " + s.getPardonedReason() + " (by " + s.getPardonedBy() + ")");
+                itemBinding.tvPardonStatus.setText("Pardoned: " + s.getPardonedReason() + " (by " + s.getPardonedBy() + ")");
                 itemBinding.tvPardonStatus.setTextColor(getColor(R.color.status_success));
                 itemBinding.btnPardonStrike.setVisibility(View.GONE);
                 itemBinding.cardStrikeItem.setCardBackgroundColor(getColor(R.color.surface));
@@ -84,7 +84,9 @@ public class StrikeDashboardActivity extends AppCompatActivity {
                 itemBinding.btnPardonStrike.setVisibility(View.VISIBLE);
 
                 // Highlight card in red if member has 3+ strikes per PRD §3.6
-                if (s.getMemberName().contains("Rahul")) {
+                User member = MockDataRepository.getInstance().findMemberById(s.getMemberId());
+                boolean isCritical = (member != null && member.getStrikeCount() >= 3);
+                if (isCritical) {
                     itemBinding.cardStrikeItem.setCardBackgroundColor(getColor(R.color.color_error_container));
                     itemBinding.tvStrikeBadge.setText("3+ STRIKES (CRITICAL)");
                 } else {

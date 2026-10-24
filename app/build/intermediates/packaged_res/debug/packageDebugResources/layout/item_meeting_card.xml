@@ -56,7 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_1"
-            android:text="📅 Friday, Oct 24, 2026 • 05:00 PM - 06:30 PM"
+            android:drawableStart="@drawable/ic_calendar"
+            android:drawablePadding="@dimen/space_1"
+            app:drawableTint="@color/text_secondary"
+            android:gravity="center_vertical"
+            android:text="Friday, Oct 24, 2026 • 05:00 PM - 06:30 PM"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
             android:textColor="@color/text_secondary" />
 
@@ -66,7 +70,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_1"
-            android:text="📍 Seminar Hall B, TKIET"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="@dimen/space_1"
+            app:drawableTint="@color/text_secondary"
+            android:gravity="center_vertical"
+            android:text="Seminar Hall B, TKIET"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
             android:textColor="@color/text_secondary" />
 

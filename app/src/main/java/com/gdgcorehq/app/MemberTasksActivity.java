@@ -98,7 +98,7 @@ public class MemberTasksActivity extends AppCompatActivity {
             cardBinding.tvTaskTitle.setText(task.getTitle());
             cardBinding.tvTaskDesc.setText(task.getDescription());
             cardBinding.tvTaskDept.setText(task.getDepartment());
-            cardBinding.tvTaskAssignee.setText("👤 " + task.getAssigneeName());
+            cardBinding.tvTaskAssignee.setText("Assigned: " + task.getAssigneeName());
             cardBinding.tvTaskDeadline.setText("Due: " + task.getDeadline());
 
             // 48h Overdue warning
@@ -108,19 +108,24 @@ public class MemberTasksActivity extends AppCompatActivity {
                 cardBinding.tvOverdueBadge.setVisibility(View.GONE);
             }
 
-            // Status Transitions for Member
-            if (task.getStatus() == TaskItem.Status.TODO) {
+            // Status Transitions: strictly enforced for user's own tasks only (PRD §2.2, §7)
+            boolean isMyTask = task.getAssigneeId() != null && task.getAssigneeId().equals(currentUserId);
+            if (!isMyTask) {
+                cardBinding.layoutStatusButtons.setVisibility(View.GONE);
+            } else if (task.getStatus() == TaskItem.Status.TODO) {
+                cardBinding.layoutStatusButtons.setVisibility(View.VISIBLE);
                 cardBinding.btnMoveProgress.setVisibility(View.VISIBLE);
-                cardBinding.btnMoveProgress.setText("→ Start Task");
+                cardBinding.btnMoveProgress.setText("Start Task");
                 cardBinding.btnMoveProgress.setOnClickListener(v -> {
                     MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.IN_PROGRESS);
                     renderTasks();
                 });
                 cardBinding.btnMoveDone.setVisibility(View.GONE);
             } else if (task.getStatus() == TaskItem.Status.IN_PROGRESS) {
+                cardBinding.layoutStatusButtons.setVisibility(View.VISIBLE);
                 cardBinding.btnMoveProgress.setVisibility(View.GONE);
                 cardBinding.btnMoveDone.setVisibility(View.VISIBLE);
-                cardBinding.btnMoveDone.setText("✓ Mark Complete");
+                cardBinding.btnMoveDone.setText("Mark Complete");
                 cardBinding.btnMoveDone.setOnClickListener(v -> {
                     MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.DONE);
                     renderTasks();

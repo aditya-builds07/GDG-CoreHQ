@@ -81,7 +81,7 @@ public class PostMeetingReportActivity extends AppCompatActivity {
         boolean success = MockDataRepository.getInstance().submitPostMeetingReport(report);
         if (success) {
             binding.btnSubmitReport.setEnabled(false);
-            Toast.makeText(this, "✓ Post-meeting report submitted for " + (currentMeeting != null ? currentMeeting.getTitle() : "chapter sync"), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Post-meeting report submitted for " + (currentMeeting != null ? currentMeeting.getTitle() : "chapter sync"), Toast.LENGTH_LONG).show();
             finish();
         } else {
             Toast.makeText(this, "Failed to submit report. Please check required fields.", Toast.LENGTH_SHORT).show();
