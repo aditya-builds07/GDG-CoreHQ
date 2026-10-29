@@ -23,16 +23,22 @@
         android:usesCleartextTraffic="false"
         tools:targetApi="34">
 
-        <!-- Launcher Activity: Login Screen per PRD §3.1 -->
+        <!-- Launcher Activity: Video Splash Screen per Rule R08 & R09 -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.GDGCoreHQ">
+            android:theme="@style/Theme.GDGCoreHQ.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Standard Child Activity: Login Screen per PRD §3.1 -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GDGCoreHQ" />
 
         <!-- Foundation Verification Activity -->
         <activity
