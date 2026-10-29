@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layoutSplashRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@android:color/black"
+    android:fitsSystemWindows="false">
 
-    <VideoView
+    <com.gdgcorehq.app.ui.FullScreenVideoView
         android:id="@+id/videoViewSplash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:clickable="false"
+        android:fitsSystemWindows="false"
         android:focusable="false"
         android:focusableInTouchMode="false" />
 
-</RelativeLayout>
+</FrameLayout>
