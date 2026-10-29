@@ -3554,6 +3554,7 @@ id inward
 id italic
 id item_touch_helper_previous_elevation
 id ivAttendanceQr
+id ivEmptyIcon
 id ivLogo
 id ivProfile
 id ivReceiptStatusIcon
@@ -3564,11 +3565,13 @@ id jumpToStart
 id labeled
 id layout
 id layoutDepartmentFilters
+id layoutEmptyStateRoot
 id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
 id layoutReviewActions
 id layoutSimulationControls
+id layoutSplashRoot
 id layoutStatusButtons
 id layoutStrikesContainer
 id layoutTasksContainer
@@ -3845,6 +3848,8 @@ id tvBoardTitle
 id tvCameraStatus
 id tvCategoryDate
 id tvChapter
+id tvEmptySubtitle
+id tvEmptyTitle
 id tvForgotPassword
 id tvMeetingContext
 id tvMeetingContextSchedule
@@ -3899,6 +3904,7 @@ id unlabeled
 id up
 id useLogo
 id vertical_only
+id videoViewSplash
 id viewScannerFrame
 id view_offset_helper
 id view_transition
@@ -4047,6 +4053,7 @@ layout activity_post_meeting_report
 layout activity_profile
 layout activity_qr_scanner
 layout activity_reimbursement_review
+layout activity_splash
 layout activity_strike_dashboard
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
@@ -4135,11 +4142,13 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout view_empty_state
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 raw firebase_common_keep
+raw splash_video
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -4968,6 +4977,7 @@ style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
 style Theme_GDGCoreHQ
+style Theme_GDGCoreHQ_Splash
 style Theme_Hidden
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog

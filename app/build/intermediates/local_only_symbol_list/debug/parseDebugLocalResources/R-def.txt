@@ -171,17 +171,20 @@ id filterLogistics
 id filterPR
 id filterTech
 id ivAttendanceQr
+id ivEmptyIcon
 id ivLogo
 id ivProfile
 id ivReceiptStatusIcon
 id ivScanReticle
 id ivStrikeIcon
 id layoutDepartmentFilters
+id layoutEmptyStateRoot
 id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
 id layoutReviewActions
 id layoutSimulationControls
+id layoutSplashRoot
 id layoutStatusButtons
 id layoutStrikesContainer
 id layoutTasksContainer
@@ -212,6 +215,8 @@ id tvBoardTitle
 id tvCameraStatus
 id tvCategoryDate
 id tvChapter
+id tvEmptySubtitle
+id tvEmptyTitle
 id tvForgotPassword
 id tvMeetingContext
 id tvMeetingContextSchedule
@@ -260,6 +265,7 @@ id tvTaskDeadline
 id tvTaskDept
 id tvTaskDesc
 id tvTaskTitle
+id videoViewSplash
 id viewScannerFrame
 layout activity_admin_dashboard
 layout activity_admin_tasks
@@ -275,6 +281,7 @@ layout activity_post_meeting_report
 layout activity_profile
 layout activity_qr_scanner
 layout activity_reimbursement_review
+layout activity_splash
 layout activity_strike_dashboard
 layout dialog_add_meeting
 layout dialog_add_task
@@ -282,9 +289,11 @@ layout item_meeting_card
 layout item_reimbursement_review
 layout item_strike_card
 layout item_task_card
+layout view_empty_state
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+raw splash_video
 string admin_dashboard_title
 string agendas_title
 string app_description
@@ -371,6 +380,7 @@ style TextAppearance.GDGCoreHQ.Label
 style TextAppearance.GDGCoreHQ.TitleLarge
 style TextAppearance.GDGCoreHQ.TitleMedium
 style Theme.GDGCoreHQ
+style Theme.GDGCoreHQ.Splash
 style Widget.GDGCoreHQ.Button.Destructive
 style Widget.GDGCoreHQ.Button.Primary
 style Widget.GDGCoreHQ.Button.Secondary

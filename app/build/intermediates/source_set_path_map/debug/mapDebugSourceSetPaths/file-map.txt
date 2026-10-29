@@ -1,54 +1,54 @@
-com.gdgcorehq.app-play-services-basement-18.4.0-0 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\0323b341d41bd49c57e7bd5f97fda030\transformed\play-services-basement-18.4.0\res
-com.gdgcorehq.app-tracing-1.2.0-1 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\0ba9ab44a0aedbe0c200ed6a46d15f5b\transformed\tracing-1.2.0\res
-com.gdgcorehq.app-camera-core-1.4.0-2 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\12fd868ed28171612afd2b1ad9c9fcbc\transformed\camera-core-1.4.0\res
-com.gdgcorehq.app-lifecycle-runtime-2.6.2-3 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\16d64e94f545cdcfeecb6e33765f5993\transformed\lifecycle-runtime-2.6.2\res
-com.gdgcorehq.app-firebase-common-21.0.0-4 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\1ae2e25f101b433e54c50b80ae001fe1\transformed\firebase-common-21.0.0\res
-com.gdgcorehq.app-material-1.12.0-5 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2149e1ddbf10a477585cf03cde4b28bf\transformed\material-1.12.0\res
-com.gdgcorehq.app-play-services-auth-20.7.0-6 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\22a289d2ee911a3fda1cf1af6f0e3e09\transformed\play-services-auth-20.7.0\res
-com.gdgcorehq.app-appcompat-resources-1.7.0-7 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2aacd2d33e2761cea5a954ebff2743da\transformed\appcompat-resources-1.7.0\res
-com.gdgcorehq.app-coordinatorlayout-1.1.0-8 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\2d8073ea067fd4a6989219d2c1463992\transformed\coordinatorlayout-1.1.0\res
-com.gdgcorehq.app-play-services-measurement-api-22.1.2-9 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\35843673bd09e2a3e1de8ae02bcd13ab\transformed\play-services-measurement-api-22.1.2\res
-com.gdgcorehq.app-appcompat-1.7.0-10 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\3b13d68e0c073bc60dd8c63696733545\transformed\appcompat-1.7.0\res
-com.gdgcorehq.app-profileinstaller-1.3.1-11 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\44365a7f0972aa1a70db0e41ffd9d314\transformed\profileinstaller-1.3.1\res
-com.gdgcorehq.app-browser-1.4.0-12 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\5635e2d9e87ec4e3eb7777f0fc203bdf\transformed\browser-1.4.0\res
-com.gdgcorehq.app-savedstate-1.2.1-13 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\5bc6fe193fe447fe2511866f69425ea6\transformed\savedstate-1.2.1\res
-com.gdgcorehq.app-emoji2-views-helper-1.3.0-14 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\5efc46de39056cbe0836b89e681ff710\transformed\emoji2-views-helper-1.3.0\res
-com.gdgcorehq.app-camera-view-1.4.0-15 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\6380bae50799925daaa1cabf90282e56\transformed\camera-view-1.4.0\res
-com.gdgcorehq.app-credentials-play-services-auth-1.2.0-rc01-16 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\7ded2bcd869314b1b645b5bbf7dd276e\transformed\credentials-play-services-auth-1.2.0-rc01\res
-com.gdgcorehq.app-annotation-experimental-1.4.1-17 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\819ab212063a262dd482f1f8fbd2db58\transformed\annotation-experimental-1.4.1\res
-com.gdgcorehq.app-credentials-1.2.0-rc01-18 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\8e3f6809c8bfcbf404195110b2e0bf41\transformed\credentials-1.2.0-rc01\res
-com.gdgcorehq.app-lifecycle-livedata-2.6.2-19 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\959984e5dd5ebcec0b1c0ae8090b63cc\transformed\lifecycle-livedata-2.6.2\res
-com.gdgcorehq.app-viewpager2-1.0.0-20 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\981f34276f37ed9b499735b679ede1be\transformed\viewpager2-1.0.0\res
-com.gdgcorehq.app-recyclerview-1.1.0-21 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\9bf5b41d42e270cc926ac145d5161ab6\transformed\recyclerview-1.1.0\res
-com.gdgcorehq.app-lifecycle-process-2.6.2-22 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\a405bf6033e03687f33b5cea87d66bd8\transformed\lifecycle-process-2.6.2\res
-com.gdgcorehq.app-drawerlayout-1.1.1-23 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\adc43f67fa76d4e1279ab1c2a363ce4d\transformed\drawerlayout-1.1.1\res
-com.gdgcorehq.app-lifecycle-viewmodel-2.6.2-24 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\b15207206c1c35dc4c5c51f4f01bcb69\transformed\lifecycle-viewmodel-2.6.2\res
-com.gdgcorehq.app-core-1.13.1-25 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\b78cf9ba38489c2b50218b23c9ce04c2\transformed\core-1.13.1\res
-com.gdgcorehq.app-core-common-2.0.3-26 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\c4f5833a53a416f82b063b802e874471\transformed\core-common-2.0.3\res
-com.gdgcorehq.app-cardview-1.0.0-27 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\c8bf78784afe39161778d084b4a1efd5\transformed\cardview-1.0.0\res
-com.gdgcorehq.app-core-ktx-1.13.1-28 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\caeb4fee46ad8c8b20b10396736f5356\transformed\core-ktx-1.13.1\res
-com.gdgcorehq.app-camera-lifecycle-1.4.0-29 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\cc50a83dee278deeb8b2f96a49f28409\transformed\camera-lifecycle-1.4.0\res
-com.gdgcorehq.app-lifecycle-viewmodel-savedstate-2.6.2-30 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\cc58d8242ab6e3822a4e3d5baf1a02a4\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
-com.gdgcorehq.app-camera-video-1.4.0-31 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\cca6d21ac623cfa486f8342126d95abb\transformed\camera-video-1.4.0\res
-com.gdgcorehq.app-fragment-1.5.4-32 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\cf122f0705bf07928017daa5ed43f90e\transformed\fragment-1.5.4\res
-com.gdgcorehq.app-transition-1.5.0-33 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\da092bd1f4e4a04ae171ebba1835fa33\transformed\transition-1.5.0\res
-com.gdgcorehq.app-activity-1.9.3-34 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\dc44061df05d05e85417f7f7ec8eba9c\transformed\activity-1.9.3\res
-com.gdgcorehq.app-core-runtime-2.2.0-35 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\dcffbe011de0b7fea3b95cd5b3b24347\transformed\core-runtime-2.2.0\res
-com.gdgcorehq.app-constraintlayout-2.1.4-36 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\ddca34484737e3f7d09b40c6b49ae963\transformed\constraintlayout-2.1.4\res
-com.gdgcorehq.app-firebase-messaging-24.0.3-37 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e09f79b4752d3e2d29e502a08435de2a\transformed\firebase-messaging-24.0.3\res
-com.gdgcorehq.app-tracing-ktx-1.2.0-38 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e70e5c2fa70f8c2ade90c1f62219e5bd\transformed\tracing-ktx-1.2.0\res
-com.gdgcorehq.app-camera-camera2-1.4.0-39 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\e75bce1788e97d63894c882b1c0756e3\transformed\camera-camera2-1.4.0\res
-com.gdgcorehq.app-ads-adservices-java-1.0.0-beta05-40 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\ebf0327c1c4dbc9aa2713058c1c8d40c\transformed\ads-adservices-java-1.0.0-beta05\res
-com.gdgcorehq.app-emoji2-1.3.0-41 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\ef1a17b5baf27dabdbc9753e7d3ca76b\transformed\emoji2-1.3.0\res
-com.gdgcorehq.app-play-services-base-18.5.0-42 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\f2e74fcb575bec4d000288e575768b4b\transformed\play-services-base-18.5.0\res
-com.gdgcorehq.app-ads-adservices-1.0.0-beta05-43 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\fd00f7f1d47a3f75fb676fbf0eba13e2\transformed\ads-adservices-1.0.0-beta05\res
-com.gdgcorehq.app-lifecycle-livedata-core-2.6.2-44 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\fe2687584eba538a5152f953b19fdfae\transformed\lifecycle-livedata-core-2.6.2\res
-com.gdgcorehq.app-startup-runtime-1.1.1-45 C:\Users\Aditya Vikas Desai\.gradle\caches\9.7.1\transforms\fe2ff7ab5e8345fe4f7be8178e1c2b86\transformed\startup-runtime-1.1.1\res
-com.gdgcorehq.app-pngs-46 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\build\generated\res\pngs\debug
-com.gdgcorehq.app-res-47 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\build\generated\res\processDebugGoogleServices
-com.gdgcorehq.app-resValues-48 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\build\generated\res\resValues\debug
-com.gdgcorehq.app-packageDebugResources-49 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.gdgcorehq.app-packageDebugResources-50 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.gdgcorehq.app-debug-51 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.gdgcorehq.app-debug-52 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\debug\res
-com.gdgcorehq.app-main-53 C:\Users\Aditya Vikas Desai\AndroidStudioProjects\GDG-CoreHQ\app\src\main\res
+com.gdgcorehq.app-tracing-ktx-1.2.0-0 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\0e551b598a2b94c48fe8197a05292f9f\transformed\tracing-ktx-1.2.0\res
+com.gdgcorehq.app-ads-adservices-java-1.0.0-beta05-1 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\1ea156a6f483f210f573ca538ddebcc2\transformed\ads-adservices-java-1.0.0-beta05\res
+com.gdgcorehq.app-camera-lifecycle-1.4.0-2 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\26f63b111c87d0fce893e5c59fd97dfc\transformed\camera-lifecycle-1.4.0\res
+com.gdgcorehq.app-core-runtime-2.2.0-3 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\2b8cbf11704f0aabcc978fb7470f4890\transformed\core-runtime-2.2.0\res
+com.gdgcorehq.app-camera-video-1.4.0-4 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\2cb740299290aeecf8f3a7cc998a570f\transformed\camera-video-1.4.0\res
+com.gdgcorehq.app-emoji2-1.3.0-5 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\31efb7cfc1b2373d42ef820f20273f32\transformed\emoji2-1.3.0\res
+com.gdgcorehq.app-credentials-play-services-auth-1.2.0-rc01-6 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\33b0b57c2654aede06bf9f6546eb2850\transformed\credentials-play-services-auth-1.2.0-rc01\res
+com.gdgcorehq.app-credentials-1.2.0-rc01-7 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\39d4d12fb6a4261e6466d1345eb3643d\transformed\credentials-1.2.0-rc01\res
+com.gdgcorehq.app-cardview-1.0.0-8 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\46c31a6dd6c40c49b6e878ee252acf50\transformed\cardview-1.0.0\res
+com.gdgcorehq.app-viewpager2-1.0.0-9 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\47a6e43c379b718f683772a2387e4e98\transformed\viewpager2-1.0.0\res
+com.gdgcorehq.app-savedstate-1.2.1-10 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\4fc8b5f6883eeb39e5cb46c311f2ba69\transformed\savedstate-1.2.1\res
+com.gdgcorehq.app-play-services-basement-18.4.0-11 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\56b63b5282cab556c22dc7200afa731d\transformed\play-services-basement-18.4.0\res
+com.gdgcorehq.app-recyclerview-1.1.0-12 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\5860fe55ac48205caa7beb5c7a29a26c\transformed\recyclerview-1.1.0\res
+com.gdgcorehq.app-lifecycle-viewmodel-2.6.2-13 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\5ad525cbf1c9e09c05ff2e6bc9a66c89\transformed\lifecycle-viewmodel-2.6.2\res
+com.gdgcorehq.app-profileinstaller-1.3.1-14 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\5b06a90edfb2717ad912bf5401338fdc\transformed\profileinstaller-1.3.1\res
+com.gdgcorehq.app-core-1.13.1-15 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\5d1f48f7f6699704eeb1883838b215d6\transformed\core-1.13.1\res
+com.gdgcorehq.app-core-common-2.0.3-16 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\6128640896bcce06c043037712b5d20d\transformed\core-common-2.0.3\res
+com.gdgcorehq.app-transition-1.5.0-17 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\63681d32f51ea7f66d7b4afefb09911b\transformed\transition-1.5.0\res
+com.gdgcorehq.app-drawerlayout-1.1.1-18 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\7bc2b006ff0f0c81c664e5f43d98ac46\transformed\drawerlayout-1.1.1\res
+com.gdgcorehq.app-play-services-auth-20.7.0-19 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\7cd12019f160300eeb24701ca5d6913b\transformed\play-services-auth-20.7.0\res
+com.gdgcorehq.app-core-ktx-1.13.1-20 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\80c38007c773e7e235a4bb8ba70c0937\transformed\core-ktx-1.13.1\res
+com.gdgcorehq.app-appcompat-1.7.0-21 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\81933541f2bc2c796a9b10776951fd21\transformed\appcompat-1.7.0\res
+com.gdgcorehq.app-camera-camera2-1.4.0-22 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\81c88008d3af08940e807ed6f2fa506e\transformed\camera-camera2-1.4.0\res
+com.gdgcorehq.app-annotation-experimental-1.4.1-23 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\8be2a65568ee80cb78c2783a6ab2d759\transformed\annotation-experimental-1.4.1\res
+com.gdgcorehq.app-emoji2-views-helper-1.3.0-24 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\8d07f9ec945c7188daf1c53a24690e5c\transformed\emoji2-views-helper-1.3.0\res
+com.gdgcorehq.app-play-services-measurement-api-22.1.2-25 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\8e8940b150192c3dadca8be7c50382a3\transformed\play-services-measurement-api-22.1.2\res
+com.gdgcorehq.app-fragment-1.5.4-26 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\8e8cce81c3ede0e3567350bce7bc8d0e\transformed\fragment-1.5.4\res
+com.gdgcorehq.app-lifecycle-process-2.6.2-27 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\968a43bde0e60b25a3752ef7dea0d7a3\transformed\lifecycle-process-2.6.2\res
+com.gdgcorehq.app-appcompat-resources-1.7.0-28 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\988ebfca062faf6f438d053623af4909\transformed\appcompat-resources-1.7.0\res
+com.gdgcorehq.app-startup-runtime-1.1.1-29 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\9c02c51f00638be95d03a33c82b2fa85\transformed\startup-runtime-1.1.1\res
+com.gdgcorehq.app-material-1.12.0-30 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\9d5a638da26250e624f535688bb4739f\transformed\material-1.12.0\res
+com.gdgcorehq.app-browser-1.4.0-31 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\a75a034ed6761d39b1d5cdd5cbfac673\transformed\browser-1.4.0\res
+com.gdgcorehq.app-lifecycle-livedata-core-2.6.2-32 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\a7deed5419fdd4a4c285c79953fe9720\transformed\lifecycle-livedata-core-2.6.2\res
+com.gdgcorehq.app-lifecycle-runtime-2.6.2-33 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\ada62d5cdc8d77f797d478516546fe26\transformed\lifecycle-runtime-2.6.2\res
+com.gdgcorehq.app-ads-adservices-1.0.0-beta05-34 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\b274a21a0a6e9a6ff2c8d5ffc2d4c136\transformed\ads-adservices-1.0.0-beta05\res
+com.gdgcorehq.app-firebase-messaging-24.0.3-35 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\b6c30030444fd9951344bedd1a239722\transformed\firebase-messaging-24.0.3\res
+com.gdgcorehq.app-camera-view-1.4.0-36 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\b6dbda7d27d9e5f9f6233ac773964c6a\transformed\camera-view-1.4.0\res
+com.gdgcorehq.app-camera-core-1.4.0-37 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\c0a509922114ed14d019452ba8db16cd\transformed\camera-core-1.4.0\res
+com.gdgcorehq.app-tracing-1.2.0-38 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\d22faa34189e656f79716cb7ca98c987\transformed\tracing-1.2.0\res
+com.gdgcorehq.app-firebase-common-21.0.0-39 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\d927bac172777c96bcd74ef4b38516c9\transformed\firebase-common-21.0.0\res
+com.gdgcorehq.app-activity-1.9.3-40 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\e37a2d3df57b36480bcffc54728f39ba\transformed\activity-1.9.3\res
+com.gdgcorehq.app-lifecycle-viewmodel-savedstate-2.6.2-41 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\e6563cf9b3f7f4cc400aa3e7279e2357\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+com.gdgcorehq.app-constraintlayout-2.1.4-42 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\e6a0d35538ec399d4d9fdb893ca29daf\transformed\constraintlayout-2.1.4\res
+com.gdgcorehq.app-play-services-base-18.5.0-43 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\ef1bc4c97bc95d7b45a59bb9c97bc3ab\transformed\play-services-base-18.5.0\res
+com.gdgcorehq.app-lifecycle-livedata-2.6.2-44 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\f29a1723da28bd799783c6740787e491\transformed\lifecycle-livedata-2.6.2\res
+com.gdgcorehq.app-coordinatorlayout-1.1.0-45 C:\Users\SHREE\.gradle\caches\8.11.1\transforms\f8435535a2fe925cc01464640fb933e2\transformed\coordinatorlayout-1.1.0\res
+com.gdgcorehq.app-pngs-46 D:\GDG HQ\GDG-CoreHQ\app\build\generated\res\pngs\debug
+com.gdgcorehq.app-res-47 D:\GDG HQ\GDG-CoreHQ\app\build\generated\res\processDebugGoogleServices
+com.gdgcorehq.app-resValues-48 D:\GDG HQ\GDG-CoreHQ\app\build\generated\res\resValues\debug
+com.gdgcorehq.app-packageDebugResources-49 D:\GDG HQ\GDG-CoreHQ\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.gdgcorehq.app-packageDebugResources-50 D:\GDG HQ\GDG-CoreHQ\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.gdgcorehq.app-debug-51 D:\GDG HQ\GDG-CoreHQ\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.gdgcorehq.app-debug-52 D:\GDG HQ\GDG-CoreHQ\app\src\debug\res
+com.gdgcorehq.app-main-53 D:\GDG HQ\GDG-CoreHQ\app\src\main\res

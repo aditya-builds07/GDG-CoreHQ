@@ -110,12 +110,12 @@
     <string name="expense_rejected">Rejected</string>
     <string name="expenses_title">Expenses</string>
     <string name="feedback_hint">Meeting feedback</string>
-    <string name="gcm_defaultSenderId" translatable="false">429398957359</string>
+    <string name="gcm_defaultSenderId" translatable="false">123456789012</string>
     <string name="global_view">Global View</string>
-    <string name="google_api_key" translatable="false">AIzaSyD9PXKJnWxIjZQSAqRbiE1thvduWo9h7Tk</string>
-    <string name="google_app_id" translatable="false">1:429398957359:android:54bb3c12347f39603815da</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD9PXKJnWxIjZQSAqRbiE1thvduWo9h7Tk</string>
-    <string name="google_storage_bucket" translatable="false">gdg-corehq.firebasestorage.app</string>
+    <string name="google_api_key" translatable="false">AIzaSyMockKeyForDevelopmentOnly123456</string>
+    <string name="google_app_id" translatable="false">1:123456789012:android:0123456789abcdef012345</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyMockKeyForDevelopmentOnly123456</string>
+    <string name="google_storage_bucket" translatable="false">gdg-corehq-mock.appspot.com</string>
     <string name="loading">Loading…</string>
     <string name="login_button">Sign In</string>
     <string name="login_email_hint">Email or Username</string>
@@ -130,7 +130,7 @@
     <string name="post_meeting_title">Post-Meeting Report</string>
     <string name="profile_title">Profile</string>
     <string name="progress_hint">What progress did you make this week?</string>
-    <string name="project_id" translatable="false">gdg-corehq</string>
+    <string name="project_id" translatable="false">gdg-corehq-mock</string>
     <string name="publish_agenda">Publish Agenda</string>
     <string name="retry">Retry</string>
     <string name="roadblocks_hint">Any roadblocks or issues?</string>
@@ -239,6 +239,13 @@
 
         
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.GDGCoreHQ.Card</item>
+    </style>
+    <style name="Theme.GDGCoreHQ.Splash" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
     <style name="Widget.GDGCoreHQ.Button.Destructive" parent="Widget.Material3.Button">
         <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>

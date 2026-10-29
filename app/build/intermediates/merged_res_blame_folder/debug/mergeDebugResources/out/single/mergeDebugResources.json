@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.gdgcorehq.app-debug-51:/raw_splash_video.mp4.flat",
+        "source": "com.gdgcorehq.app-main-53:/raw/splash_video.mp4"
+    },
+    {
         "merged": "com.gdgcorehq.app-debug-51:/drawable_bg_nav_selected.xml.flat",
         "source": "com.gdgcorehq.app-main-53:/drawable/bg_nav_selected.xml"
     },
@@ -38,6 +42,10 @@
     {
         "merged": "com.gdgcorehq.app-debug-51:/layout_activity_strike_dashboard.xml.flat",
         "source": "com.gdgcorehq.app-main-53:/layout/activity_strike_dashboard.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-debug-51:/layout_activity_splash.xml.flat",
+        "source": "com.gdgcorehq.app-main-53:/layout/activity_splash.xml"
     },
     {
         "merged": "com.gdgcorehq.app-debug-51:/mipmap-hdpi_ic_launcher_round.png.flat",
@@ -170,6 +178,10 @@
     {
         "merged": "com.gdgcorehq.app-debug-51:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.gdgcorehq.app-main-53:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-debug-51:/layout_view_empty_state.xml.flat",
+        "source": "com.gdgcorehq.app-main-53:/layout/view_empty_state.xml"
     },
     {
         "merged": "com.gdgcorehq.app-debug-51:/mipmap-ldpi_ic_launcher_round.png.flat",

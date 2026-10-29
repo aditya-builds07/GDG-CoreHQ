@@ -16,12 +16,20 @@
         "source": "com.gdgcorehq.app-main-53:/layout/activity_main.xml"
     },
     {
+        "merged": "com.gdgcorehq.app-mergeDebugResources-50:/layout/view_empty_state.xml",
+        "source": "com.gdgcorehq.app-main-53:/layout/view_empty_state.xml"
+    },
+    {
         "merged": "com.gdgcorehq.app-mergeDebugResources-50:/layout/activity_post_meeting_report.xml",
         "source": "com.gdgcorehq.app-main-53:/layout/activity_post_meeting_report.xml"
     },
     {
         "merged": "com.gdgcorehq.app-mergeDebugResources-50:/layout/activity_expense_history.xml",
         "source": "com.gdgcorehq.app-main-53:/layout/activity_expense_history.xml"
+    },
+    {
+        "merged": "com.gdgcorehq.app-mergeDebugResources-50:/layout/activity_splash.xml",
+        "source": "com.gdgcorehq.app-main-53:/layout/activity_splash.xml"
     },
     {
         "merged": "com.gdgcorehq.app-mergeDebugResources-50:/layout/activity_qr_scanner.xml",

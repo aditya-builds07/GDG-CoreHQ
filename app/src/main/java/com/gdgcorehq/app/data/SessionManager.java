@@ -79,6 +79,48 @@ public class SessionManager {
         } catch (Throwable ignored) {}
     }
 
+    /**
+     * Checks if a persistent session exists in FirebaseAuth and restores currentUser from Firestore.
+     * Invoked during SplashActivity to pre-warm user session without blocking video playback.
+     */
+    public void restoreSession(AuthCallback callback) {
+        if (currentUser != null) {
+            if (callback != null) callback.onSuccess(currentUser);
+            return;
+        }
+
+        try {
+            if (FirebaseApp.getInstance() != null) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser fbUser = auth.getCurrentUser();
+                if (fbUser != null) {
+                    String uid = fbUser.getUid();
+                    FirebaseFirestore.getInstance().collection("users").document(uid).get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
+                                    currentUser = parseUserFromDoc(task.getResult());
+                                    postAuthSuccess(currentUser);
+                                    if (callback != null) callback.onSuccess(currentUser);
+                                } else {
+                                    String email = fbUser.getEmail();
+                                    ProvisionedAccount localAccount = email != null ? provisionedAccounts.get(email.toLowerCase()) : null;
+                                    if (localAccount != null) {
+                                        currentUser = localAccount.user;
+                                    } else {
+                                        currentUser = new User(uid, fbUser.getDisplayName() != null ? fbUser.getDisplayName() : "GDG Member", "PRN2024001", fbUser.getEmail(), User.Role.CORE_MEMBER, "General", 0);
+                                    }
+                                    postAuthSuccess(currentUser);
+                                    if (callback != null) callback.onSuccess(currentUser);
+                                }
+                            });
+                    return;
+                }
+            }
+        } catch (Throwable ignored) {}
+
+        if (callback != null) callback.onError("No active session");
+    }
+
     public interface AuthCallback {
         void onSuccess(User user);
         void onError(String message);
