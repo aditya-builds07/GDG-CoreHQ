@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#F5F6FA</color>
+    <color name="border">#E5E7EF</color>
+    <color name="brand_blue">#C8D8FF</color>
+    <color name="brand_coral">#F5A0A5</color>
+    <color name="brand_lavender">#D8D4FF</color>
+    <color name="brand_mint">#BFE9E3</color>
+    <color name="brand_navy">#18233F</color>
+    <color name="brand_peach">#FFE1C9</color>
+    <color name="brand_pink">#F0C5C8</color>
+    <color name="color_error_container">#FCE1E3</color>
+    <color name="color_info_container">#E4ECFF</color>
+    <color name="color_success_container">#DDF4E8</color>
+    <color name="color_warning_container">#FFF0C7</color>
+    <color name="ic_launcher_background">#F0F0F0</color>
+    <color name="md_theme_background">#F5F6FA</color>
+    <color name="md_theme_error">#B42332</color>
+    <color name="md_theme_errorContainer">#FCE1E3</color>
+    <color name="md_theme_onBackground">#171923</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_onErrorContainer">#B42332</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_onPrimaryContainer">#18233F</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_onSecondaryContainer">#171923</color>
+    <color name="md_theme_onSurface">#171923</color>
+    <color name="md_theme_onSurfaceVariant">#666A78</color>
+    <color name="md_theme_outline">#E5E7EF</color>
+    <color name="md_theme_primary">#18233F</color>
+    <color name="md_theme_primaryContainer">#C8D8FF</color>
+    <color name="md_theme_secondary">#666A78</color>
+    <color name="md_theme_secondaryContainer">#D8D4FF</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_surfaceVariant">#F0F1F6</color>
+    <color name="status_error">#B42332</color>
+    <color name="status_error_container">#FCE1E3</color>
+    <color name="status_info">#315DA8</color>
+    <color name="status_info_container">#E4ECFF</color>
+    <color name="status_success">#247A55</color>
+    <color name="status_success_container">#DDF4E8</color>
+    <color name="status_warning">#8A5A00</color>
+    <color name="status_warning_container">#FFF0C7</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_subtle">#F0F1F6</color>
+    <color name="text_muted">#8B8FA0</color>
+    <color name="text_primary">#171923</color>
+    <color name="text_secondary">#666A78</color>
+    <dimen name="app_bar_action_size">44dp</dimen>
+    <dimen name="border_width">1dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_nav">4dp</dimen>
+    <dimen name="icon_size_compact">16dp</dimen>
+    <dimen name="icon_size_standard">24dp</dimen>
+    <dimen name="page_padding">16dp</dimen>
+    <dimen name="radius_button">16dp</dimen>
+    <dimen name="radius_card">20dp</dimen>
+    <dimen name="radius_card_feature">24dp</dimen>
+    <dimen name="radius_chip">12dp</dimen>
+    <dimen name="radius_input">14dp</dimen>
+    <dimen name="screen_padding_horizontal">16dp</dimen>
+    <dimen name="space_1">4dp</dimen>
+    <dimen name="space_2">8dp</dimen>
+    <dimen name="space_3">12dp</dimen>
+    <dimen name="space_4">16dp</dimen>
+    <dimen name="space_5">20dp</dimen>
+    <dimen name="space_6">24dp</dimen>
+    <dimen name="space_8">32dp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_body_large">16sp</dimen>
+    <dimen name="text_caption">11sp</dimen>
+    <dimen name="text_display">28sp</dimen>
+    <dimen name="text_headline">24sp</dimen>
+    <dimen name="text_label">12sp</dimen>
+    <dimen name="text_title_large">20sp</dimen>
+    <dimen name="text_title_medium">16sp</dimen>
+    <dimen name="touch_target_min">48dp</dimen>
+    <string name="admin_dashboard_title">Admin Dashboard</string>
+    <string name="agendas_title">Meeting Agendas</string>
+    <string name="app_description">Internal management app for GDGoC TKIET</string>
+    <string name="app_name">GDG CoreHQ</string>
+    <string name="attendance_absent">Absent</string>
+    <string name="attendance_duplicate">Attendance already recorded for this meeting</string>
+    <string name="attendance_invalid_prn">Invalid PRN</string>
+    <string name="attendance_present">Present</string>
+    <string name="attendance_recorded">Attendance recorded</string>
+    <string name="attendance_title">QR Attendance</string>
+    <string name="cancel">Cancel</string>
+    <string name="cd_app_logo">GDG CoreHQ logo</string>
+    <string name="cd_back_navigation">Navigate back</string>
+    <string name="cd_receipt_image">Receipt image</string>
+    <string name="cd_scan_qr_code">Scan QR code</string>
+    <string name="cd_task_status">Task status indicator</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_attendance">Confirm Attendance</string>
+    <string name="create_task">Create Task</string>
+    <string name="empty_state_generic">Nothing here yet</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_network">Unable to connect. Check your internet connection.</string>
+    <string name="expense_amount_hint">Amount</string>
+    <string name="expense_approve">Approve</string>
+    <string name="expense_approved">Approved</string>
+    <string name="expense_category_hint">Category</string>
+    <string name="expense_date_hint">Date</string>
+    <string name="expense_pending">Pending</string>
+    <string name="expense_reject">Reject</string>
+    <string name="expense_reject_reason_hint">Reason for rejection (required)</string>
+    <string name="expense_reject_reason_required">A rejection reason is required</string>
+    <string name="expense_rejected">Rejected</string>
+    <string name="expenses_title">Expenses</string>
+    <string name="feedback_hint">Meeting feedback</string>
+    <string name="gcm_defaultSenderId" translatable="false">429398957359</string>
+    <string name="global_view">Global View</string>
+    <string name="google_api_key" translatable="false">AIzaSyD9PXKJnWxIjZQSAqRbiE1thvduWo9h7Tk</string>
+    <string name="google_app_id" translatable="false">1:429398957359:android:54bb3c12347f39603815da</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD9PXKJnWxIjZQSAqRbiE1thvduWo9h7Tk</string>
+    <string name="google_storage_bucket" translatable="false">gdg-corehq.firebasestorage.app</string>
+    <string name="loading">Loading…</string>
+    <string name="login_button">Sign In</string>
+    <string name="login_email_hint">Email or Username</string>
+    <string name="login_error_empty_email">Email is required</string>
+    <string name="login_error_empty_password">Password is required</string>
+    <string name="login_error_invalid">Invalid email or password</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_title">Sign In</string>
+    <string name="member_dashboard_title">Dashboard</string>
+    <string name="new_expense">New Expense</string>
+    <string name="post_meeting_title">Post-Meeting Report</string>
+    <string name="profile_title">Profile</string>
+    <string name="progress_hint">What progress did you make this week?</string>
+    <string name="project_id" translatable="false">gdg-corehq</string>
+    <string name="publish_agenda">Publish Agenda</string>
+    <string name="retry">Retry</string>
+    <string name="roadblocks_hint">Any roadblocks or issues?</string>
+    <string name="save">Save</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="strike_count">%d Strikes</string>
+    <string name="strike_pardon">Pardon Strike</string>
+    <string name="strike_remove">Remove Strike</string>
+    <string name="strikes_title">Strike Dashboard</string>
+    <string name="submit">Submit</string>
+    <string name="submit_expense">Submit Expense</string>
+    <string name="submit_report">Submit Report</string>
+    <string name="task_status_done">Done</string>
+    <string name="task_status_in_progress">In Progress</string>
+    <string name="task_status_todo">To-Do</string>
+    <string name="tasks_title">Tasks</string>
+    <string name="welcome_message">Welcome back</string>
+    <style name="ShapeAppearance.GDGCoreHQ.Button" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_button</item>
+    </style>
+    <style name="ShapeAppearance.GDGCoreHQ.Card" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_card</item>
+    </style>
+    <style name="ShapeAppearance.GDGCoreHQ.Chip" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_chip</item>
+    </style>
+    <style name="ShapeAppearance.GDGCoreHQ.FeatureCard" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_card_feature</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ" parent="android:TextAppearance"/>
+    <style name="TextAppearance.GDGCoreHQ.Body">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.BodyLarge">
+        <item name="android:textSize">@dimen/text_body_large</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.Caption">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.Display">
+        <item name="android:textSize">@dimen/text_display</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.Headline">
+        <item name="android:textSize">@dimen/text_headline</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.Label">
+        <item name="android:textSize">@dimen/text_label</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.TitleLarge">
+        <item name="android:textSize">@dimen/text_title_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="TextAppearance.GDGCoreHQ.TitleMedium">
+        <item name="android:textSize">@dimen/text_title_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="Theme.GDGCoreHQ" parent="Theme.Material3.Light.NoActionBar">
+        
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+
+        
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+
+        
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
+
+        
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+
+        
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.GDGCoreHQ.Card</item>
+    </style>
+    <style name="Theme.GDGCoreHQ.Splash" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+    <style name="Widget.GDGCoreHQ.Button.Destructive" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>
+        <item name="backgroundTint">@color/status_error</item>
+        <item name="android:textColor">@color/surface</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+    <style name="Widget.GDGCoreHQ.Button.Primary" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>
+        <item name="backgroundTint">@color/brand_navy</item>
+        <item name="android:textColor">@color/surface</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+    <style name="Widget.GDGCoreHQ.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Button</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+    <style name="Widget.GDGCoreHQ.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="shapeAppearance">@style/ShapeAppearance.GDGCoreHQ.Card</item>
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="strokeWidth">@dimen/border_width</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="contentPadding">@dimen/card_padding</item>
+    </style>
+    <style name="Widget.GDGCoreHQ.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/border</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_input</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_input</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_input</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_input</item>
+        <item name="boxBackgroundColor">@color/surface</item>
+    </style>
+</resources>
