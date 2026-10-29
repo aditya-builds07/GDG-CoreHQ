@@ -4,29 +4,29 @@ package com.gdgcorehq.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.VideoView;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.gdgcorehq.app.R;
+import com.gdgcorehq.app.ui.FullScreenVideoView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivitySplashBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final FrameLayout rootView;
 
   @NonNull
-  public final RelativeLayout layoutSplashRoot;
+  public final FrameLayout layoutSplashRoot;
 
   @NonNull
-  public final VideoView videoViewSplash;
+  public final FullScreenVideoView videoViewSplash;
 
-  private ActivitySplashBinding(@NonNull RelativeLayout rootView,
-      @NonNull RelativeLayout layoutSplashRoot, @NonNull VideoView videoViewSplash) {
+  private ActivitySplashBinding(@NonNull FrameLayout rootView,
+      @NonNull FrameLayout layoutSplashRoot, @NonNull FullScreenVideoView videoViewSplash) {
     this.rootView = rootView;
     this.layoutSplashRoot = layoutSplashRoot;
     this.videoViewSplash = videoViewSplash;
@@ -34,7 +34,7 @@ public final class ActivitySplashBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public FrameLayout getRoot() {
     return rootView;
   }
 
@@ -59,16 +59,15 @@ public final class ActivitySplashBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      RelativeLayout layoutSplashRoot = (RelativeLayout) rootView;
+      FrameLayout layoutSplashRoot = (FrameLayout) rootView;
 
       id = R.id.videoViewSplash;
-      VideoView videoViewSplash = ViewBindings.findChildViewById(rootView, id);
+      FullScreenVideoView videoViewSplash = ViewBindings.findChildViewById(rootView, id);
       if (videoViewSplash == null) {
         break missingId;
       }
 
-      return new ActivitySplashBinding((RelativeLayout) rootView, layoutSplashRoot,
-          videoViewSplash);
+      return new ActivitySplashBinding((FrameLayout) rootView, layoutSplashRoot, videoViewSplash);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

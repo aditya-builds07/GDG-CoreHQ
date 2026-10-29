@@ -3,11 +3,11 @@ package com.gdgcorehq.app;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.DisplayMetrics;
-import android.view.ViewGroup;
+import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,10 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Lightweight Video Splash Screen Activity per Rule R08 & R09.
+ * Lightweight True Full-Screen Video Splash Activity per Rule R08 & R09.
  * Acts as the primary launcher entry point for GDG CoreHQ.
- * Plays full-screen muted branded splash animation and transitions
- * seamlessly based on active session state upon completion.
+ * Plays full-screen edge-to-edge muted branded splash animation across
+ * camera cutouts/notches without letterboxing or system bar margins.
  */
 public class SplashActivity extends AppCompatActivity {
 
@@ -39,7 +39,20 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Hide system bars for an immersive, edge-to-edge video presentation
+        // Edge-to-edge decoration
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+
+        // Extend across display cutout (notch/punch-hole)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }
+
+        // Layout no limits to eliminate system bar margins across all Android versions
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+        // Hide both status and navigation bars in sticky immersive mode
         WindowInsetsControllerCompat insetsController =
                 WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
         if (insetsController != null) {
@@ -84,14 +97,8 @@ public class SplashActivity extends AppCompatActivity {
             // Muted audio per requirements
             mp.setVolume(0f, 0f);
 
-            // Scale type set to fill/center-crop
+            // Scale type set to fill/center-crop across entire full screen
             mp.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
-
-            mp.setOnVideoSizeChangedListener((player, videoWidth, videoHeight) -> {
-                if (videoWidth > 0 && videoHeight > 0) {
-                    adjustVideoViewCenterCrop(videoWidth, videoHeight);
-                }
-            });
 
             binding.videoViewSplash.start();
         });
@@ -102,33 +109,6 @@ public class SplashActivity extends AppCompatActivity {
         } catch (Throwable t) {
             transitionToNextScreen();
         }
-    }
-
-    /**
-     * Dynamically adjusts VideoView layout dimensions to fill and center-crop the screen.
-     */
-    private void adjustVideoViewCenterCrop(int videoWidth, int videoHeight) {
-        if (binding == null) return;
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-        int screenWidth = metrics.widthPixels;
-        int screenHeight = metrics.heightPixels;
-
-        float videoAspect = (float) videoWidth / videoHeight;
-        float screenAspect = (float) screenWidth / screenHeight;
-
-        ViewGroup.LayoutParams params = binding.videoViewSplash.getLayoutParams();
-        if (videoAspect > screenAspect) {
-            // Video is wider than screen: match height, crop sides
-            params.height = screenHeight;
-            params.width = (int) (screenHeight * videoAspect);
-        } else {
-            // Video is taller than screen: match width, crop top/bottom
-            params.width = screenWidth;
-            params.height = (int) (screenWidth / videoAspect);
-        }
-        binding.videoViewSplash.setLayoutParams(params);
     }
 
     /**

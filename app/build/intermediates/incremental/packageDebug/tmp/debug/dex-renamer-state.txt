@@ -1,4 +1,4 @@
-#Thu Oct 29 23:13:12 IST 2026
+#Thu Oct 29 23:47:54 IST 2026
 base.0=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\11\\classes.dex
@@ -8,6 +8,7 @@ base.5=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeProj
 base.6=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
 base.7=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 base.8=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.9=D\:\\GDG HQ\\GDG-CoreHQ\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=11/classes.dex
@@ -17,6 +18,7 @@ path.5=4/classes.dex
 path.6=5/classes.dex
 path.7=classes2.dex
 path.8=classes3.dex
+path.9=7/classes.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.2=classes3.dex
@@ -26,3 +28,4 @@ renamed.5=classes6.dex
 renamed.6=classes7.dex
 renamed.7=classes8.dex
 renamed.8=classes9.dex
+renamed.9=classes10.dex
