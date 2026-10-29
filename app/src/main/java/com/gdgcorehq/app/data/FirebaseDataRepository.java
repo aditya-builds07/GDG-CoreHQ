@@ -44,8 +44,35 @@ public class FirebaseDataRepository {
     private final List<User> members = new ArrayList<>();
 
     private FirebaseDataRepository() {
-        seedInitialData();
         initFirestore();
+    }
+
+    /**
+     * Seeds in-memory data for testing / test fixtures.
+     */
+    public void seedTestData(List<User> testMembers, List<TaskItem> testTasks,
+                              List<Meeting> testMeetings, List<Reimbursement> testReimbursements,
+                              List<StrikeRecord> testStrikes) {
+        synchronized (members) {
+            members.clear();
+            if (testMembers != null) members.addAll(testMembers);
+        }
+        synchronized (tasks) {
+            tasks.clear();
+            if (testTasks != null) tasks.addAll(testTasks);
+        }
+        synchronized (meetings) {
+            meetings.clear();
+            if (testMeetings != null) meetings.addAll(testMeetings);
+        }
+        synchronized (reimbursements) {
+            reimbursements.clear();
+            if (testReimbursements != null) reimbursements.addAll(testReimbursements);
+        }
+        synchronized (strikeRecords) {
+            strikeRecords.clear();
+            if (testStrikes != null) strikeRecords.addAll(testStrikes);
+        }
     }
 
     public static synchronized FirebaseDataRepository getInstance() {
@@ -82,49 +109,36 @@ public class FirebaseDataRepository {
         // 1. Users collection
         db.collection("users").addSnapshotListener((snapshots, error) -> {
             if (error != null || snapshots == null) return;
-            if (!snapshots.isEmpty()) {
-                synchronized (members) {
-                    members.clear();
-                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                        User user = parseUser(doc);
-                        if (user != null) members.add(user);
-                    }
+            synchronized (members) {
+                members.clear();
+                for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                    User user = parseUser(doc);
+                    if (user != null) members.add(user);
                 }
-            } else {
-                // Seed Firestore if collection is empty
-                seedUsersToFirestore();
             }
         });
 
         // 2. Tasks collection
         db.collection("tasks").addSnapshotListener((snapshots, error) -> {
             if (error != null || snapshots == null) return;
-            if (!snapshots.isEmpty()) {
-                synchronized (tasks) {
-                    tasks.clear();
-                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                        TaskItem task = parseTask(doc);
-                        if (task != null) tasks.add(task);
-                    }
+            synchronized (tasks) {
+                tasks.clear();
+                for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                    TaskItem task = parseTask(doc);
+                    if (task != null) tasks.add(task);
                 }
-            } else {
-                seedTasksToFirestore();
             }
         });
 
         // 3. Meetings collection
         db.collection("meetings").addSnapshotListener((snapshots, error) -> {
             if (error != null || snapshots == null) return;
-            if (!snapshots.isEmpty()) {
-                synchronized (meetings) {
-                    meetings.clear();
-                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                        Meeting meeting = parseMeeting(doc);
-                        if (meeting != null) meetings.add(meeting);
-                    }
+            synchronized (meetings) {
+                meetings.clear();
+                for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                    Meeting meeting = parseMeeting(doc);
+                    if (meeting != null) meetings.add(meeting);
                 }
-            } else {
-                seedMeetingsToFirestore();
             }
         });
 
@@ -155,32 +169,24 @@ public class FirebaseDataRepository {
         // 6. Reimbursements collection
         db.collection("reimbursements").addSnapshotListener((snapshots, error) -> {
             if (error != null || snapshots == null) return;
-            if (!snapshots.isEmpty()) {
-                synchronized (reimbursements) {
-                    reimbursements.clear();
-                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                        Reimbursement r = parseReimbursement(doc);
-                        if (r != null) reimbursements.add(r);
-                    }
+            synchronized (reimbursements) {
+                reimbursements.clear();
+                for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                    Reimbursement r = parseReimbursement(doc);
+                    if (r != null) reimbursements.add(r);
                 }
-            } else {
-                seedReimbursementsToFirestore();
             }
         });
 
         // 7. Strikes collection
         db.collection("strikes").addSnapshotListener((snapshots, error) -> {
             if (error != null || snapshots == null) return;
-            if (!snapshots.isEmpty()) {
-                synchronized (strikeRecords) {
-                    strikeRecords.clear();
-                    for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                        StrikeRecord s = parseStrike(doc);
-                        if (s != null) strikeRecords.add(s);
-                    }
+            synchronized (strikeRecords) {
+                strikeRecords.clear();
+                for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                    StrikeRecord s = parseStrike(doc);
+                    if (s != null) strikeRecords.add(s);
                 }
-            } else {
-                seedStrikesToFirestore();
             }
         });
     }
@@ -549,10 +555,237 @@ public class FirebaseDataRepository {
         return updated;
     }
 
+    // --- Overdue Task Automated Strike Evaluation Hook ---
+
+    public interface OverdueEvaluationCallback {
+        void onComplete(int newStrikesCount);
+    }
+
+    /**
+     * Evaluates tasks where isOverdue48h == false. If a task is >48 hours past its deadline,
+     * it idempotently creates a StrikeRecord in Firestore strikes collection and marks the task
+     * as isOverdue48h = true.
+     */
+    public void evaluateOverdueTasks(OverdueEvaluationCallback callback) {
+        final long FORTY_EIGHT_HOURS_MS = 48L * 60L * 60L * 1000L;
+        long now = System.currentTimeMillis();
+
+        if (isFirebaseAvailable && db != null) {
+            db.collection("tasks")
+                    .whereEqualTo("isOverdue48h", false)
+                    .get()
+                    .addOnCompleteListener(taskSnapshotResult -> {
+                        if (!taskSnapshotResult.isSuccessful() || taskSnapshotResult.getResult() == null) {
+                            if (callback != null) callback.onComplete(0);
+                            return;
+                        }
+
+                        List<DocumentSnapshot> overdueCandidateDocs = new ArrayList<>();
+                        for (DocumentSnapshot doc : taskSnapshotResult.getResult().getDocuments()) {
+                            TaskItem t = parseTask(doc);
+                            if (t == null) continue;
+                            if (t.getStatus() == TaskItem.Status.DONE) continue;
+
+                            long deadlineMs = parseDeadlineMillis(t.getDeadline());
+                            if (deadlineMs > 0 && (now - deadlineMs) > FORTY_EIGHT_HOURS_MS) {
+                                overdueCandidateDocs.add(doc);
+                            }
+                        }
+
+                        if (overdueCandidateDocs.isEmpty()) {
+                            if (callback != null) callback.onComplete(0);
+                            return;
+                        }
+
+                        final int[] processedCount = {0};
+                        final int[] newStrikesRecorded = {0};
+                        final int total = overdueCandidateDocs.size();
+
+                        for (DocumentSnapshot doc : overdueCandidateDocs) {
+                            TaskItem t = parseTask(doc);
+                            String taskId = t.getId();
+                            String strikeDocId = "strk_task_" + taskId;
+
+                            // Idempotently verify strike does not exist
+                            db.collection("strikes").document(strikeDocId).get()
+                                    .addOnCompleteListener(strikeCheck -> {
+                                        boolean strikeExists = strikeCheck.isSuccessful() && strikeCheck.getResult() != null && strikeCheck.getResult().exists();
+                                        if (!strikeExists) {
+                                            String timeStr = new java.text.SimpleDateFormat("MMM dd, yyyy", java.util.Locale.getDefault()).format(new java.util.Date());
+                                            StrikeRecord strike = new StrikeRecord(
+                                                    strikeDocId,
+                                                    t.getAssigneeId(),
+                                                    t.getAssigneeName(),
+                                                    StrikeRecord.TriggerType.OVERDUE_TASK,
+                                                    "Task '" + t.getTitle() + "' exceeded deadline (" + t.getDeadline() + ") by > 48 hours.",
+                                                    timeStr,
+                                                    false,
+                                                    null,
+                                                    null
+                                            );
+                                            db.collection("strikes").document(strikeDocId).set(strikeToMap(strike), SetOptions.merge());
+
+                                            // Increment member's strike count
+                                            if (t.getAssigneeId() != null) {
+                                                db.collection("users").document(t.getAssigneeId())
+                                                        .update("strikeCount", com.google.firebase.firestore.FieldValue.increment(1));
+                                            }
+                                            newStrikesRecorded[0]++;
+                                        }
+
+                                        // Mark task overdue flag in Firestore
+                                        db.collection("tasks").document(taskId).update("isOverdue48h", true, "updatedAt", com.google.firebase.Timestamp.now());
+
+                                        processedCount[0]++;
+                                        if (processedCount[0] >= total && callback != null) {
+                                            callback.onComplete(newStrikesRecorded[0]);
+                                        }
+                                    });
+                        }
+                    });
+            return;
+        }
+
+        // Local / in-memory evaluation for JVM tests and offline mode
+        int inMemoryNewStrikes = 0;
+        synchronized (tasks) {
+            for (TaskItem t : tasks) {
+                if (t.isOverdue48h() || t.getStatus() == TaskItem.Status.DONE) continue;
+                long deadlineMs = parseDeadlineMillis(t.getDeadline());
+                if (deadlineMs > 0 && (now - deadlineMs) > FORTY_EIGHT_HOURS_MS) {
+                    t.setOverdue48h(true);
+                    String strikeDocId = "strk_task_" + t.getId();
+                    boolean exists = false;
+                    synchronized (strikeRecords) {
+                        for (StrikeRecord s : strikeRecords) {
+                            if (strikeDocId.equals(s.getId())) {
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists) {
+                            String timeStr = new java.text.SimpleDateFormat("MMM dd, yyyy", java.util.Locale.getDefault()).format(new java.util.Date());
+                            StrikeRecord strike = new StrikeRecord(
+                                    strikeDocId,
+                                    t.getAssigneeId(),
+                                    t.getAssigneeName(),
+                                    StrikeRecord.TriggerType.OVERDUE_TASK,
+                                    "Task '" + t.getTitle() + "' exceeded deadline (" + t.getDeadline() + ") by > 48 hours.",
+                                    timeStr,
+                                    false,
+                                    null,
+                                    null
+                            );
+                            strikeRecords.add(strike);
+                            inMemoryNewStrikes++;
+
+                            // Update member strike count in-memory
+                            synchronized (members) {
+                                for (User u : members) {
+                                    if (u.getId().equals(t.getAssigneeId())) {
+                                        u.setStrikeCount(u.getStrikeCount() + 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (callback != null) {
+            callback.onComplete(inMemoryNewStrikes);
+        }
+    }
+
+    private long parseDeadlineMillis(String deadlineStr) {
+        if (deadlineStr == null || deadlineStr.trim().isEmpty()) return -1;
+        String[] patterns = new String[]{"MMM dd, yyyy", "yyyy-MM-dd", "dd/MM/yyyy", "MMM d, yyyy"};
+        for (String pattern : patterns) {
+            try {
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(pattern, java.util.Locale.US);
+                sdf.setLenient(false);
+                java.util.Date date = sdf.parse(deadlineStr.trim());
+                if (date != null) {
+                    return date.getTime();
+                }
+            } catch (Exception ignored) {}
+        }
+        return -1;
+    }
+
     public List<User> getMembers() {
         synchronized (members) {
             return new ArrayList<>(members);
         }
+    }
+
+    // --- FCM Token Management ---
+    public void updateUserFcmToken(String userId, String token) {
+        if (userId == null || token == null) return;
+        if (isFirebaseAvailable && db != null) {
+            db.collection("users").document(userId)
+                    .update("fcmToken", token, "updatedAt", com.google.firebase.Timestamp.now());
+        }
+    }
+
+    // --- Receipt Image Upload to Firebase Storage ---
+    public interface UploadCallback {
+        void onSuccess(String downloadUri);
+        void onError(String message);
+    }
+
+    public void uploadReceiptImage(String userId, byte[] imageBytes, String filename, UploadCallback callback) {
+        if (userId == null || imageBytes == null || imageBytes.length == 0) {
+            callback.onError("Invalid image data");
+            return;
+        }
+
+        String safeFilename = (filename != null && !filename.isEmpty()) ? filename : System.currentTimeMillis() + ".jpg";
+
+        try {
+            if (FirebaseApp.getInstance() != null) {
+                com.google.firebase.storage.FirebaseStorage storage = com.google.firebase.storage.FirebaseStorage.getInstance();
+                com.google.firebase.storage.StorageReference ref = storage.getReference()
+                        .child("receipts")
+                        .child(userId)
+                        .child(safeFilename);
+
+                ref.putBytes(imageBytes)
+                        .addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl()
+                                .addOnSuccessListener(uri -> callback.onSuccess(uri.toString()))
+                                .addOnFailureListener(e -> callback.onError("Failed to obtain download URL: " + e.getMessage())))
+                        .addOnFailureListener(e -> callback.onError("Failed to upload image: " + e.getMessage()));
+                return;
+            }
+        } catch (Throwable t) {
+            // Storage unavailable (offline or JVM environment)
+        }
+
+        // Fallback for offline / demo mode
+        String simulatedUri = "https://firebasestorage.googleapis.com/v0/b/gdg-corehq.appspot.com/o/receipts%2F" + userId + "%2F" + safeFilename;
+        callback.onSuccess(simulatedUri);
+    }
+
+    // --- Real-Time Attendance Listener for Member ---
+    public interface AttendanceListener {
+        void onAttendanceChanged(AttendanceRecord record);
+    }
+
+    public com.google.firebase.firestore.ListenerRegistration listenForMemberAttendance(String meetingId, String prn, AttendanceListener listener) {
+        if (meetingId == null || prn == null || listener == null) return null;
+        String cleanPrn = prn.trim().toUpperCase();
+
+        if (isFirebaseAvailable && db != null) {
+            String docId = meetingId + "_" + cleanPrn;
+            return db.collection("attendance").document(docId).addSnapshotListener((doc, error) -> {
+                if (error != null || doc == null || !doc.exists()) return;
+                AttendanceRecord record = parseAttendance(doc);
+                if (record != null) {
+                    listener.onAttendanceChanged(record);
+                }
+            });
+        }
+        return null;
     }
 
     // --- Entity Parsing Helpers ---
@@ -792,177 +1025,5 @@ public class FirebaseDataRepository {
         return map;
     }
 
-    // --- Seeding Methods ---
-
-    private void seedUsersToFirestore() {
-        if (!isFirebaseAvailable || db == null) return;
-        synchronized (members) {
-            for (User u : members) {
-                db.collection("users").document(u.getId()).set(userToMap(u), SetOptions.merge());
-            }
-        }
-    }
-
-    private void seedTasksToFirestore() {
-        if (!isFirebaseAvailable || db == null) return;
-        synchronized (tasks) {
-            for (TaskItem t : tasks) {
-                db.collection("tasks").document(t.getId()).set(taskToMap(t), SetOptions.merge());
-            }
-        }
-    }
-
-    private void seedMeetingsToFirestore() {
-        if (!isFirebaseAvailable || db == null) return;
-        synchronized (meetings) {
-            for (Meeting m : meetings) {
-                db.collection("meetings").document(m.getId()).set(meetingToMap(m), SetOptions.merge());
-            }
-        }
-    }
-
-    private void seedReimbursementsToFirestore() {
-        if (!isFirebaseAvailable || db == null) return;
-        synchronized (reimbursements) {
-            for (Reimbursement r : reimbursements) {
-                db.collection("reimbursements").document(r.getId()).set(reimbursementToMap(r), SetOptions.merge());
-            }
-        }
-    }
-
-    private void seedStrikesToFirestore() {
-        if (!isFirebaseAvailable || db == null) return;
-        synchronized (strikeRecords) {
-            for (StrikeRecord s : strikeRecords) {
-                db.collection("strikes").document(s.getId()).set(strikeToMap(s), SetOptions.merge());
-            }
-        }
-    }
-
-    private void seedInitialData() {
-        // Sample Core Members
-        members.add(new User("usr_admin_01", "Aditya Desai", "PRN2022001", "aditya.d@gdg.org", User.Role.SUPER_ADMIN, "Organizer", 0));
-        members.add(new User("usr_member_01", "Siddhi Kulkarni", "PRN2024001", "siddhi.k@gdg.org", User.Role.CORE_MEMBER, "Design & Web Lead", 1));
-        members.add(new User("usr_member_02", "Tanmay Patil", "PRN2024002", "tanmay.p@gdg.org", User.Role.CORE_MEMBER, "PR & Outreach", 0));
-        members.add(new User("usr_member_03", "Rahul Patil", "PRN2024003", "rahul.p@gdg.org", User.Role.CORE_MEMBER, "Technical Team", 3));
-        members.add(new User("usr_member_04", "Ananya Shinde", "PRN2024004", "ananya.s@gdg.org", User.Role.CORE_MEMBER, "Logistics Lead", 2));
-
-        // Sample Tasks
-        tasks.add(new TaskItem("task_01", "Finalize Cloud Community Day Poster", "Export Instagram & LinkedIn flyers in approved brand dimensions.", "usr_member_01", "Siddhi Kulkarni", "Oct 24, 2026", TaskItem.Status.IN_PROGRESS, "Design", false));
-        tasks.add(new TaskItem("task_02", "Book Auditorium & Sound System", "Coordinate with college administration for Friday seminar hall.", "usr_member_04", "Ananya Shinde", "Oct 22, 2026", TaskItem.Status.TODO, "Logistics", false));
-        tasks.add(new TaskItem("task_03", "Publish Speaker Announcement Post", "Draft caption and tag speaker profiles on Twitter and LinkedIn.", "usr_member_02", "Tanmay Patil", "Oct 21, 2026", TaskItem.Status.DONE, "PR", false));
-        tasks.add(new TaskItem("task_04", "Deploy Hackathon Registration Form", "Complete Google Cloud backend validation and link to CoreHQ.", "usr_member_03", "Rahul Patil", "Oct 18, 2026", TaskItem.Status.TODO, "Technical", true));
-
-        // Sample Meetings & Agendas
-        meetings.add(new Meeting(
-                "meet_101",
-                "Weekly Chapter Sync & Hackathon Prep",
-                "Friday, Oct 24, 2026",
-                "05:00 PM - 06:30 PM",
-                "Seminar Hall B, TKIET",
-                Arrays.asList(
-                        "Review registration milestone (150+ signups)",
-                        "Sponsorship deck updates & budget allocation",
-                        "Departmental roadblock check-in",
-                        "Post-meeting report submissions"
-                ),
-                "Aditya Desai (Organizer)",
-                true
-        ));
-        meetings.add(new Meeting(
-                "meet_100",
-                "Core Team Onboarding & Roles Alignment",
-                "Friday, Oct 17, 2026",
-                "04:30 PM - 06:00 PM",
-                "Computer Lab 4, TKIET",
-                Arrays.asList(
-                        "Welcome new tech and design leads",
-                        "Introduce GDG CoreHQ operations system",
-                        "PRN ID card distribution for attendance"
-                ),
-                "Aditya Desai (Organizer)",
-                false
-        ));
-
-        // Sample Reimbursements
-        reimbursements.add(new Reimbursement(
-                "exp_01",
-                "usr_member_04",
-                "Ananya Shinde",
-                1250.00,
-                "Oct 19, 2026",
-                "Printing & Swag",
-                "receipt_banners_tkiet.jpg",
-                Reimbursement.Status.PENDING,
-                null
-        ));
-        reimbursements.add(new Reimbursement(
-                "exp_02",
-                "usr_member_01",
-                "Siddhi Kulkarni",
-                480.00,
-                "Oct 15, 2026",
-                "Refreshments",
-                "receipt_snacks_oct15.jpg",
-                Reimbursement.Status.APPROVED,
-                null
-        ));
-        reimbursements.add(new Reimbursement(
-                "exp_03",
-                "usr_member_03",
-                "Rahul Patil",
-                2100.00,
-                "Oct 12, 2026",
-                "Logistics",
-                "receipt_cables.jpg",
-                Reimbursement.Status.REJECTED,
-                "Receipt image blurry and missing vendor GST tax invoice. Please re-upload legible bill."
-        ));
-
-        // Sample Strike Records
-        strikeRecords.add(new StrikeRecord(
-                "strk_01",
-                "usr_member_03",
-                "Rahul Patil",
-                StrikeRecord.TriggerType.OVERDUE_TASK,
-                "Task 'Deploy Hackathon Registration Form' exceeded deadline by > 48 hours without prior notice.",
-                "Oct 20, 2026",
-                false,
-                null,
-                null
-        ));
-        strikeRecords.add(new StrikeRecord(
-                "strk_02",
-                "usr_member_03",
-                "Rahul Patil",
-                StrikeRecord.TriggerType.ABSENCE,
-                "Unexcused absence from Chapter Sync (Oct 17, 2026). No attendance scan recorded.",
-                "Oct 17, 2026",
-                false,
-                null,
-                null
-        ));
-        strikeRecords.add(new StrikeRecord(
-                "strk_03",
-                "usr_member_03",
-                "Rahul Patil",
-                StrikeRecord.TriggerType.ABSENCE,
-                "Unexcused absence from Chapter Sync (Oct 10, 2026).",
-                "Oct 10, 2026",
-                false,
-                null,
-                null
-        ));
-        strikeRecords.add(new StrikeRecord(
-                "strk_04",
-                "usr_member_04",
-                "Ananya Shinde",
-                StrikeRecord.TriggerType.ABSENCE,
-                "Missed meeting on Oct 10 due to exam overlap.",
-                "Oct 10, 2026",
-                true,
-                "Pardoned by Organizer: Mid-term university exam clash verified.",
-                "Aditya Desai"
-        ));
-    }
+    // --- Snapshot Listeners ---
 }

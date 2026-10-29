@@ -11,6 +11,14 @@ import com.gdgcorehq.app.model.TaskItem;
 import com.gdgcorehq.app.model.User;
 import java.util.List;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.content.ContextCompat;
+import com.google.firebase.firestore.ListenerRegistration;
+
 /**
  * Core Member Dashboard for GDG CoreHQ.
  * Strictly adheres to PRD §2.2 and §4:
@@ -20,6 +28,13 @@ import java.util.List;
 public class MemberDashboardActivity extends AppCompatActivity {
 
     private ActivityMemberDashboardBinding binding;
+    private ListenerRegistration attendanceListenerRegistration;
+    private boolean hasPromptedReportForCurrentMeeting = false;
+
+    private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                // Handled
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +42,17 @@ public class MemberDashboardActivity extends AppCompatActivity {
         binding = ActivityMemberDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        checkNotificationPermission();
         displayMemberData();
         setupNavigationAndActions();
+    }
+
+    private void checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     @Override
@@ -86,6 +110,40 @@ public class MemberDashboardActivity extends AppCompatActivity {
 
         // Digital Encrypted Attendance QR (PRD §3.2)
         generateAndDisplayQr(user);
+
+        // Attach Real-Time Attendance Listener (PRD §3.2 & §8.2)
+        attachRealtimeAttendanceListener(user);
+    }
+
+    private void attachRealtimeAttendanceListener(User user) {
+        if (user == null || user.getPrn() == null) return;
+        Meeting nextMeeting = MockDataRepository.getInstance().getNextUpcomingMeeting();
+        final String currentMeetingId = (nextMeeting != null) ? nextMeeting.getId() : "meet_101";
+
+        if (attendanceListenerRegistration != null) {
+            attendanceListenerRegistration.remove();
+        }
+
+        attendanceListenerRegistration = MockDataRepository.getInstance().listenForMemberAttendance(
+                currentMeetingId,
+                user.getPrn(),
+                record -> {
+                    if (record != null && "PRESENT".equalsIgnoreCase(record.getStatus())) {
+                        boolean alreadySubmitted = MockDataRepository.getInstance().hasSubmittedReport(currentMeetingId, user.getId());
+                        if (!alreadySubmitted && !hasPromptedReportForCurrentMeeting && !isFinishing()) {
+                            hasPromptedReportForCurrentMeeting = true;
+                            new androidx.appcompat.app.AlertDialog.Builder(MemberDashboardActivity.this)
+                                    .setTitle("Attendance Verified!")
+                                    .setMessage("Your attendance for " + (nextMeeting != null ? nextMeeting.getTitle() : "the meeting") + " has been recorded as PRESENT.\n\nPlease submit your weekly post-meeting accountability report.")
+                                    .setPositiveButton("Submit Report Now", (dialog, which) -> {
+                                        startActivity(new Intent(MemberDashboardActivity.this, PostMeetingReportActivity.class));
+                                    })
+                                    .setNegativeButton("Later", null)
+                                    .show();
+                        }
+                    }
+                }
+        );
     }
 
     private void generateAndDisplayQr(User user) {
@@ -164,6 +222,10 @@ public class MemberDashboardActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (attendanceListenerRegistration != null) {
+            attendanceListenerRegistration.remove();
+            attendanceListenerRegistration = null;
+        }
         binding = null;
     }
 }

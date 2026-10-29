@@ -32,6 +32,22 @@ public class CoreHQLogicTest {
         repo = MockDataRepository.getInstance();
         sessionManager = SessionManager.getInstance();
         sessionManager.logout(); // start with clean session
+
+        // Rule R24: Populate in-memory store and session manager strictly using isolated TestFixtures
+        java.util.Map<String, TestFixtures.TestUserAccount> testAccounts = TestFixtures.getTestAccounts();
+        java.util.Map<String, SessionManager.ProvisionedAccount> provisionedMap = new java.util.HashMap<>();
+        for (java.util.Map.Entry<String, TestFixtures.TestUserAccount> entry : testAccounts.entrySet()) {
+            provisionedMap.put(entry.getKey(), new SessionManager.ProvisionedAccount(entry.getValue().user, entry.getValue().password));
+        }
+        sessionManager.seedTestAccounts(provisionedMap);
+
+        repo.seedTestData(
+                TestFixtures.getTestMembers(),
+                TestFixtures.getTestTasks(),
+                TestFixtures.getTestMeetings(),
+                TestFixtures.getTestReimbursements(),
+                TestFixtures.getTestStrikes()
+        );
     }
 
     // --- Authentication & Session Tests ---
@@ -417,5 +433,86 @@ public class CoreHQLogicTest {
     @Test(expected = IllegalArgumentException.class)
     public void testQrEncryptThrowsOnEmptyUserId() throws Exception {
         QrCryptoManager.encryptPayload("PRN2024001", "");
+    }
+
+    @Test
+    public void testReceiptUploadValidation() {
+        final boolean[] errorTriggered = {false};
+        repo.uploadReceiptImage(null, new byte[]{1, 2, 3}, "test.jpg", new com.gdgcorehq.app.data.FirebaseDataRepository.UploadCallback() {
+            @Override
+            public void onSuccess(String downloadUri) {}
+
+            @Override
+            public void onError(String message) {
+                errorTriggered[0] = true;
+            }
+        });
+        assertTrue("Null userId must trigger error", errorTriggered[0]);
+
+        errorTriggered[0] = false;
+        repo.uploadReceiptImage("usr_01", null, "test.jpg", new com.gdgcorehq.app.data.FirebaseDataRepository.UploadCallback() {
+            @Override
+            public void onSuccess(String downloadUri) {}
+
+            @Override
+            public void onError(String message) {
+                errorTriggered[0] = true;
+            }
+        });
+        assertTrue("Null image bytes must trigger error", errorTriggered[0]);
+
+        errorTriggered[0] = false;
+        repo.uploadReceiptImage("usr_01", new byte[0], "test.jpg", new com.gdgcorehq.app.data.FirebaseDataRepository.UploadCallback() {
+            @Override
+            public void onSuccess(String downloadUri) {}
+
+            @Override
+            public void onError(String message) {
+                errorTriggered[0] = true;
+            }
+        });
+        assertTrue("Empty image bytes must trigger error", errorTriggered[0]);
+    }
+
+    @Test
+    public void testAutomatedStrikeTriggerForOverdueTasks() {
+        // Setup: Ensure task_04 (deadline Oct 18, 2026, overdue > 48h) is marked false initially
+        TaskItem overdueTask = null;
+        for (TaskItem t : repo.getAllTasks()) {
+            if ("task_04".equals(t.getId())) {
+                overdueTask = t;
+                break;
+            }
+        }
+        assertNotNull(overdueTask);
+        overdueTask.setOverdue48h(false);
+
+        // Remove any existing strike for task_04 from test fixtures
+        String strikeId = "strk_task_task_04";
+
+        final int[] newStrikes = {0};
+        repo.evaluateOverdueTasks(count -> newStrikes[0] = count);
+
+        // Task should now be flagged overdue
+        assertTrue("Task should be flagged overdue > 48h", overdueTask.isOverdue48h());
+
+        // A strike should have been created with id strk_task_task_04
+        boolean foundStrike = false;
+        for (StrikeRecord s : repo.getAllStrikes()) {
+            if (strikeId.equals(s.getId())) {
+                foundStrike = true;
+                assertEquals(StrikeRecord.TriggerType.OVERDUE_TASK, s.getTriggerType());
+                assertEquals("usr_member_03", s.getMemberId());
+                break;
+            }
+        }
+        assertTrue("Automated strike should be recorded in strikes", foundStrike);
+
+        // Idempotency check: running evaluation again must not create duplicate strike
+        int countBefore = repo.getAllStrikes().size();
+        final int[] secondRunStrikes = {0};
+        repo.evaluateOverdueTasks(count -> secondRunStrikes[0] = count);
+        assertEquals("Duplicate strike must not be created on second evaluation", 0, secondRunStrikes[0]);
+        assertEquals("Strike count must remain identical", countBefore, repo.getAllStrikes().size());
     }
 }

@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.gdgcorehq.app.CoreHQLogicTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-10-24T10:14:03.310Z" hostname="INBOOK_X2_SLIM" time="1.165">
+<testsuite name="com.gdgcorehq.app.CoreHQLogicTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-10-24T11:22:13.477Z" hostname="INBOOK_X2_SLIM" time="0.364">
   <properties/>
-  <testcase name="testMemberNavigationDestinations" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.546"/>
-  <testcase name="testPrnValidation" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
-  <testcase name="testValidLoginGrantsAccess" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.003"/>
-  <testcase name="testFindMemberByIdAndStrikeCountThreshold" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
-  <testcase name="testTaskStatusTransitionsAndOverdueClearing" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testMemberNavigationDestinations" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.122"/>
+  <testcase name="testPrnValidation" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testValidLoginGrantsAccess" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.005"/>
+  <testcase name="testFindMemberByIdAndStrikeCountThreshold" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.005"/>
+  <testcase name="testReceiptUploadValidation" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.01"/>
+  <testcase name="testTaskStatusTransitionsAndOverdueClearing" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
   <testcase name="testInvalidExpenseAmountRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
-  <testcase name="testQrReplayAttackExpiredPayloadRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.423"/>
+  <testcase name="testQrReplayAttackExpiredPayloadRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.106"/>
   <testcase name="testReimbursementRejectionReasonRequirement" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
-  <testcase name="testAdminNavigationDestinations" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.004"/>
+  <testcase name="testAdminNavigationDestinations" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.01"/>
   <testcase name="testQrEncryptionDecryptionSuccess" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.003"/>
-  <testcase name="testStrikePardonRequiresJustification" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
-  <testcase name="testDuplicateAttendancePrevention" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
+  <testcase name="testStrikePardonRequiresJustification" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testDuplicateAttendancePrevention" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
   <testcase name="testSessionClearingOnLogout" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
-  <testcase name="testInvalidLoginIsRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
-  <testcase name="testQrInvalidOrCorruptTokenRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.0"/>
+  <testcase name="testInvalidLoginIsRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.004"/>
+  <testcase name="testQrInvalidOrCorruptTokenRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.001"/>
   <testcase name="testQrEncryptThrowsOnEmptyPrn" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
-  <testcase name="testQrTamperedCiphertextRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.025"/>
-  <testcase name="testQrEncryptThrowsOnEmptyUserId" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.104"/>
-  <testcase name="testRoleAccessDistinction" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.003"/>
-  <testcase name="testPostMeetingReportValidationAndLinking" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
+  <testcase name="testQrTamperedCiphertextRejected" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.004"/>
+  <testcase name="testQrEncryptThrowsOnEmptyUserId" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.002"/>
+  <testcase name="testRoleAccessDistinction" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.015"/>
+  <testcase name="testPostMeetingReportValidationAndLinking" classname="com.gdgcorehq.app.CoreHQLogicTest" time="0.024"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

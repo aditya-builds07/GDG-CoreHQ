@@ -101,6 +101,11 @@ public class QrScannerActivity extends AppCompatActivity {
                 binding.navHome, binding.navTasks, binding.navScanner,
                 binding.navExpenses, binding.navStrikes);
 
+        // Rule R24: Gate simulation controls behind BuildConfig.DEBUG
+        if (!BuildConfig.DEBUG) {
+            binding.layoutSimulationControls.setVisibility(View.GONE);
+        }
+
         // Quick simulation triggers for UI/Offline testing
         binding.btnSimulateValid.setOnClickListener(v -> {
             try {

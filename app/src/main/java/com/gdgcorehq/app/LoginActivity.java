@@ -25,6 +25,11 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Rule R24: Hide development fixture quick-switch card in production/release builds
+        if (!BuildConfig.DEBUG) {
+            binding.cardQuickSwitch.setVisibility(View.GONE);
+        }
+
         setupListeners();
     }
 

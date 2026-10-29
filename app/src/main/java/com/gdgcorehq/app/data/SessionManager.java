@@ -1,6 +1,13 @@
 package com.gdgcorehq.app.data;
 
 import com.gdgcorehq.app.model.User;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +23,11 @@ public class SessionManager {
     private User currentUser;
 
     // Pre-provisioned user directory (temporary until Developer B integrates Firebase Auth)
-    private static class ProvisionedAccount {
-        final User user;
-        final String password;
+    public static class ProvisionedAccount {
+        public final User user;
+        public final String password;
 
-        ProvisionedAccount(User user, String password) {
+        public ProvisionedAccount(User user, String password) {
             this.user = user;
             this.password = password;
         }
@@ -29,7 +36,7 @@ public class SessionManager {
     private final Map<String, ProvisionedAccount> provisionedAccounts = new HashMap<>();
 
     private SessionManager() {
-        seedProvisionedAccounts();
+        // Production starts 100% clean, reading only from Firestore/FirebaseAuth.
     }
 
     public static synchronized SessionManager getInstance() {
@@ -39,85 +46,16 @@ public class SessionManager {
         return instance;
     }
 
-    private void seedProvisionedAccounts() {
-        // 1. Super Admin
-        User admin = new User(
-                "usr_admin_01",
-                "Aditya Desai",
-                "PRN2022001",
-                "aditya.d@gdg.org",
-                User.Role.SUPER_ADMIN,
-                "Organizer / Lead",
-                0
-        );
-        ProvisionedAccount adminAcc = new ProvisionedAccount(admin, "admin123");
-        provisionedAccounts.put("admin", adminAcc);
-        provisionedAccounts.put("organizer", adminAcc);
-        provisionedAccounts.put("aditya.d@gdg.org", adminAcc);
-        provisionedAccounts.put("prn2022001", adminAcc);
-
-        // 2. Core Member (Design Lead)
-        User siddhi = new User(
-                "usr_member_01",
-                "Siddhi Kulkarni",
-                "PRN2024001",
-                "siddhi.k@gdg.org",
-                User.Role.CORE_MEMBER,
-                "Design & Web Lead",
-                1
-        );
-        ProvisionedAccount siddhiAcc = new ProvisionedAccount(siddhi, "lead123");
-        provisionedAccounts.put("lead", siddhiAcc);
-        provisionedAccounts.put("siddhi", siddhiAcc);
-        provisionedAccounts.put("siddhi.k@gdg.org", siddhiAcc);
-        provisionedAccounts.put("prn2024001", siddhiAcc);
-
-        // 3. Core Member (PR & Outreach)
-        User tanmay = new User(
-                "usr_member_02",
-                "Tanmay Patil",
-                "PRN2024002",
-                "tanmay.p@gdg.org",
-                User.Role.CORE_MEMBER,
-                "PR & Outreach",
-                0
-        );
-        ProvisionedAccount tanmayAcc = new ProvisionedAccount(tanmay, "member123");
-        provisionedAccounts.put("tanmay", tanmayAcc);
-        provisionedAccounts.put("tanmay.p@gdg.org", tanmayAcc);
-        provisionedAccounts.put("prn2024002", tanmayAcc);
-
-        // 4. Core Member (3 Strikes Critical Flag per PRD §3.6)
-        User rahul = new User(
-                "usr_member_03",
-                "Rahul Patil",
-                "PRN2024003",
-                "rahul.p@gdg.org",
-                User.Role.CORE_MEMBER,
-                "Technical Team",
-                3
-        );
-        ProvisionedAccount rahulAcc = new ProvisionedAccount(rahul, "strike123");
-        provisionedAccounts.put("strike", rahulAcc);
-        provisionedAccounts.put("member3", rahulAcc);
-        provisionedAccounts.put("rahul", rahulAcc);
-        provisionedAccounts.put("rahul.p@gdg.org", rahulAcc);
-        provisionedAccounts.put("prn2024003", rahulAcc);
-
-        // 5. Core Member (Logistics Lead)
-        User ananya = new User(
-                "usr_member_04",
-                "Ananya Shinde",
-                "PRN2024004",
-                "ananya.s@gdg.org",
-                User.Role.CORE_MEMBER,
-                "Logistics Lead",
-                2
-        );
-        ProvisionedAccount ananyaAcc = new ProvisionedAccount(ananya, "member123");
-        provisionedAccounts.put("ananya", ananyaAcc);
-        provisionedAccounts.put("ananya.s@gdg.org", ananyaAcc);
-        provisionedAccounts.put("prn2024004", ananyaAcc);
+    /**
+     * Seeds test accounts for offline / JVM unit test execution (Rule R24).
+     */
+    public void seedTestAccounts(Map<String, ProvisionedAccount> testAccounts) {
+        synchronized (provisionedAccounts) {
+            provisionedAccounts.clear();
+            if (testAccounts != null) {
+                provisionedAccounts.putAll(testAccounts);
+            }
+        }
     }
 
     public User getCurrentUser() {
@@ -134,6 +72,11 @@ public class SessionManager {
 
     public void logout() {
         this.currentUser = null;
+        try {
+            if (FirebaseApp.getInstance() != null) {
+                FirebaseAuth.getInstance().signOut();
+            }
+        } catch (Throwable ignored) {}
     }
 
     public interface AuthCallback {
@@ -142,8 +85,9 @@ public class SessionManager {
     }
 
     /**
-     * Authenticates with assigned username/ID and password.
-     * Enforces PRD §3.1: No public registration. Unprovisioned accounts are rejected.
+     * Authenticates with assigned username/ID/email and password.
+     * Authenticates against live FirebaseAuth when available, with Firestore role fetching,
+     * and preserves fallback to pre-provisioned directory for local JVM testing and offline access.
      */
     public void authenticate(String identifier, String password, AuthCallback callback) {
         if (identifier == null || identifier.trim().isEmpty()) {
@@ -156,19 +100,110 @@ public class SessionManager {
         }
 
         String id = identifier.trim().toLowerCase();
+        ProvisionedAccount localAccount = provisionedAccounts.get(id);
 
+        boolean isFirebaseAvailable = false;
+        try {
+            isFirebaseAvailable = (FirebaseApp.getInstance() != null);
+        } catch (Throwable ignored) {}
+
+        if (!isFirebaseAvailable) {
+            // Local JVM / offline testing fallback
+            authenticateLocal(id, password, callback);
+            return;
+        }
+
+        // Resolve email for live Firebase Auth
+        String emailToUse = identifier.trim();
+        if (!emailToUse.contains("@")) {
+            if (localAccount != null && localAccount.user != null && localAccount.user.getEmail() != null) {
+                emailToUse = localAccount.user.getEmail();
+            } else {
+                emailToUse = id + "@gdg.org";
+            }
+        }
+
+        final String finalEmail = emailToUse;
+        try {
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            auth.signInWithEmailAndPassword(finalEmail, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            FirebaseUser fbUser = task.getResult().getUser();
+                            String uid = fbUser != null ? fbUser.getUid() : null;
+                            if (uid != null) {
+                                FirebaseFirestore.getInstance().collection("users").document(uid).get()
+                                        .addOnCompleteListener(userDocTask -> {
+                                            if (userDocTask.isSuccessful() && userDocTask.getResult() != null && userDocTask.getResult().exists()) {
+                                                DocumentSnapshot doc = userDocTask.getResult();
+                                                currentUser = parseUserFromDoc(doc);
+                                            } else if (localAccount != null) {
+                                                currentUser = localAccount.user;
+                                            } else {
+                                                currentUser = new User(uid, fbUser.getDisplayName() != null ? fbUser.getDisplayName() : "GDG Member", "PRN2024001", fbUser.getEmail(), User.Role.CORE_MEMBER, "General", 0);
+                                            }
+                                            postAuthSuccess(currentUser);
+                                            callback.onSuccess(currentUser);
+                                        });
+                            } else {
+                                postAuthSuccess(localAccount != null ? localAccount.user : null);
+                                callback.onSuccess(currentUser);
+                            }
+                        } else {
+                            // If live auth fails (e.g. unseeded auth user in Firebase console), check local provisioned directory
+                            if (localAccount != null && localAccount.password.equals(password)) {
+                                currentUser = localAccount.user;
+                                postAuthSuccess(currentUser);
+                                callback.onSuccess(currentUser);
+                            } else {
+                                String errorMsg = "Incorrect password or account not found.";
+                                if (task.getException() != null && task.getException().getMessage() != null) {
+                                    errorMsg = task.getException().getMessage();
+                                }
+                                callback.onError(errorMsg);
+                            }
+                        }
+                    });
+        } catch (Throwable t) {
+            authenticateLocal(id, password, callback);
+        }
+    }
+
+    private void authenticateLocal(String id, String password, AuthCallback callback) {
         ProvisionedAccount account = provisionedAccounts.get(id);
         if (account == null) {
             callback.onError("Account not found. Accounts are provisioned by the Chapter Organizer.");
             return;
         }
-
         if (!account.password.equals(password)) {
             callback.onError("Incorrect password. Please verify your credentials.");
             return;
         }
-
         currentUser = account.user;
         callback.onSuccess(currentUser);
+    }
+
+    private void postAuthSuccess(User user) {
+        if (user == null) return;
+        try {
+            FirebaseMessaging.getInstance().subscribeToTopic("meeting_agendas");
+            FirebaseMessaging.getInstance().getToken().addOnSuccessListener(token -> {
+                FirebaseDataRepository.getInstance().updateUserFcmToken(user.getId(), token);
+            });
+        } catch (Throwable ignored) {}
+    }
+
+    private User parseUserFromDoc(DocumentSnapshot doc) {
+        String id = doc.getString("id");
+        if (id == null) id = doc.getId();
+        String name = doc.getString("name");
+        String prn = doc.getString("prn");
+        String email = doc.getString("email");
+        String roleStr = doc.getString("role");
+        User.Role role = "SUPER_ADMIN".equalsIgnoreCase(roleStr) ? User.Role.SUPER_ADMIN : User.Role.CORE_MEMBER;
+        String department = doc.getString("department");
+        Long strikesLong = doc.getLong("strikeCount");
+        int strikeCount = strikesLong != null ? strikesLong.intValue() : 0;
+        return new User(id, name, prn, email, role, department, strikeCount);
     }
 }

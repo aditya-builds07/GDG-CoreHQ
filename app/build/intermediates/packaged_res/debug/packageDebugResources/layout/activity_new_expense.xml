@@ -173,6 +173,16 @@
                 android:layout_height="wrap_content"
                 android:text="Submit for Admin Approval" />
 
+            <!-- Upload Loading Indicator (Rule R23) -->
+            <ProgressBar
+                android:id="@+id/progressBarExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/space_3"
+                android:indeterminateTint="@color/brand_navy"
+                android:visibility="gone" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

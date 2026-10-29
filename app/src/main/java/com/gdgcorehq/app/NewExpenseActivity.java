@@ -22,6 +22,7 @@ public class NewExpenseActivity extends AppCompatActivity {
 
     private ActivityNewExpenseBinding binding;
     private String attachedReceiptName = null;
+    private byte[] receiptBytes = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class NewExpenseActivity extends AppCompatActivity {
         // Simulated Camera / Receipt Capture
         binding.cardCaptureReceipt.setOnClickListener(v -> {
             attachedReceiptName = "receipt_chapter_" + System.currentTimeMillis() + ".jpg";
+            receiptBytes = generateReceiptPlaceholderBytes();
             binding.tvReceiptStatus.setText("Receipt Image Attached");
             binding.tvReceiptStatus.setTextColor(getColor(R.color.status_success));
             binding.tvReceiptDetails.setText(attachedReceiptName + " (Ready to upload)");
@@ -96,22 +98,57 @@ public class NewExpenseActivity extends AppCompatActivity {
         String memberId = current != null ? current.getId() : "usr_member_01";
         String memberName = current != null ? current.getName() : "Siddhi Kulkarni";
 
-        Reimbursement expense = new Reimbursement(
-                "exp_" + System.currentTimeMillis(),
-                memberId,
-                memberName,
-                amount,
-                date.isEmpty() ? "Today" : date,
-                category,
-                attachedReceiptName,
-                Reimbursement.Status.PENDING,
-                null
-        );
-
-        MockDataRepository.getInstance().submitReimbursement(expense);
+        // Provide clear loading state and disable submit button (Rule R23)
         binding.btnSubmitExpense.setEnabled(false);
-        Toast.makeText(this, "Expense submitted as Pending for Admin review.", Toast.LENGTH_LONG).show();
-        finish();
+        binding.progressBarExpense.setVisibility(android.view.View.VISIBLE);
+
+        final byte[] bytesToUpload = (receiptBytes != null) ? receiptBytes : generateReceiptPlaceholderBytes();
+
+        MockDataRepository.getInstance().uploadReceiptImage(memberId, bytesToUpload, attachedReceiptName, new com.gdgcorehq.app.data.FirebaseDataRepository.UploadCallback() {
+            @Override
+            public void onSuccess(String downloadUri) {
+                Reimbursement expense = new Reimbursement(
+                        "exp_" + System.currentTimeMillis(),
+                        memberId,
+                        memberName,
+                        amount,
+                        date.isEmpty() ? "Today" : date,
+                        category,
+                        downloadUri,
+                        Reimbursement.Status.PENDING,
+                        null
+                );
+
+                MockDataRepository.getInstance().submitReimbursement(expense);
+                binding.progressBarExpense.setVisibility(android.view.View.GONE);
+                Toast.makeText(NewExpenseActivity.this, "Expense submitted as Pending for Admin review.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onError(String message) {
+                binding.btnSubmitExpense.setEnabled(true);
+                binding.progressBarExpense.setVisibility(android.view.View.GONE);
+                Toast.makeText(NewExpenseActivity.this, "Failed to upload receipt: " + message, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private byte[] generateReceiptPlaceholderBytes() {
+        android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(300, 300, android.graphics.Bitmap.Config.ARGB_8888);
+        android.graphics.Canvas canvas = new android.graphics.Canvas(bitmap);
+        canvas.drawColor(android.graphics.Color.WHITE);
+        android.graphics.Paint paint = new android.graphics.Paint();
+        paint.setColor(android.graphics.Color.DKGRAY);
+        paint.setTextSize(24);
+        paint.setAntiAlias(true);
+        canvas.drawText("GDG CoreHQ Receipt", 30, 80, paint);
+        canvas.drawText("Verified Chapter Expense", 30, 140, paint);
+        canvas.drawText("TKIET Chapter Sync", 30, 200, paint);
+
+        java.io.ByteArrayOutputStream stream = new java.io.ByteArrayOutputStream();
+        bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, stream);
+        return stream.toByteArray();
     }
 
     @Override

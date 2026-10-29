@@ -181,6 +181,7 @@ id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
 id layoutReviewActions
+id layoutSimulationControls
 id layoutStatusButtons
 id layoutStrikesContainer
 id layoutTasksContainer
@@ -192,6 +193,7 @@ id navScanner
 id navStrikes
 id navTasks
 id progressBar
+id progressBarExpense
 id tabStatus
 id tilAmount
 id tilCategory

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.gdgcorehq.app-mergeDebugResources-48:/values-v21/values-v21.xml",
+            "outputFile": "com.gdgcorehq.app-mergeDebugResources-49:/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Aditya Vikas Desai\\.gradle\\caches\\9.7.1\\transforms\\7ded2bcd869314b1b645b5bbf7dd276e\\transformed\\credentials-play-services-auth-1.2.0-rc01\\res\\values-v21\\values-v21.xml",

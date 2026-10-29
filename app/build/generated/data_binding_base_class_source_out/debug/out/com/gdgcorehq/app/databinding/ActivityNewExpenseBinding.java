@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,9 @@ public final class ActivityNewExpenseBinding implements ViewBinding {
   public final ImageView ivReceiptStatusIcon;
 
   @NonNull
+  public final ProgressBar progressBarExpense;
+
+  @NonNull
   public final TextInputLayout tilAmount;
 
   @NonNull
@@ -64,9 +68,9 @@ public final class ActivityNewExpenseBinding implements ViewBinding {
       @NonNull MaterialButton btnSubmitExpense, @NonNull MaterialCardView cardCaptureReceipt,
       @NonNull TextInputEditText etAmount, @NonNull TextInputEditText etCategory,
       @NonNull TextInputEditText etDate, @NonNull ImageView ivReceiptStatusIcon,
-      @NonNull TextInputLayout tilAmount, @NonNull TextInputLayout tilCategory,
-      @NonNull TextInputLayout tilDate, @NonNull TextView tvReceiptDetails,
-      @NonNull TextView tvReceiptStatus) {
+      @NonNull ProgressBar progressBarExpense, @NonNull TextInputLayout tilAmount,
+      @NonNull TextInputLayout tilCategory, @NonNull TextInputLayout tilDate,
+      @NonNull TextView tvReceiptDetails, @NonNull TextView tvReceiptStatus) {
     this.rootView = rootView;
     this.btnBack = btnBack;
     this.btnSubmitExpense = btnSubmitExpense;
@@ -75,6 +79,7 @@ public final class ActivityNewExpenseBinding implements ViewBinding {
     this.etCategory = etCategory;
     this.etDate = etDate;
     this.ivReceiptStatusIcon = ivReceiptStatusIcon;
+    this.progressBarExpense = progressBarExpense;
     this.tilAmount = tilAmount;
     this.tilCategory = tilCategory;
     this.tilDate = tilDate;
@@ -151,6 +156,12 @@ public final class ActivityNewExpenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBarExpense;
+      ProgressBar progressBarExpense = ViewBindings.findChildViewById(rootView, id);
+      if (progressBarExpense == null) {
+        break missingId;
+      }
+
       id = R.id.tilAmount;
       TextInputLayout tilAmount = ViewBindings.findChildViewById(rootView, id);
       if (tilAmount == null) {
@@ -182,8 +193,8 @@ public final class ActivityNewExpenseBinding implements ViewBinding {
       }
 
       return new ActivityNewExpenseBinding((CoordinatorLayout) rootView, btnBack, btnSubmitExpense,
-          cardCaptureReceipt, etAmount, etCategory, etDate, ivReceiptStatusIcon, tilAmount,
-          tilCategory, tilDate, tvReceiptDetails, tvReceiptStatus);
+          cardCaptureReceipt, etAmount, etCategory, etDate, ivReceiptStatusIcon, progressBarExpense,
+          tilAmount, tilCategory, tilDate, tvReceiptDetails, tvReceiptStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

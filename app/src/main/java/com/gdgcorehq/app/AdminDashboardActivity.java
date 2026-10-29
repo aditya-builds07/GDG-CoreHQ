@@ -9,6 +9,13 @@ import com.gdgcorehq.app.databinding.ActivityAdminDashboardBinding;
 import com.gdgcorehq.app.model.Meeting;
 import com.gdgcorehq.app.model.User;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.content.ContextCompat;
+
 /**
  * Super Admin Dashboard for GDG CoreHQ.
  * Strictly adheres to PRD §2.1 and §4:
@@ -18,6 +25,9 @@ import com.gdgcorehq.app.model.User;
 public class AdminDashboardActivity extends AppCompatActivity {
 
     private ActivityAdminDashboardBinding binding;
+
+    private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {});
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +42,17 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding = ActivityAdminDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        checkNotificationPermission();
         displayUserData();
         setupNavigationAndActions();
+    }
+
+    private void checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     @Override

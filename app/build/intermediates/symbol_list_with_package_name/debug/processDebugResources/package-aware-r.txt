@@ -3568,6 +3568,7 @@ id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
 id layoutReviewActions
+id layoutSimulationControls
 id layoutStatusButtons
 id layoutStrikesContainer
 id layoutTasksContainer
@@ -3702,6 +3703,7 @@ id position
 id postLayout
 id pressed
 id progressBar
+id progressBarExpense
 id progress_circular
 id progress_horizontal
 id radio
@@ -4246,6 +4248,7 @@ string fab_transformation_sheet_behavior
 string fallback_menu_item_copy_link
 string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
+string fcm_fallback_notification_channel_label
 string feedback_hint
 string gcm_defaultSenderId
 string global_view

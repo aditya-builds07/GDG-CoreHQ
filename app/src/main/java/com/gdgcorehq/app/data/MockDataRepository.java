@@ -133,4 +133,26 @@ public class MockDataRepository {
     public List<User> getMembers() {
         return backend.getMembers();
     }
+
+    public void evaluateOverdueTasks(FirebaseDataRepository.OverdueEvaluationCallback callback) {
+        backend.evaluateOverdueTasks(callback);
+    }
+
+    public void seedTestData(List<User> members, List<TaskItem> tasks,
+                             List<Meeting> meetings, List<Reimbursement> reimbursements,
+                             List<StrikeRecord> strikes) {
+        backend.seedTestData(members, tasks, meetings, reimbursements, strikes);
+    }
+
+    public void updateUserFcmToken(String userId, String token) {
+        backend.updateUserFcmToken(userId, token);
+    }
+
+    public void uploadReceiptImage(String userId, byte[] imageBytes, String filename, FirebaseDataRepository.UploadCallback callback) {
+        backend.uploadReceiptImage(userId, imageBytes, filename, callback);
+    }
+
+    public com.google.firebase.firestore.ListenerRegistration listenForMemberAttendance(String meetingId, String prn, FirebaseDataRepository.AttendanceListener listener) {
+        return backend.listenForMemberAttendance(meetingId, prn, listener);
+    }
 }
