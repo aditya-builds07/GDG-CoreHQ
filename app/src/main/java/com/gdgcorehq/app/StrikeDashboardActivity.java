@@ -45,6 +45,14 @@ public class StrikeDashboardActivity extends AppCompatActivity {
                 binding.navHome, binding.navTasks, binding.navScanner,
                 binding.navExpenses, binding.navStrikes);
 
+        // Automated Strike Trigger (Overdue Tasks):
+        // Lightweight evaluation hook when Super Admin opens StrikeDashboardActivity
+        MockDataRepository.getInstance().evaluateOverdueTasks(newStrikesCount -> {
+            if (newStrikesCount > 0) {
+                runOnUiThread(this::renderStrikes);
+            }
+        });
+
         renderStrikes();
     }
 
@@ -57,6 +65,19 @@ public class StrikeDashboardActivity extends AppCompatActivity {
     private void renderStrikes() {
         binding.layoutStrikesContainer.removeAllViews();
         List<StrikeRecord> list = MockDataRepository.getInstance().getAllStrikes();
+
+        if (list.isEmpty()) {
+            binding.layoutStrikesContainer.addView(
+                    com.gdgcorehq.app.util.EmptyStateHelper.createEmptyState(
+                            this,
+                            binding.layoutStrikesContainer,
+                            R.drawable.ic_strike,
+                            "No Strikes Recorded",
+                            "There are currently zero accountability strikes in the chapter."
+                    )
+            );
+            return;
+        }
 
         for (StrikeRecord s : list) {
             ItemStrikeCardBinding itemBinding = ItemStrikeCardBinding.inflate(

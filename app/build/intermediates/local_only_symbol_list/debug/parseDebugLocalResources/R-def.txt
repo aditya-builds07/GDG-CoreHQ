@@ -171,12 +171,14 @@ id filterLogistics
 id filterPR
 id filterTech
 id ivAttendanceQr
+id ivEmptyIcon
 id ivLogo
 id ivProfile
 id ivReceiptStatusIcon
 id ivScanReticle
 id ivStrikeIcon
 id layoutDepartmentFilters
+id layoutEmptyStateRoot
 id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
@@ -212,6 +214,8 @@ id tvBoardTitle
 id tvCameraStatus
 id tvCategoryDate
 id tvChapter
+id tvEmptySubtitle
+id tvEmptyTitle
 id tvForgotPassword
 id tvMeetingContext
 id tvMeetingContextSchedule
@@ -282,6 +286,7 @@ layout item_meeting_card
 layout item_reimbursement_review
 layout item_strike_card
 layout item_task_card
+layout view_empty_state
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round

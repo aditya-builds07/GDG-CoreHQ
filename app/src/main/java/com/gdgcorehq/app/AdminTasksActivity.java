@@ -159,12 +159,15 @@ public class AdminTasksActivity extends AppCompatActivity {
         }
 
         if (count == 0) {
-            android.widget.TextView emptyView = new android.widget.TextView(this);
-            emptyView.setText("No tasks in '" + selectedStatus.getDisplayName() + "' for " + selectedDept);
-            emptyView.setPadding(32, 64, 32, 32);
-            emptyView.setGravity(android.view.Gravity.CENTER);
-            emptyView.setTextColor(getColor(R.color.text_secondary));
-            binding.layoutTasksContainer.addView(emptyView);
+            binding.layoutTasksContainer.addView(
+                    com.gdgcorehq.app.util.EmptyStateHelper.createEmptyState(
+                            this,
+                            binding.layoutTasksContainer,
+                            R.drawable.ic_tasks,
+                            "No Tasks Found",
+                            "No tasks in '" + selectedStatus.getDisplayName() + "' for " + selectedDept + "."
+                    )
+            );
         }
     }
 

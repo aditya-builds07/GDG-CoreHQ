@@ -48,6 +48,19 @@ public class MemberAgendaActivity extends AppCompatActivity {
         binding.layoutMeetingsContainer.removeAllViews();
         List<Meeting> meetings = MockDataRepository.getInstance().getMeetings();
 
+        if (meetings.isEmpty()) {
+            binding.layoutMeetingsContainer.addView(
+                    com.gdgcorehq.app.util.EmptyStateHelper.createEmptyState(
+                            this,
+                            binding.layoutMeetingsContainer,
+                            R.drawable.ic_agenda,
+                            "No Chapter Meetings",
+                            "Meeting schedules and discussion agendas will appear here."
+                    )
+            );
+            return;
+        }
+
         for (Meeting m : meetings) {
             ItemMeetingCardBinding cardBinding = ItemMeetingCardBinding.inflate(
                     LayoutInflater.from(this), binding.layoutMeetingsContainer, false);

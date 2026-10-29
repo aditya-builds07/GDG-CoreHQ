@@ -3554,6 +3554,7 @@ id inward
 id italic
 id item_touch_helper_previous_elevation
 id ivAttendanceQr
+id ivEmptyIcon
 id ivLogo
 id ivProfile
 id ivReceiptStatusIcon
@@ -3564,6 +3565,7 @@ id jumpToStart
 id labeled
 id layout
 id layoutDepartmentFilters
+id layoutEmptyStateRoot
 id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
@@ -3845,6 +3847,8 @@ id tvBoardTitle
 id tvCameraStatus
 id tvCategoryDate
 id tvChapter
+id tvEmptySubtitle
+id tvEmptyTitle
 id tvForgotPassword
 id tvMeetingContext
 id tvMeetingContextSchedule
@@ -4135,6 +4139,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout view_empty_state
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round

@@ -53,12 +53,15 @@ public class ExpenseHistoryActivity extends AppCompatActivity {
         List<Reimbursement> list = MockDataRepository.getInstance().getReimbursementsForUser(memberId);
 
         if (list.isEmpty()) {
-            android.widget.TextView empty = new android.widget.TextView(this);
-            empty.setText("You have not submitted any reimbursement requests yet.");
-            empty.setPadding(32, 64, 32, 32);
-            empty.setGravity(android.view.Gravity.CENTER);
-            empty.setTextColor(getColor(R.color.text_secondary));
-            binding.layoutExpensesContainer.addView(empty);
+            binding.layoutExpensesContainer.addView(
+                    com.gdgcorehq.app.util.EmptyStateHelper.createEmptyState(
+                            this,
+                            binding.layoutExpensesContainer,
+                            R.drawable.ic_receipt,
+                            "No Reimbursements Submitted",
+                            "You have not submitted any reimbursement requests yet."
+                    )
+            );
             return;
         }
 

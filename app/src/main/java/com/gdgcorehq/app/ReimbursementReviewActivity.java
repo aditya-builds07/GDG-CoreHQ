@@ -55,6 +55,19 @@ public class ReimbursementReviewActivity extends AppCompatActivity {
         binding.layoutReimbursementsContainer.removeAllViews();
         List<Reimbursement> list = MockDataRepository.getInstance().getAllReimbursements();
 
+        if (list.isEmpty()) {
+            binding.layoutReimbursementsContainer.addView(
+                    com.gdgcorehq.app.util.EmptyStateHelper.createEmptyState(
+                            this,
+                            binding.layoutReimbursementsContainer,
+                            R.drawable.ic_receipt,
+                            "No Reimbursements Submitted",
+                            "No expense reimbursement claims have been submitted by members yet."
+                    )
+            );
+            return;
+        }
+
         for (Reimbursement r : list) {
             ItemReimbursementReviewBinding itemBinding = ItemReimbursementReviewBinding.inflate(
                     LayoutInflater.from(this), binding.layoutReimbursementsContainer, false);
