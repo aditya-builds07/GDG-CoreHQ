@@ -58,7 +58,7 @@
                         android:id="@+id/tvMeetingContext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meeting: Weekly Chapter Sync"
+                        tools:text="Meeting: Weekly Chapter Sync"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>
@@ -116,49 +116,6 @@
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Simulation Controls for UI Testing (Gated behind BuildConfig.DEBUG) -->
-            <LinearLayout
-                android:id="@+id/layoutSimulationControls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/space_2"
-                    android:text="Simulate ID Card Scan (Testing)"
-                    android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
-                    android:textColor="@color/text_secondary" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/space_3"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSimulateValid"
-                        style="@style/Widget.GDGCoreHQ.Button.Secondary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/space_1"
-                        android:layout_weight="1"
-                        android:text="Valid (PRN2024001)"
-                        android:textSize="11sp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSimulateInvalid"
-                        style="@style/Widget.GDGCoreHQ.Button.Secondary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/space_1"
-                        android:layout_weight="1"
-                        android:text="Invalid PRN"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
-
             <!-- Manual PRN Fallback -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,14 +142,14 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVerifyPrn"
-                    style="@style/Widget.GDGCoreHQ.Button.Secondary"
+                    style="@style/Widget.GDGCoreHQ.Button.Primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Look Up" />
+                    android:text="Verify" />
             </LinearLayout>
 
-            <!-- Scanned Member Confirmation Card -->
+            <!-- Scanned Member Result Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardResult"
                 style="@style/Widget.GDGCoreHQ.Card"
@@ -200,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_4"
                 android:visibility="gone"
-                tools:visibility="visible">
+                app:cardBackgroundColor="@color/surface_subtle">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -210,9 +167,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Member Scan Result"
-                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
-                        android:textColor="@color/text_primary" />
+                        android:text="Member Identified"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                        android:textColor="@color/text_secondary" />
 
                     <View
                         android:layout_width="match_parent"
@@ -224,7 +181,7 @@
                         android:id="@+id/tvResultName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Siddhi Kulkarni"
+                        tools:text="Member Name"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
                         android:textColor="@color/text_primary" />
 
@@ -233,7 +190,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="Design Lead • PRN: PRN2024001"
+                        tools:text="Role • PRN"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                         android:textColor="@color/text_secondary" />
 

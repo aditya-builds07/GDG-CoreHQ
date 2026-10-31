@@ -95,8 +95,13 @@ public class NewExpenseActivity extends AppCompatActivity {
         }
 
         User current = SessionManager.getInstance().getCurrentUser();
-        String memberId = current != null ? current.getId() : "usr_member_01";
-        String memberName = current != null ? current.getName() : "Siddhi Kulkarni";
+        if (current == null) {
+            Toast.makeText(this, "Session expired. Please log in again.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String memberId = current.getId();
+        String memberName = (current.getName() != null && !current.getName().isEmpty())
+                ? current.getName() : "Member";
 
         // Provide clear loading state and disable submit button (Rule R23)
         binding.btnSubmitExpense.setEnabled(false);
@@ -135,20 +140,17 @@ public class NewExpenseActivity extends AppCompatActivity {
     }
 
     private byte[] generateReceiptPlaceholderBytes() {
-        android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(300, 300, android.graphics.Bitmap.Config.ARGB_8888);
-        android.graphics.Canvas canvas = new android.graphics.Canvas(bitmap);
-        canvas.drawColor(android.graphics.Color.WHITE);
-        android.graphics.Paint paint = new android.graphics.Paint();
-        paint.setColor(android.graphics.Color.DKGRAY);
-        paint.setTextSize(24);
-        paint.setAntiAlias(true);
-        canvas.drawText("GDG CoreHQ Receipt", 30, 80, paint);
-        canvas.drawText("Verified Chapter Expense", 30, 140, paint);
-        canvas.drawText("TKIET Chapter Sync", 30, 200, paint);
-
-        java.io.ByteArrayOutputStream stream = new java.io.ByteArrayOutputStream();
-        bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, stream);
-        return stream.toByteArray();
+        // Minimal 1x1 GIF / JPEG payload
+        return new byte[]{
+                (byte) 0x47, (byte) 0x49, (byte) 0x46, (byte) 0x38, (byte) 0x39, (byte) 0x61,
+                (byte) 0x01, (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x80, (byte) 0x00,
+                (byte) 0x00, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0x00, (byte) 0x00,
+                (byte) 0x00, (byte) 0x21, (byte) 0xF9, (byte) 0x04, (byte) 0x01, (byte) 0x00,
+                (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x2C, (byte) 0x00, (byte) 0x00,
+                (byte) 0x00, (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x01, (byte) 0x00,
+                (byte) 0x00, (byte) 0x02, (byte) 0x02, (byte) 0x44, (byte) 0x01, (byte) 0x00,
+                (byte) 0x3B
+        };
     }
 
     @Override

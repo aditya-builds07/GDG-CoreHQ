@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="Rahul Patil"
+                tools:text="Rahul Patil"
                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
                 android:textColor="@color/text_primary" />
 
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_1"
-            android:text="Task 'Deploy Hackathon Registration Form' exceeded deadline by > 48 hours without prior notice."
+            tools:text="Strike details"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
             android:textColor="@color/text_secondary" />
 

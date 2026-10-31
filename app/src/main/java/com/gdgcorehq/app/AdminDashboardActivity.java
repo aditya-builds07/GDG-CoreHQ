@@ -63,8 +63,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     private void displayUserData() {
         User user = SessionManager.getInstance().getCurrentUser();
-        if (user != null) {
-            binding.tvAdminGreeting.setText("Welcome, " + user.getName().split(" ")[0]);
+        if (user != null && user.getName() != null && !user.getName().isEmpty()) {
+            String firstName = user.getName().contains(" ") ? user.getName().split(" ")[0] : user.getName();
+            binding.tvAdminGreeting.setText("Welcome, " + firstName);
+        } else {
+            binding.tvAdminGreeting.setText("Welcome, Admin");
         }
     }
 
@@ -80,6 +83,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
         if (next != null) {
             binding.tvMeetingTitle.setText(next.getTitle());
             binding.tvMeetingTimeLocation.setText(next.getDate() + " • " + next.getTime() + " • " + next.getLocation());
+        } else {
+            binding.tvMeetingTitle.setText("No Upcoming Meeting");
+            binding.tvMeetingTimeLocation.setText("No meeting scheduled yet.");
         }
 
         // Pending Reimbursements

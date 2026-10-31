@@ -11,6 +11,7 @@ import com.gdgcorehq.app.data.MockDataRepository;
 import com.gdgcorehq.app.databinding.ActivityAdminTasksBinding;
 import com.gdgcorehq.app.databinding.ItemTaskCardBinding;
 import com.gdgcorehq.app.model.TaskItem;
+import com.gdgcorehq.app.model.User;
 import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class AdminTasksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.gdgcorehq.app.model.User user = com.gdgcorehq.app.data.SessionManager.getInstance().getCurrentUser();
+        User user = com.gdgcorehq.app.data.SessionManager.getInstance().getCurrentUser();
         if (user == null || !user.isSuperAdmin()) {
             Toast.makeText(this, "Access denied: Super Admin authorization required.", Toast.LENGTH_SHORT).show();
             finish();
@@ -193,16 +194,36 @@ public class AdminTasksActivity extends AppCompatActivity {
                         Toast.makeText(this, "Task title is required", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if (assignee.isEmpty()) {
+                        Toast.makeText(this, "Assignee name or PRN is required", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (deadline.isEmpty()) {
+                        Toast.makeText(this, "Deadline is required", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Look up member dynamically from members collection
+                    User member = MockDataRepository.getInstance().getMembers().stream()
+                            .filter(m -> (m.getName() != null && m.getName().equalsIgnoreCase(assignee)) ||
+                                         (m.getPrn() != null && m.getPrn().equalsIgnoreCase(assignee)))
+                            .findFirst()
+                            .orElse(null);
+
+                    String assigneeId = (member != null) ? member.getId() : "user_" + System.currentTimeMillis();
+                    String assigneeName = (member != null) ? member.getName() : assignee;
+                    String taskDept = (member != null && member.getDepartment() != null && !member.getDepartment().isEmpty())
+                            ? member.getDepartment() : (dept.isEmpty() ? "General" : dept);
 
                     TaskItem newTask = new TaskItem(
                             "task_" + System.currentTimeMillis(),
                             title,
                             desc.isEmpty() ? "No description provided." : desc,
-                            "usr_member_01",
-                            assignee.isEmpty() ? "Siddhi Kulkarni" : assignee,
-                            deadline.isEmpty() ? "Oct 26, 2026" : deadline,
+                            assigneeId,
+                            assigneeName,
+                            deadline,
                             TaskItem.Status.TODO,
-                            dept.isEmpty() ? "General" : dept,
+                            taskDept,
                             false
                     );
 
