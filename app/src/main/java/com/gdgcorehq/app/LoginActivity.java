@@ -25,11 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Rule R24: Hide development fixture quick-switch card in production/release builds
-        if (!BuildConfig.DEBUG) {
-            binding.cardQuickSwitch.setVisibility(View.GONE);
-        }
-
         setupListeners();
     }
 
@@ -37,25 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnSignIn.setOnClickListener(v -> handleSignIn());
 
         binding.tvForgotPassword.setOnClickListener(v -> showForgotPasswordDialog());
-
-        // Quick role shortcuts for Phase 2 UI Demonstration
-        binding.btnRoleAdmin.setOnClickListener(v -> {
-            binding.etIdentifier.setText("admin");
-            binding.etPassword.setText("admin123");
-            handleSignIn();
-        });
-
-        binding.btnRoleMember.setOnClickListener(v -> {
-            binding.etIdentifier.setText("lead");
-            binding.etPassword.setText("lead123");
-            handleSignIn();
-        });
-
-        binding.btnRoleStrikeMember.setOnClickListener(v -> {
-            binding.etIdentifier.setText("strike");
-            binding.etPassword.setText("strike123");
-            handleSignIn();
-        });
     }
 
     private void handleSignIn() {
@@ -87,10 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                 binding.btnSignIn.setEnabled(true);
                 binding.progressBar.setVisibility(View.GONE);
 
-                Toast.makeText(LoginActivity.this, "Welcome, " + user.getName(), Toast.LENGTH_SHORT).show();
+                String displayName = (user != null && user.getName() != null && !user.getName().isEmpty())
+                        ? user.getName() : "Member";
+                Toast.makeText(LoginActivity.this, "Welcome, " + displayName, Toast.LENGTH_SHORT).show();
 
                 Intent intent;
-                if (user.isSuperAdmin()) {
+                if (user != null && user.isSuperAdmin()) {
                     intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                 } else {
                     intent = new Intent(LoginActivity.this, MemberDashboardActivity.class);
@@ -111,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     private void showForgotPasswordDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Account Recovery")
-                .setMessage("GDG CoreHQ uses administrator-provisioned accounts. Please contact the Chapter Organizer (Aditya Desai) or Community Manager to reset your password.")
+                .setMessage("GDG CoreHQ uses administrator-provisioned accounts. Please contact your Chapter Organizer or Community Manager to reset your password.")
                 .setPositiveButton("Understood", null)
                 .show();
     }

@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Session provider for GDG CoreHQ.
  * Strictly adheres to PROJECT_RULES.md §1 (R03, R07), PRD §3.1, and TEAM_RESPONSIBILITIES.md §2:
- * Maintains local session state and validates pre-provisioned credentials.
+ * Maintains local session state and validates credentials against live Firebase.
  * Invalid credentials never grant access. Privileged server secrets are not stored.
  */
 public class SessionManager {
@@ -22,7 +22,6 @@ public class SessionManager {
     private static SessionManager instance;
     private User currentUser;
 
-    // Pre-provisioned user directory (temporary until Developer B integrates Firebase Auth)
     public static class ProvisionedAccount {
         public final User user;
         public final String password;
@@ -36,7 +35,7 @@ public class SessionManager {
     private final Map<String, ProvisionedAccount> provisionedAccounts = new HashMap<>();
 
     private SessionManager() {
-        // Production starts 100% clean, reading only from Firestore/FirebaseAuth.
+        // Starts clean, reading from live Firestore and FirebaseAuth.
     }
 
     public static synchronized SessionManager getInstance() {
@@ -103,12 +102,18 @@ public class SessionManager {
                                     if (callback != null) callback.onSuccess(currentUser);
                                 } else {
                                     String email = fbUser.getEmail();
-                                    ProvisionedAccount localAccount = email != null ? provisionedAccounts.get(email.toLowerCase()) : null;
-                                    if (localAccount != null) {
-                                        currentUser = localAccount.user;
-                                    } else {
-                                        currentUser = new User(uid, fbUser.getDisplayName() != null ? fbUser.getDisplayName() : "GDG Member", "PRN2024001", fbUser.getEmail(), User.Role.CORE_MEMBER, "General", 0);
-                                    }
+                                    String displayName = (fbUser.getDisplayName() != null && !fbUser.getDisplayName().isEmpty())
+                                            ? fbUser.getDisplayName()
+                                            : (email != null && email.contains("@") ? email.split("@")[0] : "Member");
+                                    currentUser = new User(
+                                            uid,
+                                            displayName,
+                                            "",
+                                            email != null ? email : "",
+                                            User.Role.CORE_MEMBER,
+                                            "General",
+                                            0
+                                    );
                                     postAuthSuccess(currentUser);
                                     if (callback != null) callback.onSuccess(currentUser);
                                 }
@@ -128,12 +133,11 @@ public class SessionManager {
 
     /**
      * Authenticates with assigned username/ID/email and password.
-     * Authenticates against live FirebaseAuth when available, with Firestore role fetching,
-     * and preserves fallback to pre-provisioned directory for local JVM testing and offline access.
+     * Authenticates against live FirebaseAuth when available, with Firestore role fetching.
      */
     public void authenticate(String identifier, String password, AuthCallback callback) {
         if (identifier == null || identifier.trim().isEmpty()) {
-            callback.onError("Please enter your assigned PRN or Username");
+            callback.onError("Please enter your assigned PRN, Email, or Username");
             return;
         }
         if (password == null || password.trim().isEmpty()) {
@@ -142,7 +146,6 @@ public class SessionManager {
         }
 
         String id = identifier.trim().toLowerCase();
-        ProvisionedAccount localAccount = provisionedAccounts.get(id);
 
         boolean isFirebaseAvailable = false;
         try {
@@ -158,11 +161,7 @@ public class SessionManager {
         // Resolve email for live Firebase Auth
         String emailToUse = identifier.trim();
         if (!emailToUse.contains("@")) {
-            if (localAccount != null && localAccount.user != null && localAccount.user.getEmail() != null) {
-                emailToUse = localAccount.user.getEmail();
-            } else {
-                emailToUse = id + "@gdg.org";
-            }
+            emailToUse = id + "@gdg.org";
         }
 
         final String finalEmail = emailToUse;
@@ -179,31 +178,32 @@ public class SessionManager {
                                             if (userDocTask.isSuccessful() && userDocTask.getResult() != null && userDocTask.getResult().exists()) {
                                                 DocumentSnapshot doc = userDocTask.getResult();
                                                 currentUser = parseUserFromDoc(doc);
-                                            } else if (localAccount != null) {
-                                                currentUser = localAccount.user;
                                             } else {
-                                                currentUser = new User(uid, fbUser.getDisplayName() != null ? fbUser.getDisplayName() : "GDG Member", "PRN2024001", fbUser.getEmail(), User.Role.CORE_MEMBER, "General", 0);
+                                                String displayName = (fbUser.getDisplayName() != null && !fbUser.getDisplayName().isEmpty())
+                                                        ? fbUser.getDisplayName()
+                                                        : (finalEmail.contains("@") ? finalEmail.split("@")[0] : "Member");
+                                                currentUser = new User(
+                                                        uid,
+                                                        displayName,
+                                                        "",
+                                                        fbUser.getEmail() != null ? fbUser.getEmail() : finalEmail,
+                                                        User.Role.CORE_MEMBER,
+                                                        "General",
+                                                        0
+                                                );
                                             }
                                             postAuthSuccess(currentUser);
                                             callback.onSuccess(currentUser);
                                         });
                             } else {
-                                postAuthSuccess(localAccount != null ? localAccount.user : null);
-                                callback.onSuccess(currentUser);
+                                callback.onError("Authentication state invalid: missing user UID.");
                             }
                         } else {
-                            // If live auth fails (e.g. unseeded auth user in Firebase console), check local provisioned directory
-                            if (localAccount != null && localAccount.password.equals(password)) {
-                                currentUser = localAccount.user;
-                                postAuthSuccess(currentUser);
-                                callback.onSuccess(currentUser);
-                            } else {
-                                String errorMsg = "Incorrect password or account not found.";
-                                if (task.getException() != null && task.getException().getMessage() != null) {
-                                    errorMsg = task.getException().getMessage();
-                                }
-                                callback.onError(errorMsg);
+                            String errorMsg = "Authentication failed. Incorrect credentials or account not found.";
+                            if (task.getException() != null && task.getException().getMessage() != null) {
+                                errorMsg = task.getException().getMessage();
                             }
+                            callback.onError(errorMsg);
                         }
                     });
         } catch (Throwable t) {
@@ -246,6 +246,6 @@ public class SessionManager {
         String department = doc.getString("department");
         Long strikesLong = doc.getLong("strikeCount");
         int strikeCount = strikesLong != null ? strikesLong.intValue() : 0;
-        return new User(id, name, prn, email, role, department, strikeCount);
+        return new User(id, name != null ? name : "Member", prn != null ? prn : "", email != null ? email : "", role, department != null ? department : "General", strikeCount);
     }
 }

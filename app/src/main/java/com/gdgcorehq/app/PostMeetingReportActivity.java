@@ -33,6 +33,10 @@ public class PostMeetingReportActivity extends AppCompatActivity {
         if (currentMeeting != null) {
             binding.tvMeetingContextTitle.setText(currentMeeting.getTitle());
             binding.tvMeetingContextSchedule.setText(currentMeeting.getDate() + " • " + currentMeeting.getLocation());
+        } else {
+            binding.tvMeetingContextTitle.setText("No Active Meeting");
+            binding.tvMeetingContextSchedule.setText("There are currently no scheduled meetings to report on.");
+            binding.btnSubmitReport.setEnabled(false);
         }
 
         binding.btnBack.setOnClickListener(v -> finish());
@@ -62,9 +66,19 @@ public class PostMeetingReportActivity extends AppCompatActivity {
         }
 
         User current = SessionManager.getInstance().getCurrentUser();
-        String memberId = current != null ? current.getId() : "usr_member_01";
-        String memberName = current != null ? current.getName() : "Siddhi Kulkarni";
-        String meetingId = currentMeeting != null ? currentMeeting.getId() : "meet_101";
+        if (current == null) {
+            Toast.makeText(this, "Session expired. Please log in again.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (currentMeeting == null) {
+            Toast.makeText(this, "No active meeting to report on.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String memberId = current.getId();
+        String memberName = (current.getName() != null && !current.getName().isEmpty())
+                ? current.getName() : "Member";
+        String meetingId = currentMeeting.getId();
         String timeStr = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault()).format(new Date());
 
         PostMeetingReport report = new PostMeetingReport(
@@ -81,7 +95,7 @@ public class PostMeetingReportActivity extends AppCompatActivity {
         boolean success = MockDataRepository.getInstance().submitPostMeetingReport(report);
         if (success) {
             binding.btnSubmitReport.setEnabled(false);
-            Toast.makeText(this, "Post-meeting report submitted for " + (currentMeeting != null ? currentMeeting.getTitle() : "chapter sync"), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Post-meeting report submitted for " + currentMeeting.getTitle(), Toast.LENGTH_LONG).show();
             finish();
         } else {
             Toast.makeText(this, "Failed to submit report. Please check required fields.", Toast.LENGTH_SHORT).show();

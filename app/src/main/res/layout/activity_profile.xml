@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_3"
-                        android:text="Siddhi Kulkarni"
+                        android:text="" tools:text="Member Name"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Headline"
                         android:textColor="@color/text_primary" />
 
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="Design &amp; Web Lead"
+                        android:text="" tools:text="Department • Role"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                         android:textColor="@color/text_secondary" />
 
@@ -99,7 +99,7 @@
                         android:background="@drawable/bg_chip_rounded"
                         android:paddingHorizontal="@dimen/space_3"
                         android:paddingVertical="@dimen/space_1"
-                        android:text="PRN: PRN2024001"
+                        android:text="" tools:text="PRN: PRN2024001"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
                         android:textColor="@color/brand_navy" />
 
@@ -141,7 +141,7 @@
                             android:id="@+id/tvProfileEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="siddhi.k@gdg.org"
+                            android:text="" tools:text="member@gdg.org"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                             android:textColor="@color/text_primary" />
                     </LinearLayout>

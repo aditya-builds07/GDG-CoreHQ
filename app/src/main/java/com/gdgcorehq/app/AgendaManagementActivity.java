@@ -114,6 +114,10 @@ public class AgendaManagementActivity extends AppCompatActivity {
                         Toast.makeText(this, "Meeting title is required", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if (date.isEmpty() || time.isEmpty() || location.isEmpty()) {
+                        Toast.makeText(this, "Date, Time, and Location are required", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     List<String> topicList = new ArrayList<>();
                     if (!topicsStr.isEmpty()) {
@@ -123,14 +127,15 @@ public class AgendaManagementActivity extends AppCompatActivity {
                     }
 
                     User current = SessionManager.getInstance().getCurrentUser();
-                    String publisher = current != null ? current.getName() : "Chapter Organizer";
+                    String publisher = (current != null && current.getName() != null && !current.getName().isEmpty())
+                            ? current.getName() : "Chapter Organizer";
 
                     Meeting newMeeting = new Meeting(
                             "meet_" + System.currentTimeMillis(),
                             title,
-                            date.isEmpty() ? "Friday, Next Week" : date,
-                            time.isEmpty() ? "05:00 PM" : time,
-                            location.isEmpty() ? "Seminar Hall B, TKIET" : location,
+                            date,
+                            time,
+                            location,
                             topicList,
                             publisher,
                             true

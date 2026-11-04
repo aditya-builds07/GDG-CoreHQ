@@ -69,8 +69,16 @@ public class MemberDashboardActivity extends AppCompatActivity {
             return;
         }
 
-        binding.tvMemberGreeting.setText("Hi, " + user.getName().split(" ")[0]);
-        binding.tvMemberRolePrn.setText(user.getDepartment() + " • " + user.getPrn());
+        String displayName = (user.getName() != null && !user.getName().isEmpty())
+                ? (user.getName().contains(" ") ? user.getName().split(" ")[0] : user.getName())
+                : "Member";
+        binding.tvMemberGreeting.setText("Hi, " + displayName);
+
+        String roleDeptPrn = user.getDepartment();
+        if (user.getPrn() != null && !user.getPrn().isEmpty()) {
+            roleDeptPrn += " • " + user.getPrn();
+        }
+        binding.tvMemberRolePrn.setText(roleDeptPrn);
 
         // Strike Status Indicator (PRD §3.6)
         int strikes = user.getStrikeCount();
@@ -100,6 +108,9 @@ public class MemberDashboardActivity extends AppCompatActivity {
         if (next != null) {
             binding.tvMeetingTitle.setText(next.getTitle());
             binding.tvMeetingSchedule.setText(next.getDate() + " • " + next.getTime() + " • " + next.getLocation());
+        } else {
+            binding.tvMeetingTitle.setText("No Upcoming Meeting");
+            binding.tvMeetingSchedule.setText("No meeting scheduled yet.");
         }
 
         // Tasks Summary
@@ -116,9 +127,17 @@ public class MemberDashboardActivity extends AppCompatActivity {
     }
 
     private void attachRealtimeAttendanceListener(User user) {
-        if (user == null || user.getPrn() == null) return;
+        if (user == null || user.getPrn() == null || user.getPrn().isEmpty()) return;
         Meeting nextMeeting = MockDataRepository.getInstance().getNextUpcomingMeeting();
-        final String currentMeetingId = (nextMeeting != null) ? nextMeeting.getId() : "meet_101";
+        if (nextMeeting == null) {
+            if (attendanceListenerRegistration != null) {
+                attendanceListenerRegistration.remove();
+                attendanceListenerRegistration = null;
+            }
+            return;
+        }
+
+        final String currentMeetingId = nextMeeting.getId();
 
         if (attendanceListenerRegistration != null) {
             attendanceListenerRegistration.remove();
@@ -133,8 +152,8 @@ public class MemberDashboardActivity extends AppCompatActivity {
                         if (!alreadySubmitted && !hasPromptedReportForCurrentMeeting && !isFinishing()) {
                             hasPromptedReportForCurrentMeeting = true;
                             new androidx.appcompat.app.AlertDialog.Builder(MemberDashboardActivity.this)
-                                    .setTitle("Attendance Verified!")
-                                    .setMessage("Your attendance for " + (nextMeeting != null ? nextMeeting.getTitle() : "the meeting") + " has been recorded as PRESENT.\n\nPlease submit your weekly post-meeting accountability report.")
+                                     .setTitle("Attendance Verified!")
+                                    .setMessage("Your attendance for " + nextMeeting.getTitle() + " has been recorded as PRESENT.\n\nPlease submit your weekly post-meeting accountability report.")
                                     .setPositiveButton("Submit Report Now", (dialog, which) -> {
                                         startActivity(new Intent(MemberDashboardActivity.this, PostMeetingReportActivity.class));
                                     })
@@ -147,7 +166,11 @@ public class MemberDashboardActivity extends AppCompatActivity {
     }
 
     private void generateAndDisplayQr(User user) {
-        if (user == null || user.getPrn() == null) return;
+        if (user == null || user.getPrn() == null || user.getPrn().isEmpty()) {
+            binding.tvQrPrnLabel.setText("");
+            binding.tvQrStatus.setText("PRN not assigned yet.");
+            return;
+        }
         binding.tvQrPrnLabel.setText("PRN: " + user.getPrn());
         try {
             String encryptedToken = com.gdgcorehq.app.data.QrCryptoManager.encryptPayload(user.getPrn(), user.getId());

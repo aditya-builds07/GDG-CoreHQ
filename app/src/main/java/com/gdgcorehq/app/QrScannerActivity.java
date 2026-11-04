@@ -24,6 +24,7 @@ import com.gdgcorehq.app.data.QrCryptoManager;
 import com.gdgcorehq.app.data.SessionManager;
 import com.gdgcorehq.app.databinding.ActivityQrScannerBinding;
 import com.gdgcorehq.app.model.AttendanceRecord;
+import com.gdgcorehq.app.model.Meeting;
 import com.gdgcorehq.app.model.User;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
@@ -51,7 +52,7 @@ import java.util.concurrent.Executors;
 public class QrScannerActivity extends AppCompatActivity {
 
     private ActivityQrScannerBinding binding;
-    private final String currentMeetingId = "meet_101"; // Active Chapter Sync
+    private String currentMeetingId = "";
     private User pendingMember = null;
     private final StringBuilder sessionLog = new StringBuilder();
 
@@ -82,6 +83,14 @@ public class QrScannerActivity extends AppCompatActivity {
         binding = ActivityQrScannerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Meeting upcomingMeeting = MockDataRepository.getInstance().getNextUpcomingMeeting();
+        if (upcomingMeeting != null) {
+            currentMeetingId = upcomingMeeting.getId();
+            binding.tvMeetingContext.setText("Meeting: " + upcomingMeeting.getTitle());
+        } else {
+            binding.tvMeetingContext.setText("No upcoming meeting scheduled");
+        }
+
         cameraExecutor = Executors.newSingleThreadExecutor();
 
         BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
@@ -101,24 +110,7 @@ public class QrScannerActivity extends AppCompatActivity {
                 binding.navHome, binding.navTasks, binding.navScanner,
                 binding.navExpenses, binding.navStrikes);
 
-        // Rule R24: Gate simulation controls behind BuildConfig.DEBUG
-        if (!BuildConfig.DEBUG) {
-            binding.layoutSimulationControls.setVisibility(View.GONE);
-        }
-
-        // Quick simulation triggers for UI/Offline testing
-        binding.btnSimulateValid.setOnClickListener(v -> {
-            try {
-                // Generate genuine encrypted payload for testing
-                String token = QrCryptoManager.encryptPayload("PRN2024001", "usr_member_01");
-                processScannedBarcode(token);
-            } catch (Exception e) {
-                processScannedBarcode("PRN2024001");
-            }
-        });
-        binding.btnSimulateInvalid.setOnClickListener(v -> processScannedBarcode("INVALID999"));
-
-        // Manual Lookup Fallback
+        // Manual Lookup
         binding.btnVerifyPrn.setOnClickListener(v -> {
             String input = binding.etManualPrn.getText() != null ?
                     binding.etManualPrn.getText().toString().trim() : "";
@@ -144,41 +136,36 @@ public class QrScannerActivity extends AppCompatActivity {
 
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                bindCameraUseCases(cameraProvider);
+
+                Preview preview = new Preview.Builder().build();
+                preview.setSurfaceProvider(binding.cameraPreviewView.getSurfaceProvider());
+
+                ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
+                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                        .build();
+
+                imageAnalysis.setAnalyzer(cameraExecutor, this::analyzeImageProxy);
+
+                CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
+
+                cameraProvider.unbindAll();
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
+
+                binding.tvCameraStatus.setText("Point camera at member's digital QR");
+
             } catch (ExecutionException | InterruptedException e) {
-                binding.tvCameraStatus.setText("Unable to initialize camera. Use manual entry.");
-                Toast.makeText(this, "Failed to start camera preview: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                binding.tvCameraStatus.setText("Failed to start camera. Use manual PRN entry.");
             }
         }, ContextCompat.getMainExecutor(this));
     }
 
-    private void bindCameraUseCases(@NonNull ProcessCameraProvider cameraProvider) {
-        Preview preview = new Preview.Builder().build();
-        preview.setSurfaceProvider(binding.cameraPreviewView.getSurfaceProvider());
-
-        ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build();
-
-        imageAnalysis.setAnalyzer(cameraExecutor, this::analyzeImage);
-
-        CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
-
-        try {
-            cameraProvider.unbindAll();
-            cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
-            binding.tvCameraStatus.setText("Scanner active: align member's QR code");
-        } catch (Exception e) {
-            binding.tvCameraStatus.setText("Camera binding failed. Use manual PRN entry.");
-        }
-    }
-
     @OptIn(markerClass = ExperimentalGetImage.class)
-    private void analyzeImage(@NonNull ImageProxy imageProxy) {
-        if (isScanningPaused || pendingMember != null) {
+    private void analyzeImageProxy(@NonNull ImageProxy imageProxy) {
+        if (isScanningPaused) {
             imageProxy.close();
             return;
         }
@@ -186,15 +173,19 @@ public class QrScannerActivity extends AppCompatActivity {
         Image mediaImage = imageProxy.getImage();
         if (mediaImage != null) {
             InputImage image = InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo().getRotationDegrees());
+
             barcodeScanner.process(image)
                     .addOnSuccessListener(barcodes -> {
-                        if (!barcodes.isEmpty() && !isScanningPaused && pendingMember == null) {
-                            Barcode barcode = barcodes.get(0);
+                        for (Barcode barcode : barcodes) {
                             String rawValue = barcode.getRawValue();
-                            if (rawValue != null && !rawValue.trim().isEmpty()) {
+                            if (rawValue != null && !rawValue.isEmpty()) {
                                 runOnUiThread(() -> processScannedBarcode(rawValue));
+                                break;
                             }
                         }
+                    })
+                    .addOnFailureListener(e -> {
+                        // Keep analyzing next frames
                     })
                     .addOnCompleteListener(task -> imageProxy.close());
         } else {
@@ -248,7 +239,8 @@ public class QrScannerActivity extends AppCompatActivity {
         }
 
         // 3. Check for duplicate scan for the active meeting
-        if (repo.isAttendanceAlreadyRecorded(currentMeetingId, member.getPrn())) {
+        if (currentMeetingId != null && !currentMeetingId.isEmpty() &&
+                repo.isAttendanceAlreadyRecorded(currentMeetingId, member.getPrn())) {
             binding.cardResult.setVisibility(View.GONE);
             new AlertDialog.Builder(this)
                     .setTitle("Duplicate Attendance")
@@ -269,6 +261,11 @@ public class QrScannerActivity extends AppCompatActivity {
 
     private void confirmPendingAttendance() {
         if (pendingMember == null) return;
+
+        if (currentMeetingId == null || currentMeetingId.isEmpty()) {
+            Toast.makeText(this, "Cannot record attendance: No active meeting scheduled.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         User admin = SessionManager.getInstance().getCurrentUser();
         String recorderId = admin != null ? admin.getId() : "admin_usr";
