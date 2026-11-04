@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardStrikeItem"
+    style="@style/Widget.GDGCoreHQ.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Member + Strike Count Row -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_1">
+
+            <TextView
+                android:id="@+id/tvStrikeMemberName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Rahul Patil"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/tvStrikeBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_chip_rounded"
+                android:backgroundTint="@color/color_error_container"
+                android:paddingHorizontal="@dimen/space_2"
+                android:paddingVertical="@dimen/space_1"
+                android:text="3 STRIKES (CRITICAL)"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                android:textColor="@color/status_error" />
+        </RelativeLayout>
+
+        <!-- Trigger Reason -->
+        <TextView
+            android:id="@+id/tvStrikeTrigger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trigger: Task Overdue > 48h • Oct 20, 2026"
+            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
+            android:textColor="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/tvStrikeDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_1"
+            android:text="Task 'Deploy Hackathon Registration Form' exceeded deadline by > 48 hours without prior notice."
+            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+            android:textColor="@color/text_secondary" />
+
+        <!-- Status / Pardon Action -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_2">
+
+            <TextView
+                android:id="@+id/tvPardonStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Active Strike"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                android:textColor="@color/status_error" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPardonStrike"
+                style="@style/Widget.GDGCoreHQ.Button.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:minHeight="36dp"
+                android:text="Pardon Strike"
+                android:textSize="11sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

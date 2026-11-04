@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/page_padding"
+        android:paddingTop="@dimen/space_4">
+
+        <!-- Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_4">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_chip_rounded"
+                android:contentDescription="Back"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/space_3"
+                android:layout_toEndOf="@id/btnBack"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reimbursement Review"
+                    android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Audit receipts and authorize payouts"
+                    android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- List of Reimbursements -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/layoutReimbursementsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="96dp" />
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <!-- Floating Pill Navigation Bar (Admin) -->
+    <LinearLayout
+        android:id="@+id/bottomNavPill"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/space_4"
+        android:layout_marginBottom="@dimen/space_4"
+        android:background="@drawable/bg_floating_nav"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_2">
+
+        <ImageView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Dashboard"
+            android:padding="10dp"
+            android:src="@drawable/ic_dashboard"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navTasks"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Tasks"
+            android:padding="10dp"
+            android:src="@drawable/ic_tasks"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navScanner"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="QR Scanner"
+            android:padding="10dp"
+            android:src="@drawable/ic_qr_scan"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navExpenses"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_selected"
+            android:contentDescription="Reimbursements"
+            android:padding="10dp"
+            android:src="@drawable/ic_receipt"
+            app:tint="@color/surface" />
+
+        <ImageView
+            android:id="@+id/navStrikes"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Strikes"
+            android:padding="10dp"
+            android:src="@drawable/ic_strike"
+            app:tint="@color/text_secondary" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

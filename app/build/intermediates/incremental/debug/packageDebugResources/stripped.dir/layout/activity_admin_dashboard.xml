@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="96dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/page_padding"
+            android:paddingTop="@dimen/space_4">
+
+            <!-- Admin Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAdminGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome, Aditya"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Headline"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GDGoC TKIET • Chapter Management"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+
+                <!-- Profile / Sign Out Action -->
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_chip_rounded"
+                    android:contentDescription="Profile and settings"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_profile" />
+            </RelativeLayout>
+
+            <!-- Role Badge -->
+            <TextView
+                android:id="@+id/chipRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                android:background="@drawable/bg_nav_selected"
+                android:paddingHorizontal="@dimen/space_3"
+                android:paddingVertical="@dimen/space_1"
+                android:text="SUPER ADMIN"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                android:textColor="@color/surface" />
+
+            <!-- Primary Action Card: Launch QR Attendance Scanner -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardQrScanner"
+                style="@style/Widget.GDGCoreHQ.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                app:cardBackgroundColor="@color/brand_navy">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="@dimen/space_3"
+                        android:background="@drawable/bg_chip_rounded"
+                        android:backgroundTint="#2D3B60"
+                        android:contentDescription="QR Scanner"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_qr_scan"
+                        app:tint="@color/surface" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="QR Attendance Scanner"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                            android:textColor="@color/surface" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scan physical member ID cards for check-in"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                            android:textColor="#C8D8FF" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Launch scanner"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/surface" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Metrics Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_2"
+                android:text="Operations Overview"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                android:textColor="@color/text_primary" />
+
+            <!-- Row 1: Active Tasks + Next Meeting -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_3"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <!-- Active Tasks -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTasksOverview"
+                    style="@style/Widget.GDGCoreHQ.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_2"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/brand_mint">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tasks"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tvTaskCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/space_1"
+                            android:text="4 Active"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kanban Board →"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                            android:textColor="@color/text_primary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Next Meeting -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardMeetingOverview"
+                    style="@style/Widget.GDGCoreHQ.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_2"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/brand_blue">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Next Sync"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/space_1"
+                            android:text="Friday"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Agenda Published →"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                            android:textColor="@color/text_primary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Row 2: Reimbursements + Strike Flags -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_4"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <!-- Reimbursements -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardReimbursementsOverview"
+                    style="@style/Widget.GDGCoreHQ.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_2"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/brand_peach">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reimbursements"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tvPendingReimbursements"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/space_1"
+                            android:text="1 Pending"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Review Receipts →"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                            android:textColor="@color/text_primary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Strike Review (Alert Coral container) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardStrikeOverview"
+                    style="@style/Widget.GDGCoreHQ.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_2"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/color_error_container">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Accountability"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
+                            android:textColor="@color/status_error" />
+
+                        <TextView
+                            android:id="@+id/tvStrikeAlerts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/space_1"
+                            android:text="1 Member 3+"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleLarge"
+                            android:textColor="@color/status_error" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Strike Dashboard →"
+                            android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
+                            android:textColor="@color/status_error" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Upcoming Agenda Highlights -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_2"
+                android:text="Next Scheduled Chapter Meeting"
+                android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                android:textColor="@color/text_primary" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.GDGCoreHQ.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvMeetingTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weekly Chapter Sync &amp; Hackathon Prep"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:id="@+id/tvMeetingTimeLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_1"
+                        android:text="Friday, Oct 24 • 05:00 PM • Seminar Hall B, TKIET"
+                        android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
+                        android:textColor="@color/text_secondary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnManageAgenda"
+                        style="@style/Widget.GDGCoreHQ.Button.Secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_3"
+                        android:text="Manage Agenda &amp; Topics" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Pill Navigation Bar (per design.md §2 and §5) -->
+    <LinearLayout
+        android:id="@+id/bottomNavPill"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/space_4"
+        android:layout_marginBottom="@dimen/space_4"
+        android:background="@drawable/bg_floating_nav"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_2">
+
+        <ImageView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_selected"
+            android:contentDescription="Dashboard"
+            android:padding="10dp"
+            android:src="@drawable/ic_dashboard"
+            app:tint="@color/surface" />
+
+        <ImageView
+            android:id="@+id/navTasks"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Tasks"
+            android:padding="10dp"
+            android:src="@drawable/ic_tasks"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navScanner"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="QR Scanner"
+            android:padding="10dp"
+            android:src="@drawable/ic_qr_scan"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navExpenses"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Reimbursements"
+            android:padding="10dp"
+            android:src="@drawable/ic_receipt"
+            app:tint="@color/text_secondary" />
+
+        <ImageView
+            android:id="@+id/navStrikes"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:contentDescription="Strikes"
+            android:padding="10dp"
+            android:src="@drawable/ic_strike"
+            app:tint="@color/text_secondary" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
