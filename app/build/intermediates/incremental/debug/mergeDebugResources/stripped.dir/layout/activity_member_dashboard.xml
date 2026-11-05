@@ -38,7 +38,7 @@
                         android:id="@+id/tvMemberGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hi, Siddhi"
+                        android:text="Welcome" tools:text="Hi, Member"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Headline"
                         android:textColor="@color/text_primary" />
 
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="PRN: PRN2024001"
+                        android:text="" tools:text="PRN: PRN2024001"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
                         android:textColor="@color/brand_navy" />
 
@@ -226,7 +226,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="Weekly Chapter Sync &amp; Hackathon Prep"
+                        android:text="No Upcoming Meeting" tools:text="Weekly Chapter Sync &amp; Hackathon Prep"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
                         android:textColor="@color/text_primary" />
 

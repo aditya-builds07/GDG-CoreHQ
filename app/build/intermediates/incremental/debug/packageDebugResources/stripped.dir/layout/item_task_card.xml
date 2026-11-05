@@ -85,7 +85,7 @@
                 android:drawablePadding="@dimen/space_1"
                 app:drawableTint="@color/text_secondary"
                 android:gravity="center_vertical"
-                android:text="Assigned: Siddhi Kulkarni"
+                tools:text="Assigned: Member Name"
                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                 android:textColor="@color/text_secondary" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="Due: Oct 24, 2026"
+                tools:text="Due: Deadline"
                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                 android:textColor="@color/text_muted" />
         </RelativeLayout>

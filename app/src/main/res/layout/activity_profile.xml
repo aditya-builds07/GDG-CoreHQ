@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="" tools:text="Department • Role"
+                        android:text="" tools:text="Department ï¿½ Role"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                         android:textColor="@color/text_secondary" />
 

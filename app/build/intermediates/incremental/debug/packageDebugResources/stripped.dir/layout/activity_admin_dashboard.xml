@@ -38,7 +38,7 @@
                         android:id="@+id/tvAdminGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Welcome, Aditya"
+                        android:text="Welcome" tools:text="Welcome, Admin"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Headline"
                         android:textColor="@color/text_primary" />
 
@@ -342,7 +342,7 @@
                         android:id="@+id/tvMeetingTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Weekly Chapter Sync &amp; Hackathon Prep"
+                        android:text="No Upcoming Meeting" tools:text="Weekly Chapter Sync &amp; Hackathon Prep"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.TitleMedium"
                         android:textColor="@color/text_primary" />
 
