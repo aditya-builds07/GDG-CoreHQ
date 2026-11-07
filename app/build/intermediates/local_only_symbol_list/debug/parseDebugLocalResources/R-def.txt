@@ -117,13 +117,8 @@ id btnPardonStrike
 id btnPostMeetingReport
 id btnRefreshQr
 id btnReject
-id btnRoleAdmin
-id btnRoleMember
-id btnRoleStrikeMember
 id btnSignIn
 id btnSignOut
-id btnSimulateInvalid
-id btnSimulateValid
 id btnSubmitExpense
 id btnSubmitReport
 id btnToggleGlobal
@@ -136,7 +131,6 @@ id cardLogin
 id cardMeetingOverview
 id cardMyTasks
 id cardQrScanner
-id cardQuickSwitch
 id cardReimbursementsOverview
 id cardResult
 id cardStatus
@@ -183,7 +177,6 @@ id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
 id layoutReviewActions
-id layoutSimulationControls
 id layoutSplashRoot
 id layoutStatusButtons
 id layoutStrikesContainer
