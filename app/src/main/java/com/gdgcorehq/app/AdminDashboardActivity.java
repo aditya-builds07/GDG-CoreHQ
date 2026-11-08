@@ -58,6 +58,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User user = SessionManager.getInstance().getCurrentUser();
+        if (user == null || !user.isSuperAdmin()) {
+            android.widget.Toast.makeText(this, "Access denied: Super Admin authorization required.", android.widget.Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         refreshMetrics();
     }
 

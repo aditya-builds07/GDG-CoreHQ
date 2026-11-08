@@ -46,7 +46,7 @@
                         android:id="@+id/tvMemberRolePrn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Design &amp; Web Lead • PRN2024001"
+                        android:text="Design &amp; Web Lead &#8226; PRN2024001"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>
@@ -108,14 +108,14 @@
                             android:id="@+id/tvStrikeSubtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 Strikes • Attendance &amp; tasks on schedule"
+                            android:text="0 Strikes &#8226; Attendance &amp; tasks on schedule"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                             android:textColor="@color/text_secondary" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Digital Attendance QR Card (PRD §3.2) -->
+            <!-- Digital Attendance QR Card (PRD &#167;3.2) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAttendanceQr"
                 style="@style/Widget.GDGCoreHQ.Card"
@@ -153,7 +153,7 @@
                                 android:id="@+id/tvQrStatus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Encrypted • Present to Chapter Admin"
+                                android:text="Encrypted &#8226; Present to Chapter Admin"
                                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                                 android:textColor="@color/text_secondary" />
                         </LinearLayout>
@@ -239,7 +239,7 @@
                         android:drawablePadding="@dimen/space_1"
                         app:drawableTint="@color/text_secondary"
                         android:gravity="center_vertical"
-                        android:text="Friday, Oct 24 • 05:00 PM • Seminar Hall B"
+                        android:text="Friday, Oct 24 &#8226; 05:00 PM &#8226; Seminar Hall B"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                         android:textColor="@color/text_secondary" />
 
@@ -303,7 +303,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="Open Kanban →"
+                            android:text="Open Kanban &#8594;"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                             android:textColor="@color/text_primary" />
                     </RelativeLayout>
@@ -313,7 +313,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_2"
-                        android:text="1 Task In Progress • 0 Overdue"
+                        android:text="1 Task In Progress &#8226; 0 Overdue"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>

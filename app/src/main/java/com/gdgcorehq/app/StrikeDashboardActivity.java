@@ -59,6 +59,12 @@ public class StrikeDashboardActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User user = SessionManager.getInstance().getCurrentUser();
+        if (user == null || !user.isSuperAdmin()) {
+            Toast.makeText(this, "Access denied: Super Admin authorization required.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         renderStrikes();
     }
 
@@ -127,26 +133,42 @@ public class StrikeDashboardActivity extends AppCompatActivity {
         etReason.setMinLines(2);
         etReason.setPadding(32, 24, 32, 24);
 
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Pardon Member Strike")
                 .setMessage("Enter the justified reason to pardon " + s.getMemberName() + "'s strike:")
                 .setView(etReason)
-                .setPositiveButton("Authorize Pardon", (dialog, which) -> {
-                    String reason = etReason.getText().toString().trim();
-                    if (reason.isEmpty()) {
-                        Toast.makeText(this, "Pardon reason cannot be empty", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    User admin = SessionManager.getInstance().getCurrentUser();
-                    String adminName = admin != null ? admin.getName() : "Chapter Organizer";
-
-                    MockDataRepository.getInstance().pardonStrike(s.getId(), reason, adminName);
-                    Toast.makeText(this, "Strike pardoned for " + s.getMemberName(), Toast.LENGTH_SHORT).show();
-                    renderStrikes();
-                })
+                .setPositiveButton("Authorize Pardon", null)
                 .setNegativeButton("Cancel", null)
-                .show();
+                .create();
+        dialog.show();
+
+        android.widget.Button btnPardon = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPardon.setOnClickListener(v -> {
+            String reason = etReason.getText().toString().trim();
+            if (reason.isEmpty()) {
+                Toast.makeText(this, "Pardon reason cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            User admin = SessionManager.getInstance().getCurrentUser();
+            String adminName = admin != null ? admin.getName() : "Chapter Organizer";
+
+            btnPardon.setEnabled(false);
+            MockDataRepository.getInstance().pardonStrike(s.getId(), reason, adminName, new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(StrikeDashboardActivity.this, "Strike pardoned for " + s.getMemberName(), Toast.LENGTH_SHORT).show();
+                    renderStrikes();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String message) {
+                    btnPardon.setEnabled(true);
+                    Toast.makeText(StrikeDashboardActivity.this, "Failed to pardon strike: " + message, Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 
     @Override

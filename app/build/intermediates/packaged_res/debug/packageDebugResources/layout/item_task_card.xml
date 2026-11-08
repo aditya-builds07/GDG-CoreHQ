@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.GDGCoreHQ.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -39,7 +40,7 @@
                 android:backgroundTint="@color/color_error_container"
                 android:paddingHorizontal="@dimen/space_2"
                 android:paddingVertical="@dimen/space_1"
-                android:text="⚠ Overdue > 48h (Strike Risk)"
+                android:text="&#9888; Overdue > 48h (Strike Risk)"
                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                 android:textColor="@color/status_error"
                 android:visibility="gone" />
@@ -116,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/space_2"
                 android:minHeight="36dp"
-                android:text="→ In Progress"
+                android:text="&#8594; In Progress"
                 android:textSize="11sp" />
 
             <com.google.android.material.button.MaterialButton

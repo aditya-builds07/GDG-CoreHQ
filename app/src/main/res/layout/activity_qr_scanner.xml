@@ -190,7 +190,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        tools:text="Role • PRN"
+                        tools:text="Role &#8226; PRN"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                         android:textColor="@color/text_secondary" />
 

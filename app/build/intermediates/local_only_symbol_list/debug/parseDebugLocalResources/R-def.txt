@@ -379,3 +379,4 @@ style Widget.GDGCoreHQ.Button.Primary
 style Widget.GDGCoreHQ.Button.Secondary
 style Widget.GDGCoreHQ.Card
 style Widget.GDGCoreHQ.TextInputLayout
+xml file_paths

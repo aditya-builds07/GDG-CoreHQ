@@ -48,6 +48,12 @@ public class ReimbursementReviewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        com.gdgcorehq.app.model.User user = com.gdgcorehq.app.data.SessionManager.getInstance().getCurrentUser();
+        if (user == null || !user.isSuperAdmin()) {
+            Toast.makeText(this, "Access denied: Super Admin authorization required.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         renderReimbursements();
     }
 
@@ -85,9 +91,22 @@ public class ReimbursementReviewActivity extends AppCompatActivity {
                 itemBinding.tvRejectionReason.setVisibility(View.GONE);
 
                 itemBinding.btnApprove.setOnClickListener(v -> {
-                    MockDataRepository.getInstance().approveReimbursement(r.getId());
-                    Toast.makeText(this, "Expense approved for reimbursement", Toast.LENGTH_SHORT).show();
-                    renderReimbursements();
+                    itemBinding.btnApprove.setEnabled(false);
+                    itemBinding.btnReject.setEnabled(false);
+                    MockDataRepository.getInstance().approveReimbursement(r.getId(), new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(ReimbursementReviewActivity.this, "Expense approved for reimbursement", Toast.LENGTH_SHORT).show();
+                            renderReimbursements();
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            itemBinding.btnApprove.setEnabled(true);
+                            itemBinding.btnReject.setEnabled(true);
+                            Toast.makeText(ReimbursementReviewActivity.this, "Failed to approve expense: " + message, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 });
 
                 itemBinding.btnReject.setOnClickListener(v -> promptRejectionReason(r));
@@ -123,22 +142,39 @@ public class ReimbursementReviewActivity extends AppCompatActivity {
         etReason.setMinLines(2);
         etReason.setPadding(32, 24, 32, 24);
 
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Reject Reimbursement")
                 .setMessage("A rejection reason is strictly required per chapter accountability rules:")
                 .setView(etReason)
-                .setPositiveButton("Confirm Rejection", (dialog, which) -> {
-                    String reason = etReason.getText().toString().trim();
-                    if (reason.isEmpty()) {
-                        Toast.makeText(this, "Rejection aborted: reason is mandatory.", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    MockDataRepository.getInstance().rejectReimbursement(r.getId(), reason);
-                    Toast.makeText(this, "Reimbursement rejected.", Toast.LENGTH_SHORT).show();
-                    renderReimbursements();
-                })
+                .setPositiveButton("Confirm Rejection", null)
                 .setNegativeButton("Cancel", null)
-                .show();
+                .create();
+        dialog.show();
+
+        android.widget.Button btnReject = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnReject.setOnClickListener(v -> {
+            String reason = etReason.getText().toString().trim();
+            if (reason.isEmpty()) {
+                Toast.makeText(this, "Rejection aborted: reason is mandatory.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            btnReject.setEnabled(false);
+            MockDataRepository.getInstance().rejectReimbursement(r.getId(), reason, new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(ReimbursementReviewActivity.this, "Reimbursement rejected.", Toast.LENGTH_SHORT).show();
+                    renderReimbursements();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String message) {
+                    btnReject.setEnabled(true);
+                    Toast.makeText(ReimbursementReviewActivity.this, "Failed to reject reimbursement: " + message, Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 
     @Override

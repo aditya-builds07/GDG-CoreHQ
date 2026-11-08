@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardStrikeItem"
     style="@style/Widget.GDGCoreHQ.Card"
     android:layout_width="match_parent"
@@ -49,7 +50,7 @@
             android:id="@+id/tvStrikeTrigger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trigger: Task Overdue > 48h • Oct 20, 2026"
+            android:text="Trigger: Task Overdue > 48h &#8226; Oct 20, 2026"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
             android:textColor="@color/text_secondary" />
 

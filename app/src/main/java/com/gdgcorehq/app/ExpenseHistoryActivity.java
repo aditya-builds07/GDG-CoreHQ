@@ -26,6 +26,16 @@ public class ExpenseHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User current = SessionManager.getInstance().getCurrentUser();
+        if (current == null) {
+            android.widget.Toast.makeText(this, "Session expired. Please log in again.", android.widget.Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         binding = ActivityExpenseHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -42,13 +52,23 @@ public class ExpenseHistoryActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User current = SessionManager.getInstance().getCurrentUser();
+        if (current == null) {
+            android.widget.Toast.makeText(this, "Session expired. Please log in again.", android.widget.Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return;
+        }
         renderExpenses();
     }
 
     private void renderExpenses() {
         binding.layoutExpensesContainer.removeAllViews();
         User current = SessionManager.getInstance().getCurrentUser();
-        String memberId = current != null ? current.getId() : "usr_member_01";
+        if (current == null) return;
+        String memberId = current.getId();
 
         List<Reimbursement> list = MockDataRepository.getInstance().getReimbursementsForUser(memberId);
 

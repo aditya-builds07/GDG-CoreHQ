@@ -155,7 +155,9 @@ public class MemberDashboardActivity extends AppCompatActivity {
                                      .setTitle("Attendance Verified!")
                                     .setMessage("Your attendance for " + nextMeeting.getTitle() + " has been recorded as PRESENT.\n\nPlease submit your weekly post-meeting accountability report.")
                                     .setPositiveButton("Submit Report Now", (dialog, which) -> {
-                                        startActivity(new Intent(MemberDashboardActivity.this, PostMeetingReportActivity.class));
+                                        Intent intent = new Intent(MemberDashboardActivity.this, PostMeetingReportActivity.class);
+                                        intent.putExtra("meetingId", currentMeetingId);
+                                        startActivity(intent);
                                     })
                                     .setNegativeButton("Later", null)
                                     .show();
@@ -209,8 +211,14 @@ public class MemberDashboardActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
-        binding.btnPostMeetingReport.setOnClickListener(v ->
-                startActivity(new Intent(this, PostMeetingReportActivity.class)));
+        binding.btnPostMeetingReport.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PostMeetingReportActivity.class);
+            Meeting upcoming = MockDataRepository.getInstance().getNextUpcomingMeeting();
+            if (upcoming != null) {
+                intent.putExtra("meetingId", upcoming.getId());
+            }
+            startActivity(intent);
+        });
 
         binding.cardMyTasks.setOnClickListener(v -> {
             Intent intent = new Intent(this, MemberTasksActivity.class);

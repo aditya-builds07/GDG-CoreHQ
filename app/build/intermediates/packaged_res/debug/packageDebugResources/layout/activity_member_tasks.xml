@@ -56,7 +56,7 @@
                     android:textColor="@color/text_secondary" />
             </LinearLayout>
 
-            <!-- Global View Toggle per PRD §3.3 -->
+            <!-- Global View Toggle per PRD &#167;3.3 -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnToggleGlobal"
                 style="@style/Widget.GDGCoreHQ.Button.Secondary"

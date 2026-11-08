@@ -45,8 +45,16 @@ public class MockDataRepository {
         return backend.addTask(task);
     }
 
+    public boolean addTask(TaskItem task, FirebaseDataRepository.WriteCallback callback) {
+        return backend.addTask(task, callback);
+    }
+
     public boolean updateTaskStatus(String taskId, TaskItem.Status newStatus) {
         return backend.updateTaskStatus(taskId, newStatus);
+    }
+
+    public boolean updateTaskStatus(String taskId, TaskItem.Status newStatus, FirebaseDataRepository.WriteCallback callback) {
+        return backend.updateTaskStatus(taskId, newStatus, callback);
     }
 
     // --- Meeting Methods ---
@@ -58,8 +66,16 @@ public class MockDataRepository {
         return backend.getNextUpcomingMeeting();
     }
 
+    public Meeting getMeetingById(String meetingId) {
+        return backend.getMeetingById(meetingId);
+    }
+
     public boolean addMeeting(Meeting meeting) {
         return backend.addMeeting(meeting);
+    }
+
+    public boolean addMeeting(Meeting meeting, FirebaseDataRepository.WriteCallback callback) {
+        return backend.addMeeting(meeting, callback);
     }
 
     // --- Post-Meeting Report Methods ---
@@ -92,8 +108,16 @@ public class MockDataRepository {
         return backend.approveReimbursement(id);
     }
 
+    public boolean approveReimbursement(String id, FirebaseDataRepository.WriteCallback callback) {
+        return backend.approveReimbursement(id, callback);
+    }
+
     public boolean rejectReimbursement(String id, String reason) {
         return backend.rejectReimbursement(id, reason);
+    }
+
+    public boolean rejectReimbursement(String id, String reason, FirebaseDataRepository.WriteCallback callback) {
+        return backend.rejectReimbursement(id, reason, callback);
     }
 
     // --- QR Attendance Methods ---
@@ -128,6 +152,10 @@ public class MockDataRepository {
 
     public boolean pardonStrike(String strikeId, String reason, String adminName) {
         return backend.pardonStrike(strikeId, reason, adminName);
+    }
+
+    public boolean pardonStrike(String strikeId, String reason, String adminName, FirebaseDataRepository.WriteCallback callback) {
+        return backend.pardonStrike(strikeId, reason, adminName, callback);
     }
 
     public List<User> getMembers() {

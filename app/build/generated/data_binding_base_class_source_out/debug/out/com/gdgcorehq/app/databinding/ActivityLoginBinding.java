@@ -26,22 +26,10 @@ public final class ActivityLoginBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
-  public final MaterialButton btnRoleAdmin;
-
-  @NonNull
-  public final MaterialButton btnRoleMember;
-
-  @NonNull
-  public final MaterialButton btnRoleStrikeMember;
-
-  @NonNull
   public final MaterialButton btnSignIn;
 
   @NonNull
   public final MaterialCardView cardLogin;
-
-  @NonNull
-  public final MaterialCardView cardQuickSwitch;
 
   @NonNull
   public final TextInputEditText etIdentifier;
@@ -70,21 +58,15 @@ public final class ActivityLoginBinding implements ViewBinding {
   @NonNull
   public final TextView tvForgotPassword;
 
-  private ActivityLoginBinding(@NonNull ScrollView rootView, @NonNull MaterialButton btnRoleAdmin,
-      @NonNull MaterialButton btnRoleMember, @NonNull MaterialButton btnRoleStrikeMember,
-      @NonNull MaterialButton btnSignIn, @NonNull MaterialCardView cardLogin,
-      @NonNull MaterialCardView cardQuickSwitch, @NonNull TextInputEditText etIdentifier,
+  private ActivityLoginBinding(@NonNull ScrollView rootView, @NonNull MaterialButton btnSignIn,
+      @NonNull MaterialCardView cardLogin, @NonNull TextInputEditText etIdentifier,
       @NonNull TextInputEditText etPassword, @NonNull ImageView ivLogo,
       @NonNull ProgressBar progressBar, @NonNull TextInputLayout tilIdentifier,
       @NonNull TextInputLayout tilPassword, @NonNull TextView tvAppName,
       @NonNull TextView tvChapter, @NonNull TextView tvForgotPassword) {
     this.rootView = rootView;
-    this.btnRoleAdmin = btnRoleAdmin;
-    this.btnRoleMember = btnRoleMember;
-    this.btnRoleStrikeMember = btnRoleStrikeMember;
     this.btnSignIn = btnSignIn;
     this.cardLogin = cardLogin;
-    this.cardQuickSwitch = cardQuickSwitch;
     this.etIdentifier = etIdentifier;
     this.etPassword = etPassword;
     this.ivLogo = ivLogo;
@@ -123,24 +105,6 @@ public final class ActivityLoginBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnRoleAdmin;
-      MaterialButton btnRoleAdmin = ViewBindings.findChildViewById(rootView, id);
-      if (btnRoleAdmin == null) {
-        break missingId;
-      }
-
-      id = R.id.btnRoleMember;
-      MaterialButton btnRoleMember = ViewBindings.findChildViewById(rootView, id);
-      if (btnRoleMember == null) {
-        break missingId;
-      }
-
-      id = R.id.btnRoleStrikeMember;
-      MaterialButton btnRoleStrikeMember = ViewBindings.findChildViewById(rootView, id);
-      if (btnRoleStrikeMember == null) {
-        break missingId;
-      }
-
       id = R.id.btnSignIn;
       MaterialButton btnSignIn = ViewBindings.findChildViewById(rootView, id);
       if (btnSignIn == null) {
@@ -150,12 +114,6 @@ public final class ActivityLoginBinding implements ViewBinding {
       id = R.id.cardLogin;
       MaterialCardView cardLogin = ViewBindings.findChildViewById(rootView, id);
       if (cardLogin == null) {
-        break missingId;
-      }
-
-      id = R.id.cardQuickSwitch;
-      MaterialCardView cardQuickSwitch = ViewBindings.findChildViewById(rootView, id);
-      if (cardQuickSwitch == null) {
         break missingId;
       }
 
@@ -213,9 +171,9 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityLoginBinding((ScrollView) rootView, btnRoleAdmin, btnRoleMember,
-          btnRoleStrikeMember, btnSignIn, cardLogin, cardQuickSwitch, etIdentifier, etPassword,
-          ivLogo, progressBar, tilIdentifier, tilPassword, tvAppName, tvChapter, tvForgotPassword);
+      return new ActivityLoginBinding((ScrollView) rootView, btnSignIn, cardLogin, etIdentifier,
+          etPassword, ivLogo, progressBar, tilIdentifier, tilPassword, tvAppName, tvChapter,
+          tvForgotPassword);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

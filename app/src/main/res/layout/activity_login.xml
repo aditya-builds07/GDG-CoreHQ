@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_1"
-            android:text="Google Developer Groups on Campus • TKIET"
+            android:text="Google Developer Groups on Campus &#8226; TKIET"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
             android:textColor="@color/text_secondary"
             app:layout_constraintEnd_toEndOf="parent"

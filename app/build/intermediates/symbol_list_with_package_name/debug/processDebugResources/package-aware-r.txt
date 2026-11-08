@@ -3363,13 +3363,8 @@ id btnPardonStrike
 id btnPostMeetingReport
 id btnRefreshQr
 id btnReject
-id btnRoleAdmin
-id btnRoleMember
-id btnRoleStrikeMember
 id btnSignIn
 id btnSignOut
-id btnSimulateInvalid
-id btnSimulateValid
 id btnSubmitExpense
 id btnSubmitReport
 id btnToggleGlobal
@@ -3386,7 +3381,6 @@ id cardLogin
 id cardMeetingOverview
 id cardMyTasks
 id cardQrScanner
-id cardQuickSwitch
 id cardReimbursementsOverview
 id cardResult
 id cardStatus
@@ -3570,7 +3564,6 @@ id layoutExpensesContainer
 id layoutMeetingsContainer
 id layoutReimbursementsContainer
 id layoutReviewActions
-id layoutSimulationControls
 id layoutSplashRoot
 id layoutStatusButtons
 id layoutStrikesContainer
@@ -5716,5 +5709,6 @@ styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
 styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration ifTagNotSet ifTagSet motionInterpolator motionTarget onStateTransition pathMotionArc setsTag transitionDisable upDuration viewTransitionMode
 styleable include constraintSet
+xml file_paths
 xml ga_ad_services_config
 xml image_share_filepaths

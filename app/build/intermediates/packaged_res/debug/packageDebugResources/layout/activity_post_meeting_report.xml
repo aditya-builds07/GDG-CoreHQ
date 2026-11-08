@@ -94,7 +94,7 @@
                         android:id="@+id/tvMeetingContextSchedule"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Friday, Oct 24 • Seminar Hall B, TKIET"
+                        android:text="Friday, Oct 24 &#8226; Seminar Hall B, TKIET"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                         android:textColor="@color/text_muted" />
                 </LinearLayout>

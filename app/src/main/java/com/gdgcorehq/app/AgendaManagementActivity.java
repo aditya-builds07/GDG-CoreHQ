@@ -45,6 +45,18 @@ public class AgendaManagementActivity extends AppCompatActivity {
         renderMeetings();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        User user = SessionManager.getInstance().getCurrentUser();
+        if (user == null || !user.isSuperAdmin()) {
+            Toast.makeText(this, "Access denied: Super Admin authorization required.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        renderMeetings();
+    }
+
     private void renderMeetings() {
         binding.layoutMeetingsContainer.removeAllViews();
         List<Meeting> meetings = MockDataRepository.getInstance().getMeetings();
@@ -100,53 +112,69 @@ public class AgendaManagementActivity extends AppCompatActivity {
         EditText etLocation = dialogView.findViewById(R.id.etMeetingLocation);
         EditText etTopics = dialogView.findViewById(R.id.etMeetingTopics);
 
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Publish New Agenda")
                 .setView(dialogView)
-                .setPositiveButton("Publish", (dialog, which) -> {
-                    String title = etTitle.getText().toString().trim();
-                    String date = etDate.getText().toString().trim();
-                    String time = etTime.getText().toString().trim();
-                    String location = etLocation.getText().toString().trim();
-                    String topicsStr = etTopics.getText().toString().trim();
-
-                    if (title.isEmpty()) {
-                        Toast.makeText(this, "Meeting title is required", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (date.isEmpty() || time.isEmpty() || location.isEmpty()) {
-                        Toast.makeText(this, "Date, Time, and Location are required", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    List<String> topicList = new ArrayList<>();
-                    if (!topicsStr.isEmpty()) {
-                        topicList.addAll(Arrays.asList(topicsStr.split("\n")));
-                    } else {
-                        topicList.add("General Chapter Operations");
-                    }
-
-                    User current = SessionManager.getInstance().getCurrentUser();
-                    String publisher = (current != null && current.getName() != null && !current.getName().isEmpty())
-                            ? current.getName() : "Chapter Organizer";
-
-                    Meeting newMeeting = new Meeting(
-                            "meet_" + System.currentTimeMillis(),
-                            title,
-                            date,
-                            time,
-                            location,
-                            topicList,
-                            publisher,
-                            true
-                    );
-
-                    MockDataRepository.getInstance().addMeeting(newMeeting);
-                    Toast.makeText(this, "Agenda published successfully", Toast.LENGTH_SHORT).show();
-                    renderMeetings();
-                })
+                .setPositiveButton("Publish", null)
                 .setNegativeButton("Cancel", null)
-                .show();
+                .create();
+        dialog.show();
+
+        android.widget.Button btnPublish = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPublish.setOnClickListener(v -> {
+            String title = etTitle.getText().toString().trim();
+            String date = etDate.getText().toString().trim();
+            String time = etTime.getText().toString().trim();
+            String location = etLocation.getText().toString().trim();
+            String topicsStr = etTopics.getText().toString().trim();
+
+            if (title.isEmpty()) {
+                Toast.makeText(this, "Meeting title is required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (date.isEmpty() || time.isEmpty() || location.isEmpty()) {
+                Toast.makeText(this, "Date, Time, and Location are required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            List<String> topicList = new ArrayList<>();
+            if (!topicsStr.isEmpty()) {
+                topicList.addAll(Arrays.asList(topicsStr.split("\n")));
+            } else {
+                topicList.add("General Chapter Operations");
+            }
+
+            User current = SessionManager.getInstance().getCurrentUser();
+            String publisher = (current != null && current.getName() != null && !current.getName().isEmpty())
+                    ? current.getName() : "Chapter Organizer";
+
+            Meeting newMeeting = new Meeting(
+                    "meet_" + System.currentTimeMillis(),
+                    title,
+                    date,
+                    time,
+                    location,
+                    topicList,
+                    publisher,
+                    true
+            );
+
+            btnPublish.setEnabled(false);
+            MockDataRepository.getInstance().addMeeting(newMeeting, new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(AgendaManagementActivity.this, "Agenda published successfully", Toast.LENGTH_SHORT).show();
+                    renderMeetings();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String message) {
+                    btnPublish.setEnabled(true);
+                    Toast.makeText(AgendaManagementActivity.this, "Failed to publish agenda: " + message, Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 
     @Override

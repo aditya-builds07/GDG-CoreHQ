@@ -6,10 +6,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import com.gdgcorehq.app.data.FirebaseDataRepository;
 import com.gdgcorehq.app.data.MockDataRepository;
 import com.gdgcorehq.app.data.QrCryptoManager;
 import com.gdgcorehq.app.data.SessionManager;
 import com.gdgcorehq.app.model.AttendanceRecord;
+import com.gdgcorehq.app.model.Meeting;
 import com.gdgcorehq.app.model.PostMeetingReport;
 import com.gdgcorehq.app.model.Reimbursement;
 import com.gdgcorehq.app.model.StrikeRecord;
@@ -78,6 +80,7 @@ public class CoreHQLogicTest {
     public void testInvalidLoginIsRejected() {
         // Unprovisioned account must be rejected per PRD §3.1
         final boolean[] errorTriggered = {false};
+        final String[] errorMsg = {""};
         sessionManager.authenticate("unregistered_user", "password123", new SessionManager.AuthCallback() {
             @Override
             public void onSuccess(User user) {
@@ -87,13 +90,17 @@ public class CoreHQLogicTest {
             @Override
             public void onError(String message) {
                 errorTriggered[0] = true;
+                errorMsg[0] = message;
             }
         });
         assertTrue("Unprovisioned user must be rejected", errorTriggered[0]);
+        assertEquals("Generic error message must be returned for unknown user",
+                "Invalid credentials. Please verify your username and password.", errorMsg[0]);
         assertFalse("Session must not be active for invalid user", sessionManager.isLoggedIn());
 
         // Incorrect password for valid user must be rejected
         errorTriggered[0] = false;
+        errorMsg[0] = "";
         sessionManager.authenticate("admin", "wrong_password", new SessionManager.AuthCallback() {
             @Override
             public void onSuccess(User user) {
@@ -103,9 +110,12 @@ public class CoreHQLogicTest {
             @Override
             public void onError(String message) {
                 errorTriggered[0] = true;
+                errorMsg[0] = message;
             }
         });
         assertTrue("Incorrect password must be rejected", errorTriggered[0]);
+        assertEquals("Generic error message must be returned for bad password",
+                "Invalid credentials. Please verify your username and password.", errorMsg[0]);
         assertFalse("Session must not be active on bad password", sessionManager.isLoggedIn());
     }
 
@@ -514,5 +524,123 @@ public class CoreHQLogicTest {
         repo.evaluateOverdueTasks(count -> secondRunStrikes[0] = count);
         assertEquals("Duplicate strike must not be created on second evaluation", 0, secondRunStrikes[0]);
         assertEquals("Strike count must remain identical", countBefore, repo.getAllStrikes().size());
+    }
+
+    @Test
+    public void testFindMeetingById() {
+        Meeting meeting = repo.getMeetingById("meet_101");
+        assertNotNull("Existing meeting must be found by id", meeting);
+        assertEquals("meet_101", meeting.getId());
+
+        Meeting nonExistent = repo.getMeetingById("non_existent_id");
+        assertNull("Non-existent meeting id must return null", nonExistent);
+
+        assertNull("Null meeting id must return null", repo.getMeetingById(null));
+    }
+
+    @Test
+    public void testWriteCallbacksForFirestoreOperations() {
+        // 1. Add meeting with callback
+        final boolean[] meetingSuccess = {false};
+        Meeting m = new Meeting("test_meet", "Test Sync", "Oct 30, 2026", "05:00 PM", "Hall A",
+                java.util.Collections.singletonList("Topic"), "Admin", true);
+        repo.addMeeting(m, new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() { meetingSuccess[0] = true; }
+            @Override
+            public void onError(String message) {}
+        });
+        assertTrue("Valid meeting addition must trigger onSuccess callback", meetingSuccess[0]);
+
+        final boolean[] meetingError = {false};
+        repo.addMeeting(new Meeting("bad", "", "Oct 30", "5pm", "Hall", java.util.Collections.emptyList(), "Admin", true),
+                new FirebaseDataRepository.WriteCallback() {
+                    @Override
+                    public void onSuccess() {}
+                    @Override
+                    public void onError(String message) { meetingError[0] = true; }
+                });
+        assertTrue("Invalid meeting addition must trigger onError callback", meetingError[0]);
+
+        // 2. Add task with callback
+        final boolean[] taskSuccess = {false};
+        TaskItem t = new TaskItem("task_test_cb", "Test Task", "Desc", "usr_01", "Member", "Oct 30", TaskItem.Status.TODO, "Tech", false);
+        repo.addTask(t, new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() { taskSuccess[0] = true; }
+            @Override
+            public void onError(String message) {}
+        });
+        assertTrue("Valid task addition must trigger onSuccess callback", taskSuccess[0]);
+
+        // 3. Update task status with callback
+        final boolean[] updateSuccess = {false};
+        repo.updateTaskStatus("task_test_cb", TaskItem.Status.IN_PROGRESS, new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() { updateSuccess[0] = true; }
+            @Override
+            public void onError(String message) {}
+        });
+        assertTrue("Updating task status must trigger onSuccess callback", updateSuccess[0]);
+
+        final boolean[] updateError = {false};
+        repo.updateTaskStatus("non_existent_task_id", TaskItem.Status.DONE, new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() {}
+            @Override
+            public void onError(String message) { updateError[0] = true; }
+        });
+        assertTrue("Updating non-existent task must trigger onError callback", updateError[0]);
+
+        // 4. Approve and reject reimbursement with callback
+        final boolean[] approveSuccess = {false};
+        repo.approveReimbursement("exp_01", new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() { approveSuccess[0] = true; }
+            @Override
+            public void onError(String message) {}
+        });
+        assertTrue("Approving reimbursement must trigger onSuccess callback", approveSuccess[0]);
+
+        final boolean[] rejectError = {false};
+        repo.rejectReimbursement("exp_01", "", new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() {}
+            @Override
+            public void onError(String message) { rejectError[0] = true; }
+        });
+        assertTrue("Rejecting reimbursement without reason must trigger onError callback", rejectError[0]);
+
+        // 5. Pardon strike with callback
+        final boolean[] pardonSuccess = {false};
+        repo.pardonStrike("strk_01", "Medical emergency", "Organizer", new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() { pardonSuccess[0] = true; }
+            @Override
+            public void onError(String message) {}
+        });
+        assertTrue("Pardoning strike with reason must trigger onSuccess callback", pardonSuccess[0]);
+
+        final boolean[] pardonError = {false};
+        repo.pardonStrike("strk_01", "", "Organizer", new FirebaseDataRepository.WriteCallback() {
+            @Override
+            public void onSuccess() {}
+            @Override
+            public void onError(String message) { pardonError[0] = true; }
+        });
+        assertTrue("Pardoning strike without reason must trigger onError callback", pardonError[0]);
+    }
+
+    @Test
+    public void testFullAttendanceTimestampFormat() {
+        String fullTimestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                .format(new java.util.Date());
+        AttendanceRecord record = new AttendanceRecord(
+                "att_full_ts", "meet_01", "PRN2024999", "Test Member", "Lead",
+                fullTimestamp, "PRESENT", "admin_01"
+        );
+        assertEquals("Full timestamp must be stored in AttendanceRecord", fullTimestamp, record.getTimestamp());
+        assertTrue("Timestamp format must match yyyy-MM-dd HH:mm:ss",
+                fullTimestamp.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"));
     }
 }

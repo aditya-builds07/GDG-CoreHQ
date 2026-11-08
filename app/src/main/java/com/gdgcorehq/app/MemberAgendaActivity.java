@@ -27,8 +27,20 @@ public class MemberAgendaActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.btnBack.setOnClickListener(v -> finish());
-        binding.btnOpenReport.setOnClickListener(v ->
-                startActivity(new Intent(this, PostMeetingReportActivity.class)));
+        binding.btnOpenReport.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PostMeetingReportActivity.class);
+            List<Meeting> list = MockDataRepository.getInstance().getMeetings();
+            for (Meeting m : list) {
+                if (m.isUpcoming()) {
+                    intent.putExtra("meetingId", m.getId());
+                    break;
+                }
+            }
+            if (!intent.hasExtra("meetingId") && !list.isEmpty()) {
+                intent.putExtra("meetingId", list.get(0).getId());
+            }
+            startActivity(intent);
+        });
 
         // Floating Pill Navigation Bar
         BottomNavHelper.setupMemberNav(this, BottomNavHelper.INDEX_AGENDA,
@@ -85,6 +97,12 @@ public class MemberAgendaActivity extends AppCompatActivity {
                 sb.append("• ").append(topic).append("\n");
             }
             cardBinding.tvMeetingTopics.setText(sb.toString().trim());
+
+            cardBinding.getRoot().setOnClickListener(v -> {
+                Intent intent = new Intent(this, PostMeetingReportActivity.class);
+                intent.putExtra("meetingId", m.getId());
+                startActivity(intent);
+            });
 
             binding.layoutMeetingsContainer.addView(cardBinding.getRoot());
         }

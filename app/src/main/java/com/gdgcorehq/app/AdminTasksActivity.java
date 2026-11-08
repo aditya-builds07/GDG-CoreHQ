@@ -47,6 +47,12 @@ public class AdminTasksActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User user = com.gdgcorehq.app.data.SessionManager.getInstance().getCurrentUser();
+        if (user == null || !user.isSuperAdmin()) {
+            Toast.makeText(this, "Access denied: Super Admin authorization required.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         renderTasks();
     }
 
@@ -138,10 +144,22 @@ public class AdminTasksActivity extends AppCompatActivity {
             // Quick Status Buttons
             if (task.getStatus() == TaskItem.Status.TODO) {
                 cardBinding.btnMoveProgress.setVisibility(View.VISIBLE);
-                cardBinding.btnMoveProgress.setText("→ In Progress");
+                cardBinding.btnMoveProgress.setText("\u2192 In Progress");
                 cardBinding.btnMoveProgress.setOnClickListener(v -> {
-                    MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.IN_PROGRESS);
-                    renderTasks();
+                    cardBinding.btnMoveProgress.setEnabled(false);
+                    MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.IN_PROGRESS, new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(AdminTasksActivity.this, "Task moved to In Progress", Toast.LENGTH_SHORT).show();
+                            renderTasks();
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            cardBinding.btnMoveProgress.setEnabled(true);
+                            Toast.makeText(AdminTasksActivity.this, "Failed to update task: " + message, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 });
                 cardBinding.btnMoveDone.setVisibility(View.GONE);
             } else if (task.getStatus() == TaskItem.Status.IN_PROGRESS) {
@@ -149,8 +167,20 @@ public class AdminTasksActivity extends AppCompatActivity {
                 cardBinding.btnMoveDone.setVisibility(View.VISIBLE);
                 cardBinding.btnMoveDone.setText("Mark Done");
                 cardBinding.btnMoveDone.setOnClickListener(v -> {
-                    MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.DONE);
-                    renderTasks();
+                    cardBinding.btnMoveDone.setEnabled(false);
+                    MockDataRepository.getInstance().updateTaskStatus(task.getId(), TaskItem.Status.DONE, new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(AdminTasksActivity.this, "Task marked as Done", Toast.LENGTH_SHORT).show();
+                            renderTasks();
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            cardBinding.btnMoveDone.setEnabled(true);
+                            Toast.makeText(AdminTasksActivity.this, "Failed to update task: " + message, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 });
             } else {
                 cardBinding.layoutStatusButtons.setVisibility(View.GONE);
@@ -180,59 +210,75 @@ public class AdminTasksActivity extends AppCompatActivity {
         EditText etDeadline = dialogView.findViewById(R.id.etTaskDeadline);
         EditText etDept = dialogView.findViewById(R.id.etTaskDept);
 
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Delegate New Task")
                 .setView(dialogView)
-                .setPositiveButton("Create Task", (dialog, which) -> {
-                    String title = etTitle.getText().toString().trim();
-                    String desc = etDesc.getText().toString().trim();
-                    String assignee = etAssignee.getText().toString().trim();
-                    String deadline = etDeadline.getText().toString().trim();
-                    String dept = etDept.getText().toString().trim();
-
-                    if (title.isEmpty()) {
-                        Toast.makeText(this, "Task title is required", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (assignee.isEmpty()) {
-                        Toast.makeText(this, "Assignee name or PRN is required", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (deadline.isEmpty()) {
-                        Toast.makeText(this, "Deadline is required", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    // Look up member dynamically from members collection
-                    User member = MockDataRepository.getInstance().getMembers().stream()
-                            .filter(m -> (m.getName() != null && m.getName().equalsIgnoreCase(assignee)) ||
-                                         (m.getPrn() != null && m.getPrn().equalsIgnoreCase(assignee)))
-                            .findFirst()
-                            .orElse(null);
-
-                    String assigneeId = (member != null) ? member.getId() : "user_" + System.currentTimeMillis();
-                    String assigneeName = (member != null) ? member.getName() : assignee;
-                    String taskDept = (member != null && member.getDepartment() != null && !member.getDepartment().isEmpty())
-                            ? member.getDepartment() : (dept.isEmpty() ? "General" : dept);
-
-                    TaskItem newTask = new TaskItem(
-                            "task_" + System.currentTimeMillis(),
-                            title,
-                            desc.isEmpty() ? "No description provided." : desc,
-                            assigneeId,
-                            assigneeName,
-                            deadline,
-                            TaskItem.Status.TODO,
-                            taskDept,
-                            false
-                    );
-
-                    MockDataRepository.getInstance().addTask(newTask);
-                    Toast.makeText(this, "Task assigned to " + newTask.getAssigneeName(), Toast.LENGTH_SHORT).show();
-                    renderTasks();
-                })
+                .setPositiveButton("Create Task", null)
                 .setNegativeButton("Cancel", null)
-                .show();
+                .create();
+        dialog.show();
+
+        android.widget.Button btnCreate = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnCreate.setOnClickListener(v -> {
+            String title = etTitle.getText().toString().trim();
+            String desc = etDesc.getText().toString().trim();
+            String assignee = etAssignee.getText().toString().trim();
+            String deadline = etDeadline.getText().toString().trim();
+            String dept = etDept.getText().toString().trim();
+
+            if (title.isEmpty()) {
+                Toast.makeText(this, "Task title is required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (assignee.isEmpty()) {
+                Toast.makeText(this, "Assignee name or PRN is required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (deadline.isEmpty()) {
+                Toast.makeText(this, "Deadline is required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Look up member dynamically from members collection
+            User member = MockDataRepository.getInstance().getMembers().stream()
+                    .filter(m -> (m.getName() != null && m.getName().equalsIgnoreCase(assignee)) ||
+                                 (m.getPrn() != null && m.getPrn().equalsIgnoreCase(assignee)))
+                    .findFirst()
+                    .orElse(null);
+
+            String assigneeId = (member != null) ? member.getId() : "user_" + System.currentTimeMillis();
+            String assigneeName = (member != null) ? member.getName() : assignee;
+            String taskDept = (member != null && member.getDepartment() != null && !member.getDepartment().isEmpty())
+                    ? member.getDepartment() : (dept.isEmpty() ? "General" : dept);
+
+            TaskItem newTask = new TaskItem(
+                    "task_" + System.currentTimeMillis(),
+                    title,
+                    desc.isEmpty() ? "No description provided." : desc,
+                    assigneeId,
+                    assigneeName,
+                    deadline,
+                    TaskItem.Status.TODO,
+                    taskDept,
+                    false
+            );
+
+            btnCreate.setEnabled(false);
+            MockDataRepository.getInstance().addTask(newTask, new com.gdgcorehq.app.data.FirebaseDataRepository.WriteCallback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(AdminTasksActivity.this, "Task assigned to " + newTask.getAssigneeName(), Toast.LENGTH_SHORT).show();
+                    renderTasks();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String message) {
+                    btnCreate.setEnabled(true);
+                    Toast.makeText(AdminTasksActivity.this, "Failed to create task: " + message, Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 
     @Override

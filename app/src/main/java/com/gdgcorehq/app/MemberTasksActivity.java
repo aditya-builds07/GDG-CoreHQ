@@ -28,6 +28,16 @@ public class MemberTasksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User currentUser = SessionManager.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            android.widget.Toast.makeText(this, "Session expired. Please log in again.", android.widget.Toast.LENGTH_SHORT).show();
+            android.content.Intent intent = new android.content.Intent(this, LoginActivity.class);
+            intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         binding = ActivityMemberTasksBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -40,6 +50,15 @@ public class MemberTasksActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User currentUser = SessionManager.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            android.widget.Toast.makeText(this, "Session expired. Please log in again.", android.widget.Toast.LENGTH_SHORT).show();
+            android.content.Intent intent = new android.content.Intent(this, LoginActivity.class);
+            intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return;
+        }
         renderTasks();
     }
 
@@ -81,7 +100,8 @@ public class MemberTasksActivity extends AppCompatActivity {
     private void renderTasks() {
         binding.layoutTasksContainer.removeAllViews();
         User currentUser = SessionManager.getInstance().getCurrentUser();
-        String currentUserId = currentUser != null ? currentUser.getId() : "usr_member_01";
+        if (currentUser == null) return;
+        String currentUserId = currentUser.getId();
 
         List<TaskItem> tasks = isGlobalView ?
                 MockDataRepository.getInstance().getAllTasks() :

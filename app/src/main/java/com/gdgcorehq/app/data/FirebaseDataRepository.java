@@ -212,8 +212,18 @@ public class FirebaseDataRepository {
         return result;
     }
 
+    public interface WriteCallback {
+        void onSuccess();
+        void onError(String message);
+    }
+
     public boolean addTask(TaskItem task) {
+        return addTask(task, null);
+    }
+
+    public boolean addTask(TaskItem task, WriteCallback callback) {
         if (task == null || task.getTitle() == null || task.getTitle().trim().isEmpty()) {
+            if (callback != null) callback.onError("Task title is required");
             return false;
         }
         synchronized (tasks) {
@@ -222,18 +232,42 @@ public class FirebaseDataRepository {
         if (isFirebaseAvailable && db != null) {
             String docId = (task.getId() != null && !task.getId().isEmpty()) ? task.getId() : "task_" + System.currentTimeMillis();
             task.setId(docId);
-            db.collection("tasks").document(docId).set(taskToMap(task), SetOptions.merge());
+            db.collection("tasks").document(docId).set(taskToMap(task), SetOptions.merge())
+                    .addOnSuccessListener(aVoid -> {
+                        if (callback != null) callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        synchronized (tasks) {
+                            tasks.remove(task);
+                        }
+                        if (callback != null) callback.onError(e.getMessage());
+                    });
+        } else {
+            if (callback != null) callback.onSuccess();
         }
         return true;
     }
 
     public boolean updateTaskStatus(String taskId, TaskItem.Status newStatus) {
-        if (taskId == null || newStatus == null) return false;
+        return updateTaskStatus(taskId, newStatus, null);
+    }
+
+    public boolean updateTaskStatus(String taskId, TaskItem.Status newStatus, WriteCallback callback) {
+        if (taskId == null || newStatus == null) {
+            if (callback != null) callback.onError("Invalid task ID or status");
+            return false;
+        }
         boolean updated = false;
         boolean isOverdueUpdated = false;
+        TaskItem targetTask = null;
+        TaskItem.Status oldStatus = null;
+        boolean oldOverdue = false;
         synchronized (tasks) {
             for (TaskItem t : tasks) {
                 if (taskId.equals(t.getId())) {
+                    targetTask = t;
+                    oldStatus = t.getStatus();
+                    oldOverdue = t.isOverdue48h();
                     t.setStatus(newStatus);
                     if (newStatus == TaskItem.Status.DONE) {
                         t.setOverdue48h(false);
@@ -244,16 +278,35 @@ public class FirebaseDataRepository {
                 }
             }
         }
-        if (updated && isFirebaseAvailable && db != null) {
+        if (!updated) {
+            if (callback != null) callback.onError("Task not found");
+            return false;
+        }
+        if (isFirebaseAvailable && db != null) {
             Map<String, Object> updates = new HashMap<>();
             updates.put("status", newStatus.name());
             if (isOverdueUpdated) {
                 updates.put("isOverdue48h", false);
             }
             updates.put("updatedAt", com.google.firebase.Timestamp.now());
-            db.collection("tasks").document(taskId).update(updates);
+            final TaskItem finalTask = targetTask;
+            final TaskItem.Status finalOldStatus = oldStatus;
+            final boolean finalOldOverdue = oldOverdue;
+            db.collection("tasks").document(taskId).update(updates)
+                    .addOnSuccessListener(aVoid -> {
+                        if (callback != null) callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (finalTask != null) {
+                            finalTask.setStatus(finalOldStatus);
+                            finalTask.setOverdue48h(finalOldOverdue);
+                        }
+                        if (callback != null) callback.onError(e.getMessage());
+                    });
+        } else {
+            if (callback != null) callback.onSuccess();
         }
-        return updated;
+        return true;
     }
 
     // --- Meeting Methods ---
@@ -273,8 +326,23 @@ public class FirebaseDataRepository {
         }
     }
 
+    public Meeting getMeetingById(String meetingId) {
+        if (meetingId == null) return null;
+        synchronized (meetings) {
+            for (Meeting m : meetings) {
+                if (meetingId.equals(m.getId())) return m;
+            }
+        }
+        return null;
+    }
+
     public boolean addMeeting(Meeting meeting) {
+        return addMeeting(meeting, null);
+    }
+
+    public boolean addMeeting(Meeting meeting, WriteCallback callback) {
         if (meeting == null || meeting.getTitle() == null || meeting.getTitle().trim().isEmpty()) {
+            if (callback != null) callback.onError("Meeting title is required");
             return false;
         }
         synchronized (meetings) {
@@ -283,7 +351,18 @@ public class FirebaseDataRepository {
         if (isFirebaseAvailable && db != null) {
             String docId = (meeting.getId() != null && !meeting.getId().isEmpty()) ? meeting.getId() : "meet_" + System.currentTimeMillis();
             meeting.setId(docId);
-            db.collection("meetings").document(docId).set(meetingToMap(meeting), SetOptions.merge());
+            db.collection("meetings").document(docId).set(meetingToMap(meeting), SetOptions.merge())
+                    .addOnSuccessListener(aVoid -> {
+                        if (callback != null) callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        synchronized (meetings) {
+                            meetings.remove(meeting);
+                        }
+                        if (callback != null) callback.onError(e.getMessage());
+                    });
+        } else {
+            if (callback != null) callback.onSuccess();
         }
         return true;
     }
@@ -379,34 +458,73 @@ public class FirebaseDataRepository {
     }
 
     public boolean approveReimbursement(String id) {
-        if (id == null) return false;
+        return approveReimbursement(id, null);
+    }
+
+    public boolean approveReimbursement(String id, WriteCallback callback) {
+        if (id == null) {
+            if (callback != null) callback.onError("Invalid reimbursement ID");
+            return false;
+        }
         boolean updated = false;
+        Reimbursement target = null;
+        Reimbursement.Status oldStatus = null;
         synchronized (reimbursements) {
             for (Reimbursement r : reimbursements) {
                 if (id.equals(r.getId())) {
+                    target = r;
+                    oldStatus = r.getStatus();
                     r.setStatus(Reimbursement.Status.APPROVED);
                     updated = true;
                     break;
                 }
             }
         }
-        if (updated && isFirebaseAvailable && db != null) {
+        if (!updated) {
+            if (callback != null) callback.onError("Reimbursement record not found");
+            return false;
+        }
+        if (isFirebaseAvailable && db != null) {
             Map<String, Object> updates = new HashMap<>();
             updates.put("status", Reimbursement.Status.APPROVED.name());
             updates.put("reviewedAt", com.google.firebase.Timestamp.now());
-            db.collection("reimbursements").document(id).update(updates);
+            final Reimbursement finalTarget = target;
+            final Reimbursement.Status finalOldStatus = oldStatus;
+            db.collection("reimbursements").document(id).update(updates)
+                    .addOnSuccessListener(aVoid -> {
+                        if (callback != null) callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (finalTarget != null) {
+                            finalTarget.setStatus(finalOldStatus);
+                        }
+                        if (callback != null) callback.onError(e.getMessage());
+                    });
+        } else {
+            if (callback != null) callback.onSuccess();
         }
-        return updated;
+        return true;
     }
 
     public boolean rejectReimbursement(String id, String reason) {
+        return rejectReimbursement(id, reason, null);
+    }
+
+    public boolean rejectReimbursement(String id, String reason, WriteCallback callback) {
         if (id == null || reason == null || reason.trim().isEmpty()) {
+            if (callback != null) callback.onError("Rejection reason is mandatory");
             return false;
         }
         boolean updated = false;
+        Reimbursement target = null;
+        Reimbursement.Status oldStatus = null;
+        String oldReason = null;
         synchronized (reimbursements) {
             for (Reimbursement r : reimbursements) {
                 if (id.equals(r.getId())) {
+                    target = r;
+                    oldStatus = r.getStatus();
+                    oldReason = r.getRejectionReason();
                     r.setStatus(Reimbursement.Status.REJECTED);
                     r.setRejectionReason(reason.trim());
                     updated = true;
@@ -414,14 +532,33 @@ public class FirebaseDataRepository {
                 }
             }
         }
-        if (updated && isFirebaseAvailable && db != null) {
+        if (!updated) {
+            if (callback != null) callback.onError("Reimbursement record not found");
+            return false;
+        }
+        if (isFirebaseAvailable && db != null) {
             Map<String, Object> updates = new HashMap<>();
             updates.put("status", Reimbursement.Status.REJECTED.name());
             updates.put("rejectionReason", reason.trim());
             updates.put("reviewedAt", com.google.firebase.Timestamp.now());
-            db.collection("reimbursements").document(id).update(updates);
+            final Reimbursement finalTarget = target;
+            final Reimbursement.Status finalOldStatus = oldStatus;
+            final String finalOldReason = oldReason;
+            db.collection("reimbursements").document(id).update(updates)
+                    .addOnSuccessListener(aVoid -> {
+                        if (callback != null) callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (finalTarget != null) {
+                            finalTarget.setStatus(finalOldStatus);
+                            finalTarget.setRejectionReason(finalOldReason);
+                        }
+                        if (callback != null) callback.onError(e.getMessage());
+                    });
+        } else {
+            if (callback != null) callback.onSuccess();
         }
-        return updated;
+        return true;
     }
 
     // --- QR Attendance Methods ---
@@ -516,14 +653,21 @@ public class FirebaseDataRepository {
     }
 
     public boolean pardonStrike(String strikeId, String reason, String adminName) {
+        return pardonStrike(strikeId, reason, adminName, null);
+    }
+
+    public boolean pardonStrike(String strikeId, String reason, String adminName, WriteCallback callback) {
         if (strikeId == null || reason == null || reason.trim().isEmpty() || adminName == null || adminName.trim().isEmpty()) {
+            if (callback != null) callback.onError("Pardon reason and administrator identity are required");
             return false;
         }
         boolean updated = false;
         String memberId = null;
+        StrikeRecord targetStrike = null;
         synchronized (strikeRecords) {
             for (StrikeRecord s : strikeRecords) {
                 if (strikeId.equals(s.getId())) {
+                    targetStrike = s;
                     s.setPardoned(true);
                     s.setPardonedReason(reason.trim());
                     s.setPardonedBy(adminName.trim());
@@ -533,26 +677,49 @@ public class FirebaseDataRepository {
                 }
             }
         }
-        if (updated) {
-            synchronized (members) {
-                for (User u : members) {
-                    if (u.getId().equals(memberId) && u.getStrikeCount() > 0) {
-                        u.setStrikeCount(u.getStrikeCount() - 1);
-                        if (isFirebaseAvailable && db != null) {
-                            db.collection("users").document(u.getId()).update("strikeCount", u.getStrikeCount());
-                        }
-                    }
+        if (!updated) {
+            if (callback != null) callback.onError("Strike record not found");
+            return false;
+        }
+        User targetMember = null;
+        synchronized (members) {
+            for (User u : members) {
+                if (u.getId().equals(memberId) && u.getStrikeCount() > 0) {
+                    targetMember = u;
+                    u.setStrikeCount(u.getStrikeCount() - 1);
+                    break;
                 }
             }
-            if (isFirebaseAvailable && db != null) {
-                Map<String, Object> updates = new HashMap<>();
-                updates.put("isPardoned", true);
-                updates.put("pardonedReason", reason.trim());
-                updates.put("pardonedBy", adminName.trim());
-                db.collection("strikes").document(strikeId).update(updates);
-            }
         }
-        return updated;
+        if (isFirebaseAvailable && db != null) {
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("isPardoned", true);
+            updates.put("pardonedReason", reason.trim());
+            updates.put("pardonedBy", adminName.trim());
+            final StrikeRecord finalStrike = targetStrike;
+            final User finalMember = targetMember;
+            db.collection("strikes").document(strikeId).update(updates)
+                    .addOnSuccessListener(aVoid -> {
+                        if (finalMember != null) {
+                            db.collection("users").document(finalMember.getId()).update("strikeCount", finalMember.getStrikeCount());
+                        }
+                        if (callback != null) callback.onSuccess();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (finalStrike != null) {
+                            finalStrike.setPardoned(false);
+                            finalStrike.setPardonedReason(null);
+                            finalStrike.setPardonedBy(null);
+                        }
+                        if (finalMember != null) {
+                            finalMember.setStrikeCount(finalMember.getStrikeCount() + 1);
+                        }
+                        if (callback != null) callback.onError(e.getMessage());
+                    });
+        } else {
+            if (callback != null) callback.onSuccess();
+        }
+        return true;
     }
 
     // --- Overdue Task Automated Strike Evaluation Hook ---
@@ -857,6 +1024,15 @@ public class FirebaseDataRepository {
             String memberName = doc.getString("memberName");
             String memberRole = doc.getString("memberRole");
             String timestamp = doc.getString("timestamp");
+            if (timestamp == null) {
+                Object tsObj = doc.get("timestamp");
+                if (tsObj instanceof com.google.firebase.Timestamp) {
+                    java.util.Date d = ((com.google.firebase.Timestamp) tsObj).toDate();
+                    timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(d);
+                } else if (tsObj != null) {
+                    timestamp = tsObj.toString();
+                }
+            }
             String status = doc.getString("status");
             String recordedById = doc.getString("recordedById");
             return new AttendanceRecord(id, meetingId, prn, memberName, memberRole, timestamp, status, recordedById);
@@ -876,6 +1052,15 @@ public class FirebaseDataRepository {
             String roadblocks = doc.getString("roadblocks");
             String feedback = doc.getString("feedback");
             String timestamp = doc.getString("timestamp");
+            if (timestamp == null) {
+                Object tsObj = doc.get("timestamp");
+                if (tsObj instanceof com.google.firebase.Timestamp) {
+                    java.util.Date d = ((com.google.firebase.Timestamp) tsObj).toDate();
+                    timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(d);
+                } else if (tsObj != null) {
+                    timestamp = tsObj.toString();
+                }
+            }
             return new PostMeetingReport(id, meetingId, memberId, memberName, progress, roadblocks, feedback, timestamp);
         } catch (Exception e) {
             return null;
@@ -913,6 +1098,15 @@ public class FirebaseDataRepository {
             StrikeRecord.TriggerType triggerType = "OVERDUE_TASK".equalsIgnoreCase(triggerStr) ? StrikeRecord.TriggerType.OVERDUE_TASK : StrikeRecord.TriggerType.ABSENCE;
             String reason = doc.getString("reason");
             String timestamp = doc.getString("timestamp");
+            if (timestamp == null) {
+                Object tsObj = doc.get("timestamp");
+                if (tsObj instanceof com.google.firebase.Timestamp) {
+                    java.util.Date d = ((com.google.firebase.Timestamp) tsObj).toDate();
+                    timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(d);
+                } else if (tsObj != null) {
+                    timestamp = tsObj.toString();
+                }
+            }
             Boolean pardoned = doc.getBoolean("isPardoned");
             boolean isPardoned = pardoned != null && pardoned;
             String pardonedReason = doc.getString("pardonedReason");

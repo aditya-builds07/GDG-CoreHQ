@@ -269,7 +269,7 @@ public class QrScannerActivity extends AppCompatActivity {
 
         User admin = SessionManager.getInstance().getCurrentUser();
         String recorderId = admin != null ? admin.getId() : "admin_usr";
-        String timeStr = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+        String timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
         AttendanceRecord record = new AttendanceRecord(
                 "att_" + System.currentTimeMillis(),
@@ -307,6 +307,12 @@ public class QrScannerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User user = SessionManager.getInstance().getCurrentUser();
+        if (user == null || !user.isSuperAdmin()) {
+            Toast.makeText(this, "Access denied: Attendance scanner requires Super Admin privileges.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         isScanningPaused = false;
     }
 

@@ -45,7 +45,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GDGoC TKIET • Chapter Management"
+                        android:text="GDGoC TKIET &#8226; Chapter Management"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Label"
                         android:textColor="@color/text_secondary" />
                 </LinearLayout>
@@ -183,7 +183,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kanban Board →"
+                            android:text="Kanban Board &#8594;"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                             android:textColor="@color/text_primary" />
                     </LinearLayout>
@@ -222,7 +222,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Agenda Published →"
+                            android:text="Agenda Published &#8594;"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                             android:textColor="@color/text_primary" />
                     </LinearLayout>
@@ -271,7 +271,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Review Receipts →"
+                            android:text="Review Receipts &#8594;"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                             android:textColor="@color/text_primary" />
                     </LinearLayout>
@@ -311,7 +311,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Strike Dashboard →"
+                            android:text="Strike Dashboard &#8594;"
                             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                             android:textColor="@color/status_error" />
                     </LinearLayout>
@@ -351,7 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_1"
-                        android:text="Friday, Oct 24 • 05:00 PM • Seminar Hall B, TKIET"
+                        android:text="Friday, Oct 24 &#8226; 05:00 PM &#8226; Seminar Hall B, TKIET"
                         android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
                         android:textColor="@color/text_secondary" />
 
@@ -368,7 +368,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Floating Pill Navigation Bar (per design.md §2 and §5) -->
+    <!-- Floating Pill Navigation Bar (per design.md &#167;2 and &#167;5) -->
     <LinearLayout
         android:id="@+id/bottomNavPill"
         android:layout_width="match_parent"

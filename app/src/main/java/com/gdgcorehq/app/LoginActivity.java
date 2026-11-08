@@ -81,17 +81,66 @@ public class LoginActivity extends AppCompatActivity {
             public void onError(String message) {
                 binding.btnSignIn.setEnabled(true);
                 binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Invalid credentials. Please verify your username and password.", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void showForgotPasswordDialog() {
+        final android.widget.EditText input = new android.widget.EditText(this);
+        input.setHint("Enter registered email");
+        input.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        String currentInput = binding.etIdentifier.getText() != null ?
+                binding.etIdentifier.getText().toString().trim() : "";
+        if (currentInput.contains("@")) {
+            input.setText(currentInput);
+        }
+
+        android.widget.FrameLayout container = new android.widget.FrameLayout(this);
+        android.widget.FrameLayout.LayoutParams params = new android.widget.FrameLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        int margin = (int) (16 * getResources().getDisplayMetrics().density);
+        params.leftMargin = margin;
+        params.rightMargin = margin;
+        input.setLayoutParams(params);
+        container.addView(input);
+
         new AlertDialog.Builder(this)
-                .setTitle("Account Recovery")
-                .setMessage("GDG CoreHQ uses administrator-provisioned accounts. Please contact your Chapter Organizer or Community Manager to reset your password.")
-                .setPositiveButton("Understood", null)
+                .setTitle("Reset Password")
+                .setMessage("Enter your registered GDG CoreHQ email address to receive password reset instructions.")
+                .setView(container)
+                .setPositiveButton("Send Reset Email", (dialog, which) -> {
+                    String email = input.getText().toString().trim();
+                    if (email.isEmpty() || !email.contains("@")) {
+                        Toast.makeText(LoginActivity.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    sendPasswordReset(email);
+                })
+                .setNegativeButton("Cancel", null)
                 .show();
+    }
+
+    private void sendPasswordReset(String email) {
+        try {
+            com.google.firebase.auth.FirebaseAuth.getInstance()
+                    .sendPasswordResetEmail(email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Password reset email sent to " + email, Toast.LENGTH_LONG).show();
+                        } else {
+                            String err = task.getException() != null && task.getException().getMessage() != null
+                                    ? task.getException().getMessage()
+                                    : "Failed to send reset email.";
+                            Toast.makeText(LoginActivity.this, "Password reset failed: " + err, Toast.LENGTH_LONG).show();
+                        }
+                    });
+        } catch (Throwable t) {
+            Toast.makeText(LoginActivity.this, "Password reset unavailable: " + t.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

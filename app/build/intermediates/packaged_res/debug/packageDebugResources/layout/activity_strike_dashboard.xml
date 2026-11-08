@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="2dp"
-                android:text="Policy (PRD §3.6): Triggers occur on unexcused meeting absence or task overdue > 48h. At 1–2 strikes: Warning sent. At 3+ strikes: Highlighted in red for formal review."
+                android:text="Policy (PRD &#167;3.6): Triggers occur on unexcused meeting absence or task overdue > 48h. At 1&#8211;2 strikes: Warning sent. At 3+ strikes: Highlighted in red for formal review."
                 android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
                 android:textColor="@color/status_warning" />
         </com.google.android.material.card.MaterialCardView>

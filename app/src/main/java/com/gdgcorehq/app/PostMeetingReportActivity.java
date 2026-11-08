@@ -29,10 +29,13 @@ public class PostMeetingReportActivity extends AppCompatActivity {
         binding = ActivityPostMeetingReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        currentMeeting = MockDataRepository.getInstance().getNextUpcomingMeeting();
+        String meetingId = getIntent().getStringExtra("meetingId");
+        if (meetingId != null && !meetingId.isEmpty()) {
+            currentMeeting = MockDataRepository.getInstance().getMeetingById(meetingId);
+        }
         if (currentMeeting != null) {
             binding.tvMeetingContextTitle.setText(currentMeeting.getTitle());
-            binding.tvMeetingContextSchedule.setText(currentMeeting.getDate() + " • " + currentMeeting.getLocation());
+            binding.tvMeetingContextSchedule.setText(currentMeeting.getDate() + " \u2022 " + currentMeeting.getLocation());
         } else {
             binding.tvMeetingContextTitle.setText("No Active Meeting");
             binding.tvMeetingContextSchedule.setText("There are currently no scheduled meetings to report on.");

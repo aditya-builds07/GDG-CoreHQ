@@ -61,7 +61,7 @@ public class SessionManager {
         return currentUser;
     }
 
-    public void setCurrentUser(User user) {
+    void setCurrentUser(User user) {
         this.currentUser = user;
     }
 
@@ -199,11 +199,7 @@ public class SessionManager {
                                 callback.onError("Authentication state invalid: missing user UID.");
                             }
                         } else {
-                            String errorMsg = "Authentication failed. Incorrect credentials or account not found.";
-                            if (task.getException() != null && task.getException().getMessage() != null) {
-                                errorMsg = task.getException().getMessage();
-                            }
-                            callback.onError(errorMsg);
+                            callback.onError("Invalid credentials. Please verify your username and password.");
                         }
                     });
         } catch (Throwable t) {
@@ -213,12 +209,8 @@ public class SessionManager {
 
     private void authenticateLocal(String id, String password, AuthCallback callback) {
         ProvisionedAccount account = provisionedAccounts.get(id);
-        if (account == null) {
-            callback.onError("Account not found. Accounts are provisioned by the Chapter Organizer.");
-            return;
-        }
-        if (!account.password.equals(password)) {
-            callback.onError("Incorrect password. Please verify your credentials.");
+        if (account == null || !account.password.equals(password)) {
+            callback.onError("Invalid credentials. Please verify your username and password.");
             return;
         }
         currentUser = account.user;

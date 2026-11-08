@@ -60,7 +60,7 @@
             android:drawablePadding="@dimen/space_1"
             app:drawableTint="@color/text_secondary"
             android:gravity="center_vertical"
-            android:text="Friday, Oct 24, 2026 • 05:00 PM - 06:30 PM"
+            android:text="Friday, Oct 24, 2026 &#8226; 05:00 PM - 06:30 PM"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Body"
             android:textColor="@color/text_secondary" />
 
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="4dp"
-            android:text="• Review registration milestone\n• Sponsorship deck updates\n• Roadblock check-in"
+            android:text="&#8226; Review registration milestone\n&#8226; Sponsorship deck updates\n&#8226; Roadblock check-in"
             android:textAppearance="@style/TextAppearance.GDGCoreHQ.Caption"
             android:textColor="@color/text_secondary" />
 
